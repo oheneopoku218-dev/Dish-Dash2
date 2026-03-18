@@ -76,5 +76,10 @@
         favoritesContainer.innerHTML = `<p
   class="empty-msg">Could not load
   favorites.</p>`;
+  
+  const profilePic = document.getElementById("profile-pic");
+  if (profilePic) {
+    profilePic.src = `https://ui-avatars.com/api/?background=ff8c42&color=fff&size=128&name=${currentuser}`;
+  }
       });
   });
