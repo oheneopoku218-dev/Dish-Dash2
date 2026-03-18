@@ -1,3 +1,8 @@
+ function signOut() {
+    localStorage.removeItem("username");
+    localStorage.removeItem("userId");
+    window.location.href = "Login.html";
+  }
  const API_BASE = "https://ideal-pancake-x5g9g6 55wwgphrpr-5000.app.github.dev";
 
   document.addEventListener("DOMContentLoaded",
