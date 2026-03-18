@@ -1,0 +1,102 @@
+/* Wrapper */
+.form-wrapper {
+  width: 90%;
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.08);
+}
+
+/* Title */
+h1 {
+  text-align: center;
+  color: #ff7a00;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+/* Labels */
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Inputs + Selects */
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 2px solid #ff7a00;
+  border-radius: 6px;
+  font-size: 15px;
+  outline: none;
+}
+
+input:focus, select:focus {
+  border-color: #ff9a33;
+}
+
+/* Steps Box */
+.steps-box {
+  margin-top: 10px;
+}
+
+.step-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.step-number {
+  font-weight: bold;
+  width: 25px;
+  text-align: right;
+}
+
+.step-input {
+  flex: 1;
+  padding: 8px;
+  border: 2px solid #ff7a00;
+  border-radius: 6px;
+}
+
+/* Buttons inside steps */
+.add-step, .remove-step {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.add-step {
+  background: #ff7a00;
+  color: white;
+}
+
+.remove-step {
+  background: #ccc;
+  color: black;
+}
+
+/* Submit button */
+button[type="submit"] {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background: #ff7a00;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background: #ff8f26;
+}

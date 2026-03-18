@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Add Recipe - Dish Dash</title>
+    <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="navbar.css">
+   <link rel ="stylesheet" href="recipe form.css">
+     </head>
+     <body>
+      <script>
+        const user=localStorage.getItem("currentUser");
+        if(!user) window.location.href="login.html";
+      </script>
+      <div id="navbar"></div>
+      <script src="Navbar.js"></script>
+      <div class="form-wrapper"></div>
+      <h1>Add Recipe</h1>
+      <form id="Recipe Form">
+        <label>Recipe Name:</label>
+        <input type="text" id="recipeName" required>
+        <label>Food Category:</label>
+        <select id="foodCategory" required>
+          <option value="Dinner">Dinner</option>
+          <option value="Breakfast">Breakfast</option>
+          <option value="Lunch">Lunch</option>
+          <option value="Dessert">Dessert</option>
+          <option value ="Snack">Snack</option>
+          <label>Steps:</label>
+          <div id="Steps Box" class="steps-box">
+            <div class="step-row">
+              <span class="Step-Number">1.</span>
+              <input type="text" class="Step-Input" placeholder="Enter step description" required>
+              <button type="button" class="Remove-Step">Remove Step</button>
+              <button type ="button" class="Add-Step">Add Step</button>
+            </div>
+          </div>
+        </select>
+      </form>
+     </body>
+</html>

@@ -1,0 +1,77 @@
+/* ------------------------------
+   DINNER PAGE — MATCHES DISH-DASH
+------------------------------ */
+
+/* Page container */
+.dinner-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 120px;
+}
+
+/* Page title */
+.dinner-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #333;
+    text-align: center;
+}
+
+/* Grid layout for recipe cards */
+.dinner-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    padding-bottom: 40px;
+}
+
+/* Recipe card */
+.dinner-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.dinner-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* Card image */
+.dinner-card img {
+    width: 100%;
+    height: 160px;
+}
+/* Dish‑Dash Title */
+.site-header {
+    width: 100%;
+    text-align: center;
+    padding: 30px 0 10px;
+}
+
+.site-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #222;
+    cursor: pointer;
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.site-title:hover {
+    color: #ff6b6b;
+    transform: scale(1.05);
+}
+
+/* Subtext under page title */
+.dinner-subtext {
+    text-align: center;
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 25px;
+}
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dish Dash - Sign Up</title>
+
+  <link rel="stylesheet" href="CSS/Dish-Dash.css">
+  <link rel="stylesheet" href="CSS/Navbar.css">
+  <link rel="stylesheet" href="CSS/SignUp.css">
+</head>
+
+<body>
+
+  <header class="site-header">
+    <h1 class="site-title" onclick="window.location.href='Dish-Dash.html'">Dish Dash</h1>
+  </header>
+
+  <div class="form-container">
+    <h2>Create Account</h2>
+
+    <form id="signup-form">
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <p>Already have an account? <a href="login.html">Login</a></p>
+    <p id="error-message" class="error"></p>
+
+  </div>
+
+  <script src="../Databases/Sign-Up.js"></script>
+  <script src="../Databases/Navbar.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dish Dash - Login</title>
+
+  <link rel="stylesheet" href="CSS/Dish-Dash.css">
+  <link rel="stylesheet" href="CSS/Navbar.css">
+  <link rel="stylesheet" href="CSS/Login.css">
+</head>
+
+<body>
+
+  <header class="site-header">
+    <h1 class="site-title" onclick="window.location.href='Dish-Dash.html'">Dish Dash</h1>
+  </header>
+
+  <div class="form-container">
+    <h2>Login</h2>
+
+    <form id="login-form">
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+
+    <p>Don't have an account? <a href="SignUp.html">Sign Up</a></p>
+  </div>
+
+  <script src="../Databases/Login.js"></script>
+  <script src="../Databases/Navbar.js"></script>
+
+</body>
+</html>

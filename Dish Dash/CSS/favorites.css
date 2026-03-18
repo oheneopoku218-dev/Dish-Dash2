@@ -1,0 +1,119 @@
+body {
+    font-family: "Poppins", sans-serif;
+    background: #faf7f2;
+    margin: 0;
+    padding: 0;
+}
+.favorites-title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-top: 30px;
+    color: #ff8c42;
+}
+.favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    padding: 30px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.favorite-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.favorite-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.favorite-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.favorite-card h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: #333;
+}
+
+.favorite-card button {
+    margin-top: 12px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: #ff8c42;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.favorite-card button:hover {
+    background: #e6762f;
+}
+.favorites-list {
+    width: 90%;
+    max-width: 700px;
+    margin: 30px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+}
+
+.favorites-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 1.1rem;
+}
+
+.favorites-list-item:last-child {
+    border-bottom: none;
+}
+
+.favorites-list-item button {
+    background: #ff8c42;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+.favorites-list-item button:hover {
+    background: #e6762f;
+}
+.empty-favorites {
+    text-align: center;
+    margin-top: 100px;
+    color: #777;
+    font-size: 1.4rem;
+}
+
+.empty-favorites-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    color: #ff8c42;
+}
+.center {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Recipe Viewer</title>
+<style>
+body { font-family: Arial; padding: 20px; }
+button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+.recipe {
+ border: 1px solid #ccc;
+ padding: 10px;
+margin-top: 10px;
+border-radius: 5px;
+}
+</style>
+</head>
+<body>
+
+ <h1>View Recipes</h1>
+<button onclick="loadRecipes('breakfast')">Breakfast</button>
+<button onclick="loadRecipes('lunch')">Lunch</button>
+<button onclick="loadRecipes('dinner')">Dinner</button>
+
+    <h2 id="title"></h2>
+    <div id="recipeList"></div>
+    <script src="viewer.js"></script>
+
+</body>
+</html>
