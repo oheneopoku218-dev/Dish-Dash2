@@ -105,3 +105,20 @@ if (searchInput && searchcontainer && searchResults) {
     }
   });
 }
+
+  // -----------------------------
+  // AUTH NAV LINK
+  // -----------------------------
+  document.addEventListener("DOMContentLoaded", () => {
+    const username = localStorage.getItem("username");
+    const authLink = document.getElementById("auth-link");
+    if (!authLink) return;
+
+    if (username) {
+      authLink.textContent = "My Account";
+      authLink.href = "account.html";
+    } else {
+      authLink.textContent = "Login / Sign Up";
+      authLink.href = "Login.html";
+    }
+  });
