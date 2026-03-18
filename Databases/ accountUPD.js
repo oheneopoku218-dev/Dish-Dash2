@@ -1,59 +1,76 @@
-document.addEventListener("DOMContentLoaded",()=>{
-    const currentuser = localStorage.getItem("Username");
+ const API_BASE = "https://ideal-pancake-x5g9g6
+  55wwgphrpr-5000.app.github.dev";
+
+  document.addEventListener("DOMContentLoaded",
+  () => {
+    const currentuser =
+  localStorage.getItem("username");
     if (!currentuser) {
-        window.location.href = "Login.html";
-        return;
+      window.location.href = "Login.html";
+      return;
     }
-    const welcomeMessage = document.getElementById("welcome-message");
-    welcomeMessage.textContent = `Welcome, ${currentuser}!`;
-    
-    const usernamedisplay = document.querySelector("#username");
-    if(usernamedisplay){
-        usernamedisplay.textContent = currentuser;
+
+    // Set welcome message
+    const welcomeMessage =
+  document.getElementById("welcome-message");
+    if (welcomeMessage)
+  welcomeMessage.textContent = `Welcome,
+  ${currentuser}!`;
+
+    // Set username tag
+    const usernamedisplay =
+  document.getElementById("username");
+    if (usernamedisplay)
+  usernamedisplay.textContent =
+  `@${currentuser}`;
+
+    // Load favorites
+    const favoritesContainer =
+  document.getElementById("favoritesPreview");
+    if (!favoritesContainer) return;
+
+    const userId =
+  localStorage.getItem("userId");
+    if (!userId) {
+      favoritesContainer.innerHTML = `<p
+  class="empty-msg">No favorites yet. <a
+  href="recipe box.html">Browse
+  recipes</a></p>`;
+      return;
     }
-// corrected section starting here//
-    const allUsers = JSON.parse(localStorage.getItem("users")) || [];
-const userdata = allUsers.find(u => u.username === currentuser);
- const favoritesContainer = document.querySelector("#favoritesPreview");
- if (!userdata || !userdata.favorites) {
-    favoritesContainer.innerHTML =`
-    <p>You have no favorite recipes yet.</p>
-    <a href="recipe box.html">Go to Recipe Box</a>
-    `;
-    return;
-}
- 
-userdata.favorites = userdata.favorites.map(f => Number(f));
-    if (userdata.favorites.length === 0) {
-    favoritesContainer.innerHTML =`
-    <p>You have no favorite recipes yet.</p>
-    <a href="recipe box.html">Go to Recipe Box</a>
-    `;
-    return;
- }
- // correcting section ending here//
-fetch("recipes.json")
-    .then(response => response.json())
-    .then(recipes => {
-favoritesContainer.innerHTML ="";
-  userdata.favorites.forEach(favId => {
-    const recipe = recipes.find(r => r.id === favId);
-    if(!recipe) return;
-    
-    const recipeCard = document.createElement("div");
-    recipeCard.classList.add("recipe-card");
-    recipeCard.innerHTML = `
-    <h3>${recipe.name}</h3>
-    <img src="${recipe.image}" alt="${recipe.name}" />
-    <p>Ingredients: ${recipe.ingredients.join(", ")}</p>
-    <p>Instructions: ${recipe.instructions}</p>
-    <a href="recipe.html?id=${recipe.id}">View Recipe</a>
-    `;
-    favoritesContainer.appendChild(recipeCard);
+
+    fetch(`${API_BASE}/api/favorites/${userId}`)
+      .then(res => res.json())
+      .then(favorites => {
+        if (!favorites || favorites.length ===
+  0) {
+          favoritesContainer.innerHTML = `<p
+  class="empty-msg">No favorites yet. <a
+  href="recipe box.html">Browse
+  recipes</a></p>`;
+          return;
+        }
+
+        favoritesContainer.innerHTML = "";
+        favorites.forEach(recipe => {
+          const card =
+  document.createElement("div");
+          card.classList.add("favorite-card");
+          card.innerHTML = `
+            <img src="${recipe.image || ''}"
+  alt="${recipe.name}"
+  onerror="this.style.display='none'"/>
+            <h4>${recipe.name}</h4>
+            <a class="view-btn"
+  href="Viewer.html?id=${recipe._id}">View
+  Recipe</a>
+          `;
+          favoritesContainer.appendChild(card);
+        });
+      })
+      .catch(() => {
+        favoritesContainer.innerHTML = `<p
+  class="empty-msg">Could not load
+  favorites.</p>`;
+      });
   });
-})
-.catch(error => {
-    console.error("Error loading recipes:", error);
-    favoritesContainer.innerHTML = "<p>Error loading favorite recipes. Please try again later.</p>";
-});
-});
