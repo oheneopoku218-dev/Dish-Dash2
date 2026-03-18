@@ -165,4 +165,34 @@
       text-align: center;
     }
   }
+ 1. Fix login redirect — in
+  Databases/loginUPD.js, change:
+  window.location.href = "Dish-Dash.html";
+  to:
+  window.location.href = "account.html";
 
+  2. Fix the logo in Dish Dash/account.html —
+  change the header to:
+  <header class="site-header">
+    <h1 class="site-title" onclick="window.locat
+  ion.href='Dish-Dash.html'">Dish Dash</h1>
+  </header>
+
+  Then add this to Dish Dash/CSS/account.css:
+  .site-header {
+    text-align: center;
+    padding: 30px;
+    background: white;
+  }
+
+  .site-title {
+    font-size: 3rem;
+    color: purple;
+    cursor: pointer;
+    font-weight: 800;
+    letter-spacing: 2px;
+  }
+
+  .site-title:hover {
+    color: #6a0dad;
+  }
