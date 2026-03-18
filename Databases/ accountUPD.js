@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded",()=>{
-    const currentuser = localStorage.getItem("currentUser");
+    const currentuser = localStorage.getItem("Username");
     if (!currentuser) {
-        window.location.href = "login.html";
+        window.location.href = "Login.html";
         return;
     }
     const welcomeMessage = document.getElementById("welcome-message");

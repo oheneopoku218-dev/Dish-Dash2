@@ -166,8 +166,3 @@
     }
   }
 
-  Now fix the JS bugs in Databases/accountUPD.js — change these two lines:
-
-  Line 3: localStorage.getItem("currentUser") → localStorage.getItem("username")
-
-  Line 5: window.location.href = "login.html" → window.location.href = "Login.html"
