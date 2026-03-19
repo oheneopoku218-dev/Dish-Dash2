@@ -14,5 +14,51 @@
     ],
     "authorId": null,
     "createdAt": "2026-03-19T09:27:32.145Z"
+  },
+  {
+    "id": 1773955600816,
+    "title": "Test",
+    "ingredients": [
+      "Test"
+    ],
+    "steps": [
+      "Test"
+    ],
+    "cookingTime": 60,
+    "difficulty": "Medium",
+    "mealType": "Dessert",
+    "category": "dessert",
+    "dietaryTags": [
+      "gluten free"
+    ],
+    "origin": "Jamacia",
+    "tradition": "Carribean",
+    "authorId": 1773850195729,
+    "authorName": "itz.oxene",
+    "isPublic": true,
+    "createdAt": "2026-03-19T21:26:40.816Z"
+  },
+  {
+    "id": 1773955600841,
+    "title": "Test",
+    "ingredients": [
+      "Test"
+    ],
+    "steps": [
+      "Test"
+    ],
+    "cookingTime": 60,
+    "difficulty": "Medium",
+    "mealType": "Dessert",
+    "category": "dessert",
+    "dietaryTags": [
+      "gluten free"
+    ],
+    "origin": "Jamacia",
+    "tradition": "Carribean",
+    "authorId": 1773850195729,
+    "authorName": "itz.oxene",
+    "isPublic": true,
+    "createdAt": "2026-03-19T21:26:40.841Z"
   }
 ]

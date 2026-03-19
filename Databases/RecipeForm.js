@@ -1,4 +1,4 @@
- const currentUser = localStorage.getItem("username");
+const currentUser = localStorage.getItem("username");
   const currentUserId = localStorage.getItem("userId");
   if (!currentUser) window.location.href = "Login.html";
 
@@ -42,6 +42,8 @@
     errorBox.textContent = "";
 
     const steps = [...document.querySelectorAll(".step-input")].map(i => i.value.trim());
+    const mealType = document.getElementById("mealType").value;
+    const visibility = document.getElementById("visibility").value;
 
     const recipeData = {
       title: document.getElementById("title").value.trim(),
@@ -49,11 +51,13 @@
       steps,
       cookingTime: Number(document.getElementById("cookingTime").value),
       difficulty: document.getElementById("difficulty").value,
-      mealType: document.getElementById("mealType").value,
+      mealType,
+      category: mealType.toLowerCase(),
       dietaryTags: document.getElementById("dietaryTags").value.split(",").map(t => t.trim()).filter(Boolean),
       origin: document.getElementById("origin").value.trim(),
       tradition: document.getElementById("tradition").value.trim(),
-      visibility: "public",
+      visibility,
+      isPublic: visibility === "public",
       user: currentUser
     };
 

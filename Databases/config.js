@@ -1,8 +1,5 @@
+  var hostname = window.location.hostname;
 
-  // Auto-detect API base URL so it works in any Codespace
-  const hostname = window.location.hostname;
-
-  // If running in Codespaces, swap the frontend port (5502) for backend (5000)
-  const API_BASE = hostname.includes("app.github.dev")
-    ? `https://${hostname.replace("-5502", "-5000")}`
+  var API_BASE = hostname.includes("app.github.dev")
+    ? "https://" + hostname.replace(/-\d+\.app\.github\.dev$/, "-5000.app.github.dev")
     : "http://localhost:5000";
