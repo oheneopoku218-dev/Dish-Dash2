@@ -1,35 +1,39 @@
-<!DOCTYPE html>
-<head> 
-<title>Dish Dash</title>
-    <meta charset="UTF-8"> 
-    <meta name="viewpoint">
-    <meta content = "width=device-width initial_scale=1.0">
-    <link href="CSS/Dish-Dash.css" rel= "stylesheet">
-    <link rel="stylesheet" href="CSS/Navbar.css">
-</head>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dish Dash</title>
+    <link href="CSS/Dish-Dash.css" rel="stylesheet">
+   
+  </head>
+  <body>
 
-<header class = "navbar">
-    <div class = "logo">
-    <h1>Dish Dash</h1>
-    </div>
+    <header class="navbar">
+      <div class="logo">
+        <h1>Dish Dash</h1>
+      </div>
+      <nav>
+        <a href="Recipes.html">Recipes</a>
+        <a href="Breakfast.html">Breakfast</a>
+        <a href="Lunch.html">Lunch</a>
+        <a href="Dinner.html">Dinner</a>
+        <a href="Deserts.html">Deserts</a>
+        <a href="About.html">About</a>
+        <a href="Login.html" id="auth-link">Login / Sign Up</a>
+      </nav>
+      <div class="search">
+        <input type="text" id="search-bar" placeholder="Search Goodness">
+        <button id="search-button"></button>
+      </div>
+    </header>
 
-<nav class="Navigation Bar Links">
-    <a href = "Recipes.html">Recipes</a>
-    <a href="Breakfast.html">Breakfast</a>
-    <a href="Lunch.html">Lunch</a>
-    <a href="Dinner.html">Dinner</a>
-    <a href="Deserts.html">Deserts</a>
-    <a href="About.html">About</a>
-    <a href ="Login.html" id="auth-link">Login / SignUp</a>
-</nav>
-<div class="search">
-<input type="text"
-id = "search bar" placeholder="Search Goodness">
-<button id="Search Button"></button>
-<script src = "../Databases/Navbar.js"></script>
-</div>
-<header class="hero">
-    <h1>Welcome to Dish Dash</h1>
-    <p>Home to quick, delicious recipes</p>
-</header>
-</section>
+    <section class="hero">
+      <h1>Welcome to Dish Dash</h1>
+      <p>Home to quick, delicious recipes</p>
+    </section>
+
+    <script src="../Databases/Navbar.js"></script>
+     <script src="../Databases/config.js"></script>
+  </body>
+  </html>

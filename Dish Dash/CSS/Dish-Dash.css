@@ -1,4 +1,109 @@
-/* Wrapper */
+
+
+  /* ---- GLOBAL ---- */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #fdf6f0;
+    color: #333;
+  }
+
+  /* ---- NAVBAR ---- */
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 40px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo h1 {
+    font-size: 1.8rem;
+    color: #ff8c42;
+    font-weight: 800;
+    letter-spacing: 2px;
+  }
+
+  nav {
+    display: flex;
+    gap: 24px;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+  }
+
+  nav a:hover {
+    color: #ff8c42;
+  }
+
+  .search {
+    display: flex;
+    gap: 8px;
+  }
+
+  .search input {
+    padding: 8px 14px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    outline: none;
+    width: 200px;
+  }
+
+  .search input:focus {
+    border-color: #ff8c42;
+  }
+
+  .search button {
+    padding: 8px 14px;
+    background: #ff8c42;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    font-size: 0.9rem;
+  }
+
+  .search button:hover {
+    background: #e6762f;
+  }
+
+  /* ---- HERO ---- */
+  .hero {
+    text-align: center;
+    padding: 100px 20px;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                url('https://tse3.mm.bing.net/th/id/OIP.oe4hAO7ZodQoj9aceGVNxAHaKZ?rs=1&pid=ImgDetMain&o=7&rm=3')
+  center/cover no-repeat;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    color: white;
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+    color: #f0f0f0;
+  }
+
+  /* ---- FORM WRAPPER ---- */
   .form-wrapper {
     width: 90%;
     max-width: 700px;
@@ -16,7 +121,7 @@
     margin-bottom: 30px;
   }
 
-  /* Form Groups */
+  /* ---- FORM GROUPS ---- */
   .form-group {
     margin-bottom: 20px;
   }
@@ -40,7 +145,7 @@
     font-size: 0.85rem;
   }
 
-  /* Inputs, Selects, Textareas */
+  /* ---- INPUTS ---- */
   input, select, textarea {
     width: 100%;
     padding: 12px;
@@ -62,7 +167,7 @@
     min-height: 80px;
   }
 
-  /* Steps */
+  /* ---- STEPS ---- */
   #stepsBox {
     display: flex;
     flex-direction: column;
@@ -120,7 +225,7 @@
     background: #e0e0e0;
   }
 
-  /* Submit Button */
+  /* ---- SUBMIT BUTTON ---- */
   .submit-btn {
     width: 100%;
     margin-top: 30px;
@@ -146,7 +251,7 @@
     text-align: center;
   }
 
-  /* Header */
+  /* ---- SITE HEADER ---- */
   .site-header {
     text-align: center;
     padding: 30px;
@@ -163,6 +268,97 @@
 
   .site-title:hover {
     color: #e6762f;
+  }
+
+  /* ---- RECIPE CARDS ---- */
+  .recipe-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .meal-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .meal-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  }
+
+  .meal-card h3 {
+    font-size: 1.2rem;
+    color: #ff8c42;
+    margin-bottom: 10px;
+  }
+
+  .meal-card p {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 6px;
+  }
+
+  .meal-card ol {
+    padding-left: 18px;
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  .category-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: #fff0e6;
+    color: #ff8c42;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .private-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: #f0f0f0;
+    color: #888;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-left: 6px;
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      gap: 16px;
+      padding: 16px 20px;
+    }
+
+    nav {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+    }
+
+    .search input {
+      width: 140px;
+    }
+
+    .recipe-container {
+      padding: 20px;
+    }
   }
 
   @media (max-width: 600px) {

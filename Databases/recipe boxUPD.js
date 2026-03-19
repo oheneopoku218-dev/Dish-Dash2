@@ -1,48 +1,62 @@
-document.addEventListener("DOMContentLoaded",()=>{
-    const currentuser = localStorage.getItem("currentUser");
-    if (!currentuser) {
-        window.location.href = "login.html";
-        return;
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    const userId = localStorage.getItem("userId");
+    const container = document.getElementById("recipeBoxContainer");
+
+    if (!userId) {
+      window.location.href = "Login.html";
+      return;
     }
-    const allUsers = JSON.parse(localStorage.getItem("users")) || [];
-    const userdata = allUsers[currentuser];
-    const recipeBoxContainer = document.querySelector("#recipeBoxContainer");
-    if (!userdata || !userdata.favorites || userdata.favorites.length === 0) {
-        recipeBoxContainer.innerHTML = "<p>Your recipe box is empty. Go add some favorite recipes!</p><a href='recipes.html'>Browse Recipes</a>";
+
+    container.innerHTML = "<p>Loading your recipe box...</p>";
+
+    try {
+      const [favRes, recipeRes] = await Promise.all([
+        fetch(`${API_BASE}/api/favorites/user/${userId}`),
+        fetch(`${API_BASE}/api/recipes`)
+      ]);
+
+      if (!favRes.ok) throw new Error("Failed to load favorites");
+      const favorites = await favRes.json();
+      const recipes = recipeRes.ok ? await recipeRes.json() : [];
+
+      if (!favorites.length) {
+        container.innerHTML = "<p>Your recipe box is empty. Go add some favorite recipes!</p>";
         return;
-    }
-    fetch("recipes.json")
-    .then(response => response.json())
-    .then(recipes => {
-    const favoriteIDs = userdata.favorites;
-    const favoriteRecipes = recipes.filter(recipe => favoriteIDs.includes(recipe.id));
-      favoriteRecipes.forEach(recipe => {
-       const card = document.createElement("div");
-      card.classList.add("recipe-card");
-      card.innerHTML = `
-      <h3>${recipe.name}</h3>
-      <img src="${recipe.image}" alt="${recipe.name}">
-      <div class="recipe-info">
-      <p>${recipe.description}</p>
-       <a href="recipe_detail.html?id=${recipe.id}">View Recipe</a>
-       </div>
-     `;
-       recipeBoxContainer.appendChild(card);
-        const btn = document.querySelector(".remove-btn");
-        btn.addEventListener("click", () => {
-          const recipeID = btn.getAttribute("data-id");
-          const index = userdata.favorites.indexOf(recipeID);
-          if (index !== -1) {
-            userdata.favorites.splice(index, 1);
-            allUsers[currentuser] = userdata;
-            localStorage.setItem("users", JSON.stringify(allUsers));
-            location.reload();
+      }
+
+      container.innerHTML = "";
+
+      favorites.forEach((fav) => {
+        const recipe = recipes.find(r => String(r.id) === String(fav.recipeId));
+        const card = document.createElement("div");
+        card.classList.add("recipe-card");
+        card.innerHTML = `
+          <h3>${recipe ? recipe.title : "Recipe #" + fav.recipeId}</h3>
+          ${recipe ? `<p>${recipe.description || ""}</p>` : ""}
+          <button class="remove-btn" data-fav-id="${fav.id}">Remove</button>
+        `;
+
+        card.querySelector(".remove-btn").addEventListener("click", async () => {
+          try {
+            await fetch(`${API_BASE}/api/favorites`, {
+              method: "DELETE",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ userId, recipeId: fav.recipeId })
+            });
+            card.remove();
+            if (!container.querySelector(".recipe-card")) {
+              container.innerHTML = "<p>Your recipe box is empty.</p>";
+            }
+          } catch (err) {
+            console.error("Remove error:", err);
           }
         });
+
+        container.appendChild(card);
       });
-      })
-      .catch(error => {
-        console.error("Error fetching recipes:", error);
-        recipeBoxContainer.innerHTML = "<p>There was an error loading your recipes.</p>";
-      });
+    } catch (err) {
+      console.error("Recipe box error:", err);
+      container.innerHTML = "<p>Error loading your recipe box.</p>";
+    }
   });

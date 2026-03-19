@@ -1,28 +1,41 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Recipe Viewer</title>
-<style>
-body { font-family: Arial; padding: 20px; }
-button { padding: 10px 20px; margin: 5px; cursor: pointer; }
-.recipe {
- border: 1px solid #ccc;
- padding: 10px;
-margin-top: 10px;
-border-radius: 5px;
-}
-</style>
-</head>
-<body>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe • Dish Dash</title>
+    <link rel="stylesheet" href="CSS/Dish-Dash.css">
+    <link rel="stylesheet" href="CSS/Navbar.css">
+  </head>
+  <body>
 
- <h1>View Recipes</h1>
-<button onclick="loadRecipes('breakfast')">Breakfast</button>
-<button onclick="loadRecipes('lunch')">Lunch</button>
-<button onclick="loadRecipes('dinner')">Dinner</button>
+    <header class="navbar">
+      <div class="logo" onclick="window.location.href='Dish-Dash.html'" style="cursor:pointer">
+        <h1>Dish Dash</h1>
+      </div>
+      <nav>
+        <a href="Breakfast.html">Breakfast</a>
+        <a href="Lunch.html">Lunch</a>
+        <a href="Dinner.html">Dinner</a>
+        <a href="Snack.html">Snacks</a>
+        <a href="Desert.html">Dessert</a>
+        <a href="Login.html" id="auth-link">Login / Sign Up</a>
+      </nav>
+    </header>
 
-    <h2 id="title"></h2>
-    <div id="recipeList"></div>
-    <script src="viewer.js"></script>
+    <div id="recipe-detail" style="
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 40px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    ">
+      <p>Loading recipe...</p>
+    </div>
+ <script src="../Databases/config.js"></script>
+    <script src="../Databases/Viewer.js"></script>
+    <script src="../Databases/Navbar.js"></script>
 
-</body>
-</html>
+  </body>
+  </html>

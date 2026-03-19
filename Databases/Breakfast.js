@@ -1,55 +1,49 @@
-const BREAKFAST_API =
-  "https://ideal-pancake-x5g9g655wwgphrpr-5000.app.github.dev/api/breakfast";
+breakfast.js
+  const BREAKFAST_API = "https://ideal-pancake-x5g9g655wwgphrpr-5000.app.github.dev/api/breakfast";
 
-async function loadBreakfast() {
-  const container = document.getElementById("breakfast-container");
-  if (!container) return;
+  async function loadBreakfast() {
+    const container = document.getElementById("breakfast-container");
+    if (!container) return;
 
-  container.textContent = "Loading breakfast...";
+    container.textContent = "Loading breakfast recipes...";
 
-  try {
-    const res = await fetch(BREAKFAST_API);
+    try {
+      const token = localStorage.getItem("token");
+      const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
-    if (!res.ok) {
-      throw new Error("Failed to load breakfast");
-    }
+      const res = await fetch(BREAKFAST_API, { headers });
 
-    const items = await res.json();
+      if (!res.ok) throw new Error("Failed to load breakfast recipes");
 
-    if (!items.length) {
-      container.textContent = "No breakfast items found.";
-      return;
-    }
+      const items = await res.json();
 
-    container.innerHTML = items
-      .map(
-        (item) => `
+      if (!items.length) {
+        container.textContent = "No breakfast recipes found.";
+        return;
+      }
+
+      container.innerHTML = items.map(item => `
         <div class="meal-card">
-          <h3>${item.name || "Untitled"}</h3>
+          <h3>${item.title || "Untitled"}</h3>
+          ${!item.isPublic ? `<span class="private-badge">Private</span>` : ""}
+          <p><strong>By:</strong> ${item.authorName || "Unknown"}</p>
 
-          ${
-            item.calories
-              ? `<p><strong>Calories:</strong> ${item.calories}</p>`
-              : ""
-          }
+          ${item.description ? `<p>${item.description}</p>` : ""}
 
-          ${
-            item.ingredients && item.ingredients.length
-              ? `<p><strong>Ingredients:</strong> ${item.ingredients.join(
-                  ", "
-                )}</p>`
-              : ""
-          }
+          ${item.ingredients?.length ? `
+            <p><strong>Ingredients:</strong> ${item.ingredients.join(", ")}</p>
+          ` : ""}
+
+          ${item.steps?.length ? `
+            <ol>${item.steps.map(s => `<li>${s}</li>`).join("")}</ol>
+          ` : ""}
         </div>
-      `
-      )
-      .join("");
+      `).join("");
 
-  } catch (err) {
-    console.error("Breakfast load error:", err);
-    container.textContent = "Error loading breakfast.";
+    } catch (err) {
+      console.error("Breakfast load error:", err);
+      container.textContent = "Error loading breakfast recipes.";
+    }
   }
-}
 
-document.addEventListener("DOMContentLoaded", loadBreakfast);
-
+  document.addEventListener("DOMContentLoaded", loadBreakfast);

@@ -1,21 +1,27 @@
-function loadDesert(){
-    fetch ("Desert.json")
-    .then(res=>res.json())
-    .then(data=>{
-        const container = document.getElementById("desert-list");
-        container.innerHTML="";
-        data.forEach(recipe=>{
-            const card = document.createElement("div");
-            card.classList.add("card");
-            card.innerHTML=`
-            <img src="${recipe.image}" alt="${recipe.name}">
-            <div class="desert-info">
-            <h3>${recipe.name}</h3>
-            <p>${recipe.description}</p>
-            </div>
-            `;
-            container.appendChild(card);
-        });
-    })
-    .catch(err=>console.error("Error loading desert recipes:",err));
-}
+
+  const DESERT_API = `${API_BASE}/api/desert`;
+
+  async function loadDesert() {
+    const container = document.getElementById("desert-list");
+    if (!container) return;
+    container.textContent = "Loading desserts...";
+    try {
+      const res = await fetch(DESERT_API);
+      if (!res.ok) throw new Error("Failed to load desserts");
+      const items = await res.json();
+      if (!items.length) { container.textContent = "No desserts found."; return; }
+      container.innerHTML = items.map((item) => `
+        <div class="meal-card">
+          <h3>${item.name || "Untitled"}</h3>
+          ${item.calories ? `<p><strong>Calories:</strong> ${item.calories}</p>` : ""}
+          ${item.ingredients?.length ? `<p><strong>Ingredients:</strong> ${item.ingredients.join(", ")}</p>` : ""}
+        </div>
+      `).join("");
+    } catch (err) {
+      console.error("Desert load error:", err);
+      container.textContent = "Error loading desserts.";
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", loadDesert);
+  

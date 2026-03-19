@@ -1,114 +1,6 @@
-// Safely get elements
-const searchcontainer = document.getElementById("search-container");
-const searchInput = document.getElementById("search-input");
-const searchResults = document.getElementById("search-results");
-const filterContainer = document.getElementById("filter-container");
+ const API_BASE = "https://ideal-pancake-x5g9g655wwgphrpr-5000.app.github.dev";
 
-// -----------------------------
-// SAFE FETCH FUNCTION
-// -----------------------------
-async function fetchRecipes(query = "") {
-  try {
-    const response = await fetch(
-      `https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=YOUR_API_KEY`
-    );
-    const data = await response.json();
-    return data.results || [];
-  } catch (error) {
-    console.error("Error fetching recipes:", error);
-    return [];
-  }
-}
-
-// -----------------------------
-// RANDOM RECIPES
-// -----------------------------
-async function showRandomRecipes() {
-  if (!searchResults) return;
-
-  const recipes = await fetchRecipes("");
-  const random = recipes.sort(() => 0.5 - Math.random()).slice(0, 10);
-
-  searchResults.innerHTML = random
-    .map(
-      (item) =>
-        `<div class="search-item" data-page="${item.page || "#"}">${item.title}</div>`
-    )
-    .join("");
-
-  searchResults.style.display = "block";
-}
-
-// -----------------------------
-// ONLY RUN IF SEARCH BAR EXISTS
-// -----------------------------
-if (searchInput && searchcontainer && searchResults) {
-  // Expand search on focus
-  searchInput.addEventListener("focus", () => {
-    searchcontainer.classList.add("expanded");
-    if (filterContainer) filterContainer.style.display = "flex";
-    showRandomRecipes();
-  });
-
-  // Collapse search when clicking outside
-  document.addEventListener("click", (e) => {
-    if (!searchcontainer.contains(e.target)) {
-      searchcontainer.classList.remove("expanded");
-      if (filterContainer) filterContainer.style.display = "none";
-      searchResults.style.display = "none";
-    }
-  });
-
-  // Live search
-  searchInput.addEventListener("input", async function () {
-    const query = searchInput.value.trim().toLowerCase();
-    const recipes = await fetchRecipes(query);
-
-    const selectedFilters = [
-      ...document.querySelectorAll(".filter-checkbox:checked"),
-    ].map((cb) => cb.value);
-
-    let matches = recipes;
-
-    if (query !== "") {
-      matches = matches.filter((recipe) =>
-        recipe.title.toLowerCase().includes(query)
-      );
-    }
-
-    if (selectedFilters.length > 0) {
-      matches = matches.filter((recipe) =>
-        selectedFilters.every((filter) => recipe.tags?.includes(filter))
-      );
-    }
-
-    if (matches.length > 0) {
-      searchResults.innerHTML = matches
-        .map(
-          (item) =>
-            `<div class="search-item" data-page="${item.page || "#"}">${item.title}</div>`
-        )
-        .join("");
-    } else {
-      searchResults.innerHTML =
-        "<div class='no-results'>No results found</div>";
-    }
-
-    searchResults.style.display = "block";
-  });
-
-  // Click result → navigate
-  searchResults.addEventListener("click", (e) => {
-    if (e.target.classList.contains("search-item")) {
-      const page = e.target.getAttribute("data-page");
-      if (page && page !== "#") window.location.href = page;
-    }
-  });
-}
-
-  // -----------------------------
-  // AUTH NAV LINK
-  // -----------------------------
+  // ---- AUTH LINK ----
   document.addEventListener("DOMContentLoaded", () => {
     const username = localStorage.getItem("username");
     const authLink = document.getElementById("auth-link");
@@ -122,3 +14,76 @@ if (searchInput && searchcontainer && searchResults) {
       authLink.href = "Login.html";
     }
   });
+
+  // ---- SEARCH ----
+  const searchInput = document.getElementById("search-bar");
+  if (searchInput) {
+    // Create results dropdown dynamically
+    const resultsBox = document.createElement("div");
+    resultsBox.id = "search-results";
+    resultsBox.style.cssText = `
+      position: absolute;
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-height: 300px;
+      overflow-y: auto;
+      z-index: 999;
+      display: none;
+      min-width: 250px;
+    `;
+    searchInput.parentElement.style.position = "relative";
+    searchInput.parentElement.appendChild(resultsBox);
+
+    let allRecipes = [];
+
+    // Load all recipes once
+    async function fetchAllRecipes() {
+      try {
+        const token = localStorage.getItem("token");
+        const headers = token ? { Authorization: `Bearer ${token}` } : {};
+        const res = await fetch(`${API_BASE}/api/recipes`, { headers });
+        allRecipes = await res.json();
+      } catch (err) {
+        console.error("Search fetch error:", err);
+      }
+    }
+
+    fetchAllRecipes();
+
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.trim().toLowerCase();
+
+      if (!query) {
+        resultsBox.style.display = "none";
+        return;
+      }
+
+      const matches = allRecipes.filter(r =>
+        r.title?.toLowerCase().includes(query) ||
+        r.category?.toLowerCase().includes(query)
+      );
+
+      if (!matches.length) {
+        resultsBox.innerHTML = `<div style="padding:12px;color:#999;">No results found</div>`;
+      } else {
+        resultsBox.innerHTML = matches.map(r => `
+          <div onclick="window.location.href='Viewer.html?id=${r.id}'"
+            style="padding:12px 16px;cursor:pointer;border-bottom:1px solid #f0f0f0;font-size:0.9rem;">
+            <strong>${r.title}</strong>
+            <span style="color:#ff8c42;font-size:0.8rem;margin-left:8px;">${r.category || ""}</span>
+          </div>
+        `).join("");
+      }
+
+      resultsBox.style.display = "block";
+    });
+
+    // Close results when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!searchInput.parentElement.contains(e.target)) {
+        resultsBox.style.display = "none";
+      }
+    });
+  }
