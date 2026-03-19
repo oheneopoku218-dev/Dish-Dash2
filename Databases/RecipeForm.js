@@ -1,7 +1,6 @@
-  const API_BASE = "https://ideal-pancake-x5g9g655wwgphrpr-5000.app.github.dev";
-
-  const token = localStorage.getItem("token");
-  if (!token) window.location.href = "Login.html";
+ const currentUser = localStorage.getItem("username");
+  const currentUserId = localStorage.getItem("userId");
+  if (!currentUser) window.location.href = "Login.html";
 
   const form = document.getElementById("recipe-form");
   const stepsBox = document.getElementById("stepsBox");
@@ -19,7 +18,9 @@
       `;
       stepsBox.appendChild(newRow);
     }
+  });
 
+  stepsBox.addEventListener("click", (e) => {
     if (e.target.classList.contains("remove-step")) {
       const rows = stepsBox.querySelectorAll(".step-row");
       if (rows.length > 1) {
@@ -41,20 +42,19 @@
     errorBox.textContent = "";
 
     const steps = [...document.querySelectorAll(".step-input")].map(i => i.value.trim());
-    const isPublic = document.getElementById("visibility").value === "public";
 
     const recipeData = {
       title: document.getElementById("title").value.trim(),
-      description: document.getElementById("description").value.trim(),
       ingredients: document.getElementById("ingredients").value.split(",").map(i => i.trim()),
       steps,
-      category: document.getElementById("mealType").value,
       cookingTime: Number(document.getElementById("cookingTime").value),
       difficulty: document.getElementById("difficulty").value,
+      mealType: document.getElementById("mealType").value,
       dietaryTags: document.getElementById("dietaryTags").value.split(",").map(t => t.trim()).filter(Boolean),
       origin: document.getElementById("origin").value.trim(),
       tradition: document.getElementById("tradition").value.trim(),
-      isPublic
+      visibility: "public",
+      user: currentUser
     };
 
     try {
@@ -62,13 +62,12 @@
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          "x-user-id": currentUserId || ""
         },
         body: JSON.stringify(recipeData)
       });
 
       const data = await res.json();
-
       if (!res.ok) {
         errorBox.textContent = data.message || "Failed to save recipe.";
         return;

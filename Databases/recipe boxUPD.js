@@ -1,5 +1,4 @@
-
-  document.addEventListener("DOMContentLoaded", async () => {
+ document.addEventListener("DOMContentLoaded", async () => {
     const userId = localStorage.getItem("userId");
     const container = document.getElementById("recipeBoxContainer");
 
@@ -12,7 +11,7 @@
 
     try {
       const [favRes, recipeRes] = await Promise.all([
-        fetch(`${API_BASE}/api/favorites/user/${userId}`),
+        fetch(`${API_BASE}/api/favorites/user/${userId}`, { headers: { "x-user-id": userId } }),
         fetch(`${API_BASE}/api/recipes`)
       ]);
 
@@ -41,7 +40,10 @@
           try {
             await fetch(`${API_BASE}/api/favorites`, {
               method: "DELETE",
-              headers: { "Content-Type": "application/json" },
+              headers: {
+                "Content-Type": "application/json",
+                "x-user-id": userId
+              },
               body: JSON.stringify({ userId, recipeId: fav.recipeId })
             });
             card.remove();

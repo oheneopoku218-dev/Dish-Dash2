@@ -1,4 +1,3 @@
- dinner.routes.js
   import express from "express";
   import fs from "fs";
   import path from "path";
@@ -20,3 +19,5 @@
     );
     res.json(visible);
   });
+
+  export default router;
