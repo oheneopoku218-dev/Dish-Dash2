@@ -1,5 +1,4 @@
-
-  import express from "express";
+import express from "express";
   import fs from "fs";
   import path from "path";
   import { authenticate, optionalAuth } from "../middleware/auth.js";
@@ -25,8 +24,6 @@
   }
 
   // GET ALL RECIPES
-  // - Logged in: sees public recipes + their own private recipes
-  // - Not logged in: sees public recipes only
   router.get("/", optionalAuth, (req, res) => {
     try {
       const recipes = readJson(recipesFile);
@@ -40,25 +37,36 @@
     }
   });
 
-  // CREATE RECIPE — must be logged in
+  // CREATE RECIPE
   router.post("/", authenticate, (req, res) => {
     try {
-      const { title, description, ingredients, steps, isPublic } = req.body;
+      const { title, ingredients, steps, cookingTime, difficulty, mealType, category, dietaryTags, origin, tradition,
+  isPublic } = req.body;
 
-      if (!title || !description)
-        return res.status(400).json({ message: "Title and description are required." });
+      if (!title) return res.status(400).json({ message: "Title is required." });
+      if (!category) return res.status(400).json({ message: "Category is required." });
+
+      const validCategories = ["breakfast", "lunch", "dinner", "snack", "desert", "dessert"];
+      if (!validCategories.includes(category.toLowerCase()))
+        return res.status(400).json({ message: "Valid category required: breakfast, lunch, dinner, snack, dessert" });
 
       const recipes = readJson(recipesFile);
 
       const newRecipe = {
         id: Date.now(),
         title,
-        description,
         ingredients: ingredients || [],
         steps: steps || [],
-        authorId: req.user.id,       // taken from token, not user input
+        cookingTime: cookingTime || null,
+        difficulty: difficulty || null,
+        mealType: mealType || category,
+        category: category.toLowerCase(),
+        dietaryTags: dietaryTags || [],
+        origin: origin || "",
+        tradition: tradition || "",
+        authorId: req.user.id,
         authorName: req.user.username,
-        isPublic: isPublic === true,  // defaults to private
+        isPublic: isPublic === true,
         createdAt: new Date().toISOString()
       };
 
@@ -91,7 +99,7 @@
     }
   });
 
-  // UPDATE VISIBILITY (public/private toggle)
+  // UPDATE VISIBILITY
   router.patch("/:id/visibility", authenticate, (req, res) => {
     try {
       const recipes = readJson(recipesFile);
@@ -111,7 +119,7 @@
     }
   });
 
-  // DELETE RECIPE — only owner can delete
+  // DELETE RECIPE
   router.delete("/:id", authenticate, (req, res) => {
     try {
       const recipes = readJson(recipesFile);
@@ -132,39 +140,3 @@
   });
 
   export default router;
-   // CREATE RECIPE — must be logged in
-  router.post("/", authenticate, (req, res) => {
-    try {
-      const { title, description, ingredients, steps, isPublic, category } = req.body;
-
-      if (!title || !description)
-        return res.status(400).json({ message: "Title and description are required." });
-
-      const validCategories = ["breakfast", "lunch", "dinner", "snack", "desert"];
-      if (!category || !validCategories.includes(category.toLowerCase()))
-        return res.status(400).json({ message: "Valid category required: breakfast, lunch, dinner, snack, desert" });
-
-      const recipes = readJson(recipesFile);
-
-      const newRecipe = {
-        id: Date.now(),
-        title,
-        description,
-        ingredients: ingredients || [],
-        steps: steps || [],
-        category: category.toLowerCase(),
-        authorId: req.user.id,
-        authorName: req.user.username,
-        isPublic: isPublic === true,
-        createdAt: new Date().toISOString()
-      };
-
-      recipes.push(newRecipe);
-      writeJson(recipesFile, recipes);
-
-      res.status(201).json(newRecipe);
-    } catch (error) {
-      console.error("CREATE RECIPE ERROR:", error);
-      res.status(500).json({ message: "Server error." });
-    }
-  });
