@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1773912452145,
+    "title": "Jollof Test",
+    "description": "Testing 123",
+    "ingredients": [
+      "rice",
+      "tomates",
+      "test"
+    ],
+    "steps": [
+      "test",
+      "test"
+    ],
+    "authorId": null,
+    "createdAt": "2026-03-19T09:27:32.145Z"
+  }
+]
