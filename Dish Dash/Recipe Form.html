@@ -10,8 +10,18 @@
 </head>
 <body>
 
-  <header class="site-header">
-    <h1 class="site-title" onclick="window.location.href='Dish-Dash.html'">Dish Dash</h1>
+  <header class="navbar">
+    <div class="logo" onclick="window.location.href='Dish-Dash.html'" style="cursor:pointer">
+      <h1>Dish Dash</h1>
+    </div>
+    <nav>
+      <a href="Breakfast.html">Breakfast</a>
+      <a href="Lunch.html">Lunch</a>
+      <a href="Dinner.html">Dinner</a>
+      <a href="Snack.html">Snacks</a>
+      <a href="Desert.html">Dessert</a>
+      <a href="Login.html" id="auth-link">Login / Sign Up</a>
+    </nav>
   </header>
 
   <div class="form-wrapper">
@@ -96,6 +106,26 @@
           <option value="public">Public — everyone can see this</option>
           <option value="private">Private — only you can see this</option>
         </select>
+      </div>
+
+      <!-- Cultural Context Section -->
+      <div class="form-group" style="margin-top: 24px; border-top: 2px solid #ff8c42; padding-top: 24px;">
+        <h3 style="margin-bottom: 16px; color: #ff8c42;">Cultural Context</h3>
+
+        <div class="form-group">
+          <label>Cultural Story</label>
+          <textarea id="culturalStory" placeholder="Share the story or history behind this dish..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>When is it typically eaten?</label>
+          <input type="text" id="culturalOccasion" placeholder="e.g. Weddings, Christmas, everyday meal">
+        </div>
+
+        <div class="form-group">
+          <label>Regional Variations</label>
+          <textarea id="culturalVariations" placeholder="Describe any regional or family variations of this dish..."></textarea>
+        </div>
       </div>
 
       <button type="submit" class="submit-btn">Submit Recipe</button>
