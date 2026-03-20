@@ -20,14 +20,14 @@
 .favorite-card {
     background: #ffffff;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    
     overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    
 }
 
 .favorite-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    
+    
 }
 
 /* Recipe image */
@@ -76,7 +76,7 @@
     border-radius: 6px;
     cursor: pointer;
     font-size: 0.9rem;
-    transition: background 0.2s ease;
+    
 }
 
 .view-btn:hover {
@@ -90,7 +90,7 @@
     border-radius: 6px;
     cursor: pointer;
     font-size: 0.9rem;
-    transition: background 0.2s ease;
+    
 }
 
 .remove-btn:hover {
