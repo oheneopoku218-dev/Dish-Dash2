@@ -8,13 +8,20 @@
   <link rel="stylesheet" href="CSS/Navbar.css">
   <link rel="stylesheet" href="CSS/category.css">
 </head>
-
 <body>
 
-  <header class="site-header">
-    <h1 class="site-title" onclick="window.location.href='Dish-Dash.html'">
-      Dish Dash
-    </h1>
+  <header class="navbar">
+    <div class="logo" onclick="window.location.href='Dish-Dash.html'" style="cursor:pointer">
+      <h1>Dish Dash</h1>
+    </div>
+    <nav>
+      <a href="Breakfast.html">Breakfast</a>
+      <a href="Lunch.html">Lunch</a>
+      <a href="Dinner.html">Dinner</a>
+      <a href="Snack.html">Snacks</a>
+      <a href="Desert.html">Dessert</a>
+      <a href="Login.html" id="auth-link">Login / Sign Up</a>
+    </nav>
   </header>
 
   <div id="lunch-container" class="recipe-container"></div>
