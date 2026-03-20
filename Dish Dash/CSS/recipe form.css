@@ -47,7 +47,7 @@
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-  border-color: #ff8c42;
+  border-color: #ffb380;
 }
 
 .form-group textarea {
@@ -85,7 +85,7 @@
 }
 
 .step-input:focus {
-  border-color: #ff8c42;
+  border-color: #ffb380;
 }
 
 .add-step {
