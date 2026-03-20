@@ -47,6 +47,7 @@ const currentUser = localStorage.getItem("username");
 
     const recipeData = {
       title: document.getElementById("title").value.trim(),
+      description: document.getElementById("description").value.trim(),
       ingredients: document.getElementById("ingredients").value.split(",").map(i => i.trim()),
       steps,
       cookingTime: Number(document.getElementById("cookingTime").value),
