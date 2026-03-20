@@ -1,111 +1,49 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+.recipe-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  padding: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
 
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    background: #fdf6f0;
-    color: #333;
-  }
+.meal-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  cursor: pointer;
+}
 
-  .site-header {
-    text-align: center;
-    padding: 30px 20px 10px;
-    background: white;
-    border-bottom: 1px solid #f0f0f0;
-  }
+.meal-card:hover {
+  border-color: #ff8c42;
+}
 
-  .site-title {
-    font-size: 2.5rem;
-    color: #ff8c42;
-    cursor: pointer;
-    font-weight: 800;
-    letter-spacing: 2px;
-  }
+.meal-card h3 {
+  font-size: 1.1rem;
+  color: #ff8c42;
+  margin-bottom: 6px;
+}
 
-  .site-title:hover {
-    color: #e6762f;
-  }
+.meal-card p {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 4px;
+}
 
-  .category-header {
-    text-align: center;
-    padding: 30px 20px 10px;
-  }
+.private-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  background: #f0f0f0;
+  color: #888;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
 
-  .category-header h2 {
-    font-size: 1.8rem;
-    color: #333;
-    font-weight: 700;
-  }
-
+@media (max-width: 600px) {
   .recipe-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 24px;
-    padding: 30px 40px;
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 16px;
+    grid-template-columns: 1fr;
   }
-
-  .meal-card {
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
-    transition: transform 0.2s, box-shadow 0.2s;
-    cursor: pointer;
-  }
-
-  .meal-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-  }
-
-  .meal-card h3 {
-    font-size: 1.1rem;
-    color: #ff8c42;
-    margin: 8px 0 6px;
-  }
-
-  .meal-card p {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 6px;
-  }
-
-  .meal-card ol {
-    padding-left: 18px;
-    font-size: 0.9rem;
-    color: #555;
-  }
-
-  .category-badge {
-    display: inline-block;
-    padding: 4px 10px;
-    background: #fff0e6;
-    color: #ff8c42;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-  }
-
-  .private-badge {
-    display: inline-block;
-    padding: 4px 10px;
-    background: #f0f0f0;
-    color: #888;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    margin-left: 6px;
-  }
-
-  @media (max-width: 768px) {
-    .recipe-container {
-      padding: 20px;
-      grid-template-columns: 1fr;
-    }
-  }
+}
