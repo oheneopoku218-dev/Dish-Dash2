@@ -40,7 +40,7 @@ import express from "express";
   // CREATE RECIPE
   router.post("/", authenticate, (req, res) => {
     try {
-      const { title, description, ingredients, steps, cookingTime, difficulty, mealType, category, dietaryTags, origin, tradition, isPublic, culturalContext } = req.body;
+      const { title, description, ingredients, steps, cookingTime, difficulty, mealType, category, dietaryTags, origin, tradition, isPublic, imageUrl, videoUrl, culturalContext } = req.body;
 
       if (!title) return res.status(400).json({ message: "Title is required." });
       if (!category) return res.status(400).json({ message: "Category is required." });
@@ -65,6 +65,8 @@ import express from "express";
         origin: origin || "",
         tradition: tradition || "",
         culturalContext: culturalContext || {},
+        imageUrl: imageUrl || "",
+        videoUrl: videoUrl || "",
         authorId: req.user.id,
         authorName: req.user.username,
         isPublic: isPublic === true,

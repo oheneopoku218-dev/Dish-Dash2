@@ -5,6 +5,20 @@ if (!currentUser) window.location.href = "Login.html";
 const form = document.getElementById("recipe-form");
 const stepsBox = document.getElementById("stepsBox");
 
+// Image preview
+const imageUrlInput = document.getElementById("imageUrl");
+const imagePreview = document.getElementById("imagePreview");
+imageUrlInput.addEventListener("input", () => {
+  const url = imageUrlInput.value.trim();
+  if (url) {
+    imagePreview.src = url;
+    imagePreview.style.display = "block";
+    imagePreview.onerror = () => { imagePreview.style.display = "none"; };
+  } else {
+    imagePreview.style.display = "none";
+  }
+});
+
 stepsBox.addEventListener("click", (e) => {
   if (e.target.classList.contains("add-step")) {
     const stepCount = stepsBox.querySelectorAll(".step-row").length + 1;
@@ -57,6 +71,8 @@ form.addEventListener("submit", async (e) => {
     dietaryTags: document.getElementById("dietaryTags").value.split(",").map(t => t.trim()).filter(Boolean),
     origin: document.getElementById("origin").value.trim(),
     tradition: document.getElementById("tradition").value.trim(),
+    imageUrl: document.getElementById("imageUrl").value.trim(),
+    videoUrl: document.getElementById("videoUrl").value.trim(),
     visibility,
     isPublic: visibility === "public",
     culturalContext: {

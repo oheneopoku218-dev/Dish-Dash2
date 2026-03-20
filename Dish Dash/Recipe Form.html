@@ -35,7 +35,7 @@
       </div>
 
       <div class="form-group">
-        <label for="description">Description</label>
+        <label>Description</label>
         <textarea id="description" placeholder="Short description of your recipe" required></textarea>
       </div>
 
@@ -100,17 +100,25 @@
         </div>
       </div>
 
-      <div class="form-group">
-        <label>Visibility</label>
-        <select id="visibility">
-          <option value="public">Public — everyone can see this</option>
-          <option value="private">Private — only you can see this</option>
-        </select>
+      <!-- Media Section -->
+      <div class="form-group" style="margin-top:24px;border-top:2px solid #ff8c42;padding-top:24px;">
+        <h3 style="margin-bottom:16px;color:#ff8c42;">Media</h3>
+
+        <div class="form-group">
+          <label>Recipe Image URL</label>
+          <input type="url" id="imageUrl" placeholder="https://example.com/image.jpg">
+          <img id="imagePreview" src="" alt="" style="display:none;margin-top:10px;max-width:100%;max-height:200px;border-radius:8px;object-fit:cover;">
+        </div>
+
+        <div class="form-group">
+          <label>Recipe Video URL <span class="hint">(YouTube or direct link)</span></label>
+          <input type="url" id="videoUrl" placeholder="https://youtube.com/watch?v=...">
+        </div>
       </div>
 
       <!-- Cultural Context Section -->
-      <div class="form-group" style="margin-top: 24px; border-top: 2px solid #ff8c42; padding-top: 24px;">
-        <h3 style="margin-bottom: 16px; color: #ff8c42;">Cultural Context</h3>
+      <div class="form-group" style="margin-top:24px;border-top:2px solid #ff8c42;padding-top:24px;">
+        <h3 style="margin-bottom:16px;color:#ff8c42;">Cultural Context</h3>
 
         <div class="form-group">
           <label>Cultural Story</label>
@@ -124,8 +132,16 @@
 
         <div class="form-group">
           <label>Regional Variations</label>
-          <textarea id="culturalVariations" placeholder="Describe any regional or family variations of this dish..."></textarea>
+          <textarea id="culturalVariations" placeholder="Describe any regional or family variations..."></textarea>
         </div>
+      </div>
+
+      <div class="form-group">
+        <label>Visibility</label>
+        <select id="visibility">
+          <option value="public">Public — everyone can see this</option>
+          <option value="private">Private — only you can see this</option>
+        </select>
       </div>
 
       <button type="submit" class="submit-btn">Submit Recipe</button>
