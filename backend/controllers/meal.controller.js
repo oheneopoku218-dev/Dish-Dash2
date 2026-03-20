@@ -1,4 +1,4 @@
-import Meal from "../models/meal.model.js";
+import Meal from "../modules/recipe.model.js";
 
 export const getMealsByCategory = async (req, res) => {
   try {

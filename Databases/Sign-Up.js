@@ -1,7 +1,5 @@
-
-
- // REPLACE with:
-  const LOGIN_API = `${API_BASE}/api/users/login`;
+const SIGNUP_API = `${API_BASE}/api/users/signup`;
+const LOGIN_API = `${API_BASE}/api/users/login`;
 
 // --------------------------------------
 // EMAIL VALIDATION
@@ -68,7 +66,7 @@ document.getElementById("signup-form").addEventListener("submit", async (e) => {
     // --------------------------------------
     // SUCCESS
     // --------------------------------------
-    alert("Signup successful! 🎉");
+    alert("Signup successful!");
     window.location.href = "Login.html";
 
   } catch (error) {
