@@ -50,14 +50,30 @@ async function loadSnack() {
       } catch {}
     }
 
+    const ratingsMap = {};
+    await Promise.all(items.map(async item => {
+      try {
+        const rRes = await fetch(`${API_BASE}/api/reviews/recipe/${item.id}`);
+        const reviews = rRes.ok ? await rRes.json() : [];
+        ratingsMap[item.id] = reviews.length
+          ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
+          : 0;
+      } catch { ratingsMap[item.id] = 0; }
+    }));
+
+    items.sort((a, b) => (ratingsMap[b.id] || 0) - (ratingsMap[a.id] || 0));
+
     container.innerHTML = items.map(item => {
       const isOwn = userId && String(item.authorId) === String(userId);
       const alreadySaved = savedIds.has(String(item.id));
+      const avg = ratingsMap[item.id];
+      const ratingBadge = avg > 0 ? `<p style="margin:4px 0;font-size:0.85rem;color:#ff8c42;"><strong>⭐ ${avg.toFixed(1)}</strong></p>` : '';
       return `
         <div class="meal-card" onclick='viewRecipe(${JSON.stringify(item).replace(/'/g, "&#39;")})' style="cursor:pointer">
           ${item.imageUrl ? `<img src="${item.imageUrl}" alt="${item.title || ""}" style="width:100%;height:180px;object-fit:cover;border-radius:6px 6px 0 0;margin-bottom:12px;" onerror="this.style.display='none'">` : ""}
           <h3>${item.title || item.name || "Untitled"}</h3>
           ${!item.isPublic ? `<span class="private-badge">Private</span>` : ""}
+          ${ratingBadge}
           <p style="color:#666;font-size:0.85rem;">By ${item.authorName || "Unknown"}</p>
           ${item.description ? `<p>${item.description}</p>` : ""}
           ${item.cookingTime ? `<p><strong>Time:</strong> ${item.cookingTime} mins</p>` : ""}

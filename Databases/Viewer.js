@@ -5,7 +5,7 @@ function getYouTubeEmbed(url) {
   return url; // treat as direct video URL
 }
 
-function displayRecipeDetail() {
+async function displayRecipeDetail() {
   const container = document.getElementById("recipe-detail");
   if (!container) return;
 
@@ -21,6 +21,7 @@ function displayRecipeDetail() {
 
   container.innerHTML = `
     <button onclick="window.history.back()" style="margin-bottom:20px;cursor:pointer;">← Back</button>
+    ${!isOwn ? `<button id="save-to-box-btn" style="float:right;padding:9px 18px;background:${alreadySaved ? '#ccc' : '#ff8c42'};color:white;border:none;border-radius:8px;cursor:${alreadySaved ? 'default' : 'pointer'};font-size:0.9rem;" ${alreadySaved ? 'disabled' : ''}>${alreadySaved ? 'Saved ✓' : 'Save to Recipe Box'}</button>` : ''}
 
     ${r.imageUrl ? `<img src="${r.imageUrl}" alt="${r.title}" style="width:100%;max-height:350px;object-fit:cover;border-radius:12px;margin-bottom:20px;" onerror="this.style.display='none'">` : ""}
 
@@ -112,7 +113,15 @@ async function loadReviews(recipeId) {
       return;
     }
 
-    list.innerHTML = reviews.map(rv => `
+    const avg = reviews.reduce((sum, rv) => sum + rv.rating, 0) / reviews.length;
+    const avgStars = '⭐'.repeat(Math.round(avg));
+    const avgHTML = '<div style="padding:12px 16px;background:#fff8f3;border-radius:8px;margin-bottom:16px;display:flex;align-items:center;gap:12px;">'
+      + '<span style="font-size:1.5rem;font-weight:700;color:#ff8c42;">' + avg.toFixed(1) + '</span>'
+      + '<div><div style="font-size:1.1rem;">' + avgStars + '</div>'
+      + '<div style="color:#888;font-size:0.82rem;">' + reviews.length + ' review' + (reviews.length !== 1 ? 's' : '') + '</div></div>'
+      + '</div>';
+
+    list.innerHTML = avgHTML + reviews.map(rv => `
       <div style="padding:16px;border-bottom:1px solid #eee;">
         <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
           <span>${"⭐".repeat(rv.rating)}</span>
