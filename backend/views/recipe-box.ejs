@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Recipe Box — Dish Dash</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & Base ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
+      background: #fdf6f0;
+      color: #333;
+      min-height: 100vh;
+    }
+
+    /* ─── Navbar ────────────────────────────────────────────────────── */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 32px;
+      background: white;
+      border-bottom: 2px solid #ff8c42;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo h1 { font-size: 1.6rem; color: #ff8c42; font-weight: 800; cursor: pointer; }
+    nav { display: flex; gap: 20px; }
+    nav a { text-decoration: none; color: #333; font-weight: 600; font-size: 0.95rem; }
+    nav a:hover { color: #ff8c42; }
+
+    /* ─── Hero ──────────────────────────────────────────────────────── */
+    .page-hero {
+      text-align: center;
+      padding: 48px 24px 36px;
+      background: white;
+      border-bottom: 1px solid #f0e8df;
+    }
+    .page-hero h2 { font-size: 2rem; font-weight: 800; color: #1a1a1a; margin-bottom: 8px; }
+    .page-hero p  { font-size: 1rem; color: #888; }
+
+    /* ─── Filter Pills ──────────────────────────────────────────────── */
+    .filter-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 28px 24px 0;
+    }
+    .pill-btn {
+      padding: 8px 22px;
+      border-radius: 24px;
+      border: 2px solid #F5890A;
+      background: transparent;
+      color: #F5890A;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s;
+    }
+    .pill-btn:hover   { background: #fff3ea; }
+    .pill-btn.active  { background: #F5890A; color: white; }
+
+    /* ─── Recipe Grid ───────────────────────────────────────────────── */
+    .grid-wrapper {
+      max-width: 1200px;
+      margin: 32px auto;
+      padding: 0 24px 70px;
+    }
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    /* ─── Recipe Card ───────────────────────────────────────────────── */
+    .recipe-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .recipe-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.11);
+    }
+    .card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(135deg, #ffe8d4 0%, #fdf0e5 100%);
+    }
+    .card-img-placeholder {
+      width: 100%;
+      height: 180px;
+      background: linear-gradient(135deg, #ffe8d4 0%, #fdf0e5 100%);
+    }
+    .card-body {
+      padding: 16px 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+    .card-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.3;
+    }
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .tag-meal {
+      background: #fff3ea;
+      color: #F5890A;
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: capitalize;
+    }
+    .tag-time {
+      font-size: 0.8rem;
+      color: #999;
+      font-weight: 500;
+    }
+
+    /* ─── Empty State ───────────────────────────────────────────────── */
+    .empty-state {
+      text-align: center;
+      padding: 80px 24px;
+      grid-column: 1 / -1;
+    }
+    .empty-state .icon { font-size: 3rem; display: block; margin-bottom: 16px; }
+    .empty-state p { font-size: 1rem; color: #888; margin-bottom: 6px; }
+    .empty-state a {
+      color: #F5890A;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .empty-state a:hover { text-decoration: underline; }
+
+    /* ─── Loading ───────────────────────────────────────────────────── */
+    .loading-msg {
+      text-align: center;
+      padding: 60px 24px;
+      color: #aaa;
+      font-size: 0.95rem;
+      grid-column: 1 / -1;
+    }
+
+    /* ─── Responsive ────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .recipe-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .recipe-grid { grid-template-columns: 1fr; }
+      .navbar { padding: 12px 16px; }
+      nav { gap: 10px; }
+      .page-hero h2 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAVBAR ─────────────────────────────────────────────────────── -->
+  <header class="navbar">
+    <div class="logo" onclick="window.location.href='/'"><h1>Dish Dash</h1></div>
+    <nav>
+      <a href="/api/breakfast">Breakfast</a>
+      <a href="/api/lunch">Lunch</a>
+      <a href="/api/dinner">Dinner</a>
+      <a href="/api/snack">Snacks</a>
+      <a href="/api/desert">Dessert</a>
+    </nav>
+  </header>
+
+  <!-- ─── HERO ───────────────────────────────────────────────────────── -->
+  <div class="page-hero">
+    <h2>My Recipe Box</h2>
+    <p>All the recipes you've saved in one place</p>
+  </div>
+
+  <!-- ─── FILTER PILLS ───────────────────────────────────────────────── -->
+  <div class="filter-row">
+    <button class="pill-btn active" data-filter="all">All</button>
+    <button class="pill-btn" data-filter="breakfast">Breakfast</button>
+    <button class="pill-btn" data-filter="lunch">Lunch</button>
+    <button class="pill-btn" data-filter="dinner">Dinner</button>
+    <button class="pill-btn" data-filter="dessert">Dessert</button>
+  </div>
+
+  <!-- ─── RECIPE GRID ─────────────────────────────────────────────────── -->
+  <div class="grid-wrapper">
+    <div class="recipe-grid" id="recipe-grid">
+      <p class="loading-msg">Loading your recipe box…</p>
+    </div>
+  </div>
+
+  <script>
+    // ─── API base URL (matches existing config.js logic) ────────────────
+    var API_BASE = (function () {
+      var h = location.hostname;
+      if (h.includes("app.github.dev"))
+        return "https://" + h.replace(/-\d+\.app\.github\.dev$/, "-5000.app.github.dev");
+      if (h.includes("onrender.com"))
+        return "https://dish-dash2.onrender.com";
+      return "http://localhost:5000";
+    })();
+
+    var _allCards = []; // { recipe, el } — used for pill filtering
+    var _activeFilter = "all";
+
+    // ─── Pill filter logic ───────────────────────────────────────────────
+    document.querySelectorAll(".pill-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        document.querySelectorAll(".pill-btn").forEach(function (b) { b.classList.remove("active"); });
+        btn.classList.add("active");
+        _activeFilter = btn.getAttribute("data-filter");
+        applyFilter();
+      });
+    });
+
+    function applyFilter() {
+      var visible = 0;
+      _allCards.forEach(function (entry) {
+        var cat = (entry.recipe.category || entry.recipe.mealType || "").toLowerCase();
+        // treat "desert" and "dessert" as the same
+        if (cat === "desert") cat = "dessert";
+        var show = _activeFilter === "all" || cat === _activeFilter;
+        entry.el.style.display = show ? "" : "none";
+        if (show) visible++;
+      });
+
+      var emptyEl = document.getElementById("empty-filter-msg");
+      if (!visible) {
+        if (!emptyEl) {
+          emptyEl = document.createElement("p");
+          emptyEl.id = "empty-filter-msg";
+          emptyEl.className = "loading-msg";
+          emptyEl.textContent = "No saved recipes in this category.";
+          document.getElementById("recipe-grid").appendChild(emptyEl);
+        }
+        emptyEl.style.display = "";
+      } else if (emptyEl) {
+        emptyEl.style.display = "none";
+      }
+    }
+
+    // ─── Build one card element ──────────────────────────────────────────
+    function buildCard(recipe) {
+      var card = document.createElement("div");
+      card.className = "recipe-card";
+      card.setAttribute("data-category", (recipe.category || recipe.mealType || "").toLowerCase());
+
+      var label = recipe.mealType || recipe.category || "";
+      if (label.toLowerCase() === "desert") label = "Dessert";
+
+      var imgHTML = recipe.imageUrl
+        ? '<img class="card-img" src="' + recipe.imageUrl + '" alt="' + escHtml(recipe.title || "") + '" onerror="this.outerHTML=\'<div class=card-img-placeholder></div>\'">'
+        : '<div class="card-img-placeholder"></div>';
+
+      var timeHTML = recipe.cookingTime
+        ? '<span class="tag-time">⏱ ' + recipe.cookingTime + ' min</span>'
+        : "";
+
+      card.innerHTML =
+        imgHTML +
+        '<div class="card-body">' +
+          '<p class="card-name">' + escHtml(recipe.title || recipe.name || "Untitled") + '</p>' +
+          '<div class="card-meta">' +
+            (label ? '<span class="tag-meal">' + escHtml(label) + '</span>' : "") +
+            timeHTML +
+          "</div>" +
+        "</div>";
+
+      card.addEventListener("click", function () {
+        localStorage.setItem("selectedRecipe", JSON.stringify(recipe));
+        window.location.href = "/recipe/" + recipe.id;
+      });
+
+      return card;
+    }
+
+    function escHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    // ─── Main: auth check → fetch favorites → fetch recipes → render ────
+    (async function () {
+      var grid = document.getElementById("recipe-grid");
+      var userId = localStorage.getItem("userId");
+
+      // Redirect to login if not logged in
+      if (!userId) {
+        window.location.href = "/login";
+        return;
+      }
+
+      try {
+        var favRes = await fetch(API_BASE + "/api/favorites/user/" + userId, {
+          headers: { "x-user-id": userId }
+        });
+        if (!favRes.ok) throw new Error("favorites fetch failed");
+        var favorites = await favRes.json();
+
+        // Empty saved list
+        if (!favorites.length) {
+          grid.innerHTML =
+            '<div class="empty-state">' +
+              '<span class="icon">📦</span>' +
+              "<p>Your recipe box is empty.</p>" +
+              '<p>Find something you love and hit <strong>+ Add to Meal Vault</strong>!</p>' +
+              '<p style="margin-top:14px"><a href="/">Browse recipes</a></p>' +
+            "</div>";
+          return;
+        }
+
+        // Fetch all public recipes and build a lookup map
+        var recipeRes = await fetch(API_BASE + "/api/recipes", {
+          headers: { "x-user-id": userId }
+        });
+        var allRecipes = recipeRes.ok ? await recipeRes.json() : [];
+        var recipeMap = {};
+        allRecipes.forEach(function (r) { recipeMap[String(r.id)] = r; });
+
+        // Build the saved recipe list (skip any whose recipe object is missing)
+        var savedRecipes = favorites
+          .map(function (fav) { return recipeMap[String(fav.recipeId)]; })
+          .filter(Boolean);
+
+        if (!savedRecipes.length) {
+          grid.innerHTML =
+            '<div class="empty-state">' +
+              '<span class="icon">📦</span>' +
+              "<p>Your saved recipes could not be loaded.</p>" +
+              '<p><a href="/">Go back home</a></p>' +
+            "</div>";
+          return;
+        }
+
+        // Render cards
+        grid.innerHTML = "";
+        savedRecipes.forEach(function (recipe) {
+          var el = buildCard(recipe);
+          _allCards.push({ recipe: recipe, el: el });
+          grid.appendChild(el);
+        });
+
+        applyFilter();
+
+      } catch (err) {
+        console.error("Recipe box error:", err);
+        grid.innerHTML =
+          '<p class="loading-msg" style="color:#cc0000;">Could not load your recipe box. Please try again.</p>';
+      }
+    })();
+  </script>
+
+</body>
+</html>

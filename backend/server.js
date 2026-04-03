@@ -48,6 +48,7 @@
   import reviewRoutes from "./routes/review.routes.js";
   import favoriteRoutes from "./routes/favorite.routes.js";
   import recipeDetailRoutes from "./routes/recipeDetail.routes.js";
+  import recipeBoxPageRoutes from "./routes/recipeBoxPage.routes.js";
 
   // -----------------------------------------------------
   // ROUTES
@@ -63,6 +64,7 @@
   app.use("/api/reviews", reviewRoutes);
   app.use("/api/favorites", favoriteRoutes);
   app.use("/recipe", recipeDetailRoutes);
+  app.use("/recipebox", recipeBoxPageRoutes);
 
   // -----------------------------------------------------
   // TEST ROUTES
