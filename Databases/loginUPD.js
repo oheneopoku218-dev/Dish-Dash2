@@ -37,8 +37,6 @@
         return;
       }
 
-      // Save everything including token
-      localStorage.setItem("token", data.token);
       localStorage.setItem("userId", data.id);
       localStorage.setItem("username", data.username);
       localStorage.setItem("profilePic", data.profilePic || "");

@@ -18,6 +18,17 @@ async function displayRecipeDetail() {
   const r = JSON.parse(stored);
   const cc = r.culturalContext || {};
   const embedUrl = getYouTubeEmbed(r.videoUrl);
+  const userId = localStorage.getItem("userId");
+  const isOwn = userId && String(r.authorId) === String(userId);
+  let alreadySaved = false;
+
+  if (userId && !isOwn) {
+    try {
+      const favRes = await fetch(`${API_BASE}/api/favorites/user/${userId}`);
+      const favs = favRes.ok ? await favRes.json() : [];
+      alreadySaved = favs.some(f => String(f.recipeId) === String(r.id));
+    } catch { /* ignore */ }
+  }
 
   container.innerHTML = `
     <button onclick="window.history.back()" style="margin-bottom:20px;cursor:pointer;">← Back</button>
