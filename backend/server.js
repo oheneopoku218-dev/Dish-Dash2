@@ -18,6 +18,12 @@
   const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
   // -----------------------------------------------------
+  // VIEW ENGINE (EJS)
+  // -----------------------------------------------------
+  app.set("views", path.join(__dirname, "views"));
+  app.set("view engine", "ejs");
+
+  // -----------------------------------------------------
   // CORS
   // -----------------------------------------------------
   app.use(cors());
@@ -41,6 +47,7 @@
   import recipeRoutes from "./routes/recipe.routes.js";
   import reviewRoutes from "./routes/review.routes.js";
   import favoriteRoutes from "./routes/favorite.routes.js";
+  import recipeDetailRoutes from "./routes/recipeDetail.routes.js";
 
   // -----------------------------------------------------
   // ROUTES
@@ -55,6 +62,7 @@
   app.use("/api/recipes", recipeRoutes);
   app.use("/api/reviews", reviewRoutes);
   app.use("/api/favorites", favoriteRoutes);
+  app.use("/recipe", recipeDetailRoutes);
 
   // -----------------------------------------------------
   // TEST ROUTES

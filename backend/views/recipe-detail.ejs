@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= recipe ? recipe.title + ' — Dish Dash' : 'Recipe — Dish Dash' %></title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & Base ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
+      background: #fdf6f0;
+      color: #333;
+      min-height: 100vh;
+    }
+
+    /* ─── Navbar ────────────────────────────────────────────────────── */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 32px;
+      background: white;
+      border-bottom: 2px solid #ff8c42;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo h1 {
+      font-size: 1.6rem;
+      color: #ff8c42;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    nav { display: flex; gap: 20px; }
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    nav a:hover { color: #ff8c42; }
+
+    /* ─── Page Wrapper ──────────────────────────────────────────────── */
+    .detail-page {
+      max-width: 1280px;
+      margin: 36px auto;
+      padding: 0 24px 70px;
+    }
+
+    /* ─── Three-Column Grid ─────────────────────────────────────────── */
+    .three-col {
+      display: grid;
+      grid-template-columns: 220px 1fr 300px;
+      gap: 28px;
+      align-items: start;
+    }
+
+    /* ─── LEFT COLUMN: Photo Stack ──────────────────────────────────── */
+    .col-left {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: sticky;
+      top: 88px;
+    }
+    .recipe-photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.09);
+      display: block;
+      background: #f0e8df;
+    }
+    .recipe-photo.placeholder {
+      background: linear-gradient(135deg, #ffe8d4 0%, #fdf0e5 100%);
+      min-height: 180px;
+    }
+
+    /* ─── CENTRE COLUMN ─────────────────────────────────────────────── */
+    .col-centre { display: flex; flex-direction: column; }
+
+    .recipe-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #1a1a1a;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    /* Pills */
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .pill {
+      background: #fff3ea;
+      color: #F5890A;
+      border-radius: 20px;
+      padding: 5px 16px;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    /* Description */
+    .recipe-description {
+      font-size: 0.96rem;
+      color: #555;
+      line-height: 1.75;
+      padding: 18px 22px;
+      background: #fafaf9;
+      border-radius: 12px;
+      border-left: 3px solid #ffe0cc;
+      margin-bottom: 24px;
+    }
+
+    /* Add to Meal Vault button */
+    .btn-vault {
+      display: inline-block;
+      padding: 12px 26px;
+      background: #F5890A;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      margin-bottom: 28px;
+      align-self: flex-start;
+    }
+    .btn-vault:hover { background: #d9760a; }
+    .btn-vault:active { transform: scale(0.98); }
+    .btn-vault.saved {
+      background: #ddd;
+      color: #999;
+      cursor: default;
+    }
+
+    /* Box shared heading */
+    .box-heading {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #1a1a1a;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #fff3ea;
+    }
+
+    /* Ingredients box */
+    .ingredients-box {
+      border: 1.5px solid #ffe0c8;
+      border-radius: 14px;
+      padding: 22px 24px;
+      margin-bottom: 28px;
+    }
+    .ingredient-row {
+      padding: 7px 0;
+      border-bottom: 1px solid #f5ece4;
+      font-size: 0.93rem;
+      color: #444;
+      line-height: 1.5;
+    }
+    .ingredient-row:last-child { border-bottom: none; }
+
+    /* Steps box */
+    .steps-box {
+      border: 1.5px solid #ffe0c8;
+      border-radius: 14px;
+      padding: 22px 24px;
+    }
+    .step-row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid #f5ece4;
+    }
+    .step-row:last-child { border-bottom: none; }
+    .step-number {
+      min-width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #F5890A;
+      color: white;
+      font-size: 0.82rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-text {
+      font-size: 0.93rem;
+      color: #444;
+      line-height: 1.65;
+    }
+
+    /* ─── RIGHT COLUMN ──────────────────────────────────────────────── */
+    .col-right {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: sticky;
+      top: 88px;
+    }
+
+    /* Cultural Context card */
+    .cultural-card {
+      background: #fff8f3;
+      border-left: 4px solid #F5890A;
+      border-radius: 14px;
+      padding: 22px 24px;
+    }
+    .cultural-card h3 {
+      color: #F5890A;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .cultural-card p {
+      color: #555;
+      line-height: 1.65;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+    .cultural-card p:last-child { margin-bottom: 0; }
+
+    /* Video embed box */
+    .video-box {
+      background: white;
+      border-radius: 14px;
+      padding: 22px 24px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    }
+    .video-box h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #fff3ea;
+    }
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* ─── Toast feedback ────────────────────────────────────────────── */
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1a1a1a;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      z-index: 200;
+    }
+    .toast.show { opacity: 1; }
+
+    /* ─── Error / empty state ───────────────────────────────────────── */
+    .error-state {
+      text-align: center;
+      padding: 100px 24px;
+    }
+    .error-state h2 {
+      font-size: 1.8rem;
+      color: #333;
+      margin-bottom: 16px;
+    }
+    .error-state a {
+      color: #F5890A;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .error-state a:hover { text-decoration: underline; }
+
+    /* ─── Responsive ────────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .three-col { grid-template-columns: 180px 1fr 260px; gap: 20px; }
+    }
+    @media (max-width: 768px) {
+      .three-col { grid-template-columns: 1fr; }
+      .col-left {
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 10px;
+        position: static;
+        padding-bottom: 4px;
+      }
+      .recipe-photo { min-width: 140px; }
+      .col-right { position: static; }
+      .navbar { padding: 12px 16px; }
+      nav { gap: 12px; }
+    }
+    @media (max-width: 480px) {
+      .recipe-title { font-size: 1.6rem; }
+      .detail-page { padding: 0 16px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAVBAR ──────────────────────────────────────────────────── -->
+  <header class="navbar">
+    <div class="logo" onclick="window.location.href='/'">
+      <h1>Dish Dash</h1>
+    </div>
+    <nav>
+      <a href="/api/breakfast">Breakfast</a>
+      <a href="/api/lunch">Lunch</a>
+      <a href="/api/dinner">Dinner</a>
+      <a href="/api/snack">Snacks</a>
+      <a href="/api/desert">Dessert</a>
+    </nav>
+  </header>
+
+  <!-- ─── MAIN ─────────────────────────────────────────────────────── -->
+  <main class="detail-page">
+
+    <% if (!recipe) { %>
+      <!-- Error / not found state -->
+      <div class="error-state">
+        <h2><%= typeof error !== 'undefined' && error ? error : 'Recipe not found.' %></h2>
+        <a href="/">← Back to Dish Dash</a>
+      </div>
+
+    <% } else { %>
+
+      <div class="three-col">
+
+        <!-- ── LEFT COLUMN: Photo stack ─────────────────────────────── -->
+        <aside class="col-left">
+          <% if (recipe.imageUrl) { %>
+            <img src="<%= recipe.imageUrl %>" alt="<%= recipe.title %>" class="recipe-photo"
+                 onerror="this.classList.add('placeholder'); this.removeAttribute('src')" />
+            <img src="<%= recipe.imageUrl %>" alt="<%= recipe.title %>" class="recipe-photo"
+                 onerror="this.classList.add('placeholder'); this.removeAttribute('src')" />
+            <img src="<%= recipe.imageUrl %>" alt="<%= recipe.title %>" class="recipe-photo"
+                 onerror="this.classList.add('placeholder'); this.removeAttribute('src')" />
+          <% } else { %>
+            <div class="recipe-photo placeholder"></div>
+            <div class="recipe-photo placeholder"></div>
+            <div class="recipe-photo placeholder"></div>
+          <% } %>
+        </aside>
+
+        <!-- ── CENTRE COLUMN ─────────────────────────────────────────── -->
+        <section class="col-centre">
+
+          <h1 class="recipe-title"><%= recipe.title %></h1>
+
+          <!-- Meal type + cook time pills -->
+          <div class="pill-row">
+            <% if (recipe.mealType || recipe.category) { %>
+              <span class="pill"><%= recipe.mealType || recipe.category %></span>
+            <% } %>
+            <% if (recipe.cookingTime) { %>
+              <span class="pill"><%= recipe.cookingTime %> min</span>
+            <% } %>
+          </div>
+
+          <!-- Description -->
+          <% if (recipe.description) { %>
+            <p class="recipe-description"><%= recipe.description %></p>
+          <% } %>
+
+          <!-- Add to Meal Vault button -->
+          <button id="vault-btn" class="btn-vault" data-id="<%= recipe.id %>">
+            + Add to Meal Vault
+          </button>
+
+          <!-- Ingredients -->
+          <% if (recipe.ingredients && recipe.ingredients.length) { %>
+            <div class="ingredients-box">
+              <h3 class="box-heading">Ingredients</h3>
+              <% recipe.ingredients.forEach(function(item) { %>
+                <div class="ingredient-row"><%= item %></div>
+              <% }); %>
+            </div>
+          <% } %>
+
+          <!-- Step-by-step instructions -->
+          <% if (recipe.steps && recipe.steps.length) { %>
+            <div class="steps-box">
+              <h3 class="box-heading">Instructions</h3>
+              <% recipe.steps.forEach(function(step, i) { %>
+                <div class="step-row">
+                  <span class="step-number"><%= i + 1 %></span>
+                  <span class="step-text"><%= step %></span>
+                </div>
+              <% }); %>
+            </div>
+          <% } %>
+
+        </section>
+
+        <!-- ── RIGHT COLUMN ──────────────────────────────────────────── -->
+        <aside class="col-right">
+
+          <%
+            var cc = recipe.culturalContext || {};
+            var hasCultural = recipe.tradition || recipe.origin || cc.story || cc.occasion || cc.variations;
+          %>
+
+          <!-- Cultural Context card -->
+          <% if (hasCultural) { %>
+            <div class="cultural-card">
+              <h3>Cultural Context</h3>
+              <% if (cc.story)      { %><p><%= cc.story %></p><% } %>
+              <% if (recipe.tradition) { %><p><strong>Tradition:</strong> <%= recipe.tradition %></p><% } %>
+              <% if (recipe.origin)    { %><p><strong>Origin:</strong> <%= recipe.origin %></p><% } %>
+              <% if (cc.occasion)   { %><p><strong>When it's eaten:</strong> <%= cc.occasion %></p><% } %>
+              <% if (cc.variations) { %><p><strong>Regional variations:</strong> <%= cc.variations %></p><% } %>
+            </div>
+          <% } %>
+
+          <!-- YouTube video embed (only if URL provided) -->
+          <% if (embedUrl) { %>
+            <div class="video-box">
+              <h3>Watch &amp; Learn</h3>
+              <div class="video-wrapper">
+                <iframe
+                  src="<%= embedUrl %>"
+                  title="<%= recipe.title %> video"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+          <% } %>
+
+        </aside>
+
+      </div><!-- /.three-col -->
+
+    <% } %>
+
+  </main>
+
+  <!-- Toast notification -->
+  <div id="toast" class="toast"></div>
+
+  <script>
+    (function () {
+      var btn = document.getElementById('vault-btn');
+      if (!btn) return;
+
+      var recipeId = btn.getAttribute('data-id');
+
+      btn.addEventListener('click', function () {
+        if (btn.disabled) return;
+        btn.disabled = true;
+        btn.textContent = 'Saving…';
+
+        fetch('/api/recipebox', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ recipeId: recipeId })
+        })
+          .then(function (res) { return res.json(); })
+          .then(function () {
+            btn.textContent = 'Saved to Vault ✓';
+            btn.classList.add('saved');
+            showToast('Added to your Meal Vault!');
+          })
+          .catch(function () {
+            btn.disabled = false;
+            btn.textContent = '+ Add to Meal Vault';
+            showToast('Could not save. Please try again.');
+          });
+      });
+
+      function showToast(msg) {
+        var t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(function () { t.classList.remove('show'); }, 3000);
+      }
+    })();
+  </script>
+
+</body>
+</html>
