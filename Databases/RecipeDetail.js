@@ -45,8 +45,10 @@ async function loadDetail() {
   // ── Pills ─────────────────────────────────────────────────────────────
   const mealLabel = r.mealType || r.category || "";
   const pillsHTML = [
-    mealLabel ? `<span class="pill">${escHtml(mealLabel)}</span>` : "",
-    r.cookingTime ? `<span class="pill">${escHtml(String(r.cookingTime))} min</span>` : ""
+    mealLabel     ? `<span class="pill">${escHtml(mealLabel)}</span>` : "",
+    r.cookingTime ? `<span class="pill">⏱ ${escHtml(String(r.cookingTime))} min</span>` : "",
+    r.difficulty  ? `<span class="pill">${escHtml(r.difficulty)}</span>` : "",
+    ...(r.dietaryTags || []).filter(Boolean).map(t => `<span class="pill">${escHtml(t)}</span>`)
   ].filter(Boolean).join("");
 
   // ── Vault button ──────────────────────────────────────────────────────
@@ -114,6 +116,7 @@ async function loadDetail() {
 
       <section class="col-centre">
         <h1 class="recipe-title">${escHtml(r.title || r.name || "Untitled")}</h1>
+        ${r.authorName ? `<p class="recipe-author">By ${escHtml(r.authorName)}</p>` : ""}
         ${pillsHTML ? `<div class="pill-row">${pillsHTML}</div>` : ""}
         ${r.description ? `<p class="recipe-desc">${escHtml(r.description)}</p>` : ""}
         ${vaultBtn}
