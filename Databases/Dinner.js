@@ -2,7 +2,7 @@ const DINNER_API = `${API_BASE}/api/dinner`;
 
 function viewRecipe(recipe) {
   localStorage.setItem("selectedRecipe", JSON.stringify(recipe));
-  window.location.href = "Viewer.html";
+  window.location.href = "recipe-detail.html";
 }
 
 async function saveToRecipeBox(btn, recipeId) {

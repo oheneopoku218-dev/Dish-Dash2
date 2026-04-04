@@ -65,7 +65,7 @@ if (searchInput) {
       resultsBox.innerHTML = `<div style="padding:12px;color:#999;">No results found</div>`;
     } else {
       resultsBox.innerHTML = matches.map(r => `
-        <div onclick="window.location.href='Viewer.html?id=${r.id}'"
+        <div onclick="window.location.href='recipe-detail.html?id=${r.id}'"
           style="padding:12px 16px;cursor:pointer;border-bottom:1px solid #f0f0f0;font-size:0.9rem;">
           <strong>${r.title}</strong>
           <span style="color:#ff8c42;font-size:0.8rem;margin-left:8px;">${r.category || ""}</span>
