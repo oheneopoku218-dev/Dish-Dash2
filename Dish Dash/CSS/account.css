@@ -1,51 +1,46 @@
+/* ---- Account page wrapper ---- */
 .account-wrapper {
   max-width: 900px;
   margin: 40px auto;
   padding: 0 20px;
 }
 
-/* Profile Card */
+/* ---- Profile card ---- */
 .profile-card {
   display: flex;
   align-items: center;
   gap: 24px;
-  background: white;
+  background-color: white;
   border: 1px solid #e0e0e0;
-  border-radius: 8px;
   padding: 24px;
   margin-bottom: 32px;
 }
 
+/* ---- Profile picture ---- */
 .avatar-wrapper {
-  position: relative;
-  flex-shrink: 0;
+  text-align: center;
 }
 
 .avatar-wrapper img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #ff8c42;
+  border: 2px solid #ff8c42;
+  display: block;
 }
 
 .avatar-edit-btn {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  background: #ff8c42;
+  display: block;
+  margin-top: 6px;
+  background-color: #ff8c42;
   color: white;
   border: none;
-  border-radius: 12px;
-  padding: 3px 8px;
+  padding: 4px 10px;
   font-size: 0.75rem;
   cursor: pointer;
 }
 
-.avatar-edit-btn:hover {
-  background: #e6762f;
-}
-
+/* ---- Profile name and username ---- */
 .profile-info h1 {
   font-size: 1.5rem;
   color: #333;
@@ -58,46 +53,32 @@
   font-size: 0.95rem;
 }
 
+/* ---- Sign out button ---- */
 .signout-btn {
   margin-top: 10px;
   padding: 8px 16px;
-  background: #ff8c42;
+  background-color: #ff8c42;
   color: white;
   border: none;
-  border-radius: 6px;
   cursor: pointer;
   font-size: 0.9rem;
 }
 
-.signout-btn:hover {
-  background: #e6762f;
-}
-
-/* Action Cards */
+/* ---- Action cards grid (Create Recipe, Recipe Box) ---- */
 .action-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
   margin-bottom: 32px;
 }
 
 .action-card {
-  background: white;
+  background-color: white;
   border: 1px solid #e0e0e0;
-  border-radius: 8px;
   padding: 24px 16px;
   text-align: center;
   text-decoration: none;
   color: #333;
-}
-
-.action-card:hover {
-  border-color: #ffb380;
-}
-
-.action-icon {
-  font-size: 2rem;
-  margin-bottom: 10px;
 }
 
 .action-card h3 {
@@ -111,7 +92,7 @@
   color: #777;
 }
 
-/* My Recipes Section */
+/* ---- My Recipes section ---- */
 .section {
   margin-top: 8px;
 }
@@ -120,26 +101,21 @@
   font-size: 1.4rem;
   color: #333;
   margin-bottom: 16px;
-  border-bottom: 2px solid #ff8c42;
+  border-bottom: 1px solid #e0e0e0;
   padding-bottom: 8px;
 }
 
 .favorites-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
 
 .favorite-card {
-  background: white;
+  background-color: white;
   border: 1px solid #e0e0e0;
-  border-radius: 8px;
   padding: 16px;
   cursor: pointer;
-}
-
-.favorite-card:hover {
-  border-color: #ffb380;
 }
 
 .favorite-card h4 {
@@ -159,11 +135,4 @@
 
 .empty-msg a {
   color: #ff8c42;
-}
-
-@media (max-width: 600px) {
-  .profile-card {
-    flex-direction: column;
-    text-align: center;
-  }
 }

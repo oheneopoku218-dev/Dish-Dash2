@@ -5,12 +5,8 @@
 #search-bar {
   padding: 8px 12px;
   border: 1px solid #ccc;
-  border-radius: 6px;
+  border-radius: 4px;
   font-size: 0.9rem;
   outline: none;
   width: 180px;
-}
-
-#search-bar:focus {
-  border-color: #ffb380;
 }
