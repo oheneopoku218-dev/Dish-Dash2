@@ -1,0 +1,77 @@
+/* ---- Google Fonts ---- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* ---- Reset ---- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ---- Page body ---- */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #fafafa;
+  color: #333;
+}
+
+/* ---- Navigation bar ---- */
+.Navigation-Bar {
+  background-color: white;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 14px 32px;
+}
+
+/* ---- Nav links ---- */
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.logo-header {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ff8c42;
+  text-decoration: none;
+}
+
+/* ---- About page wrapper ---- */
+.about-wrapper {
+  max-width: 820px;
+  margin: 40px auto;
+  padding: 0 20px 60px;
+}
+
+/* ---- Each section box ---- */
+.section-box {
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  padding: 24px 28px;
+  margin-bottom: 16px;
+}
+
+.section-box h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ff8c42;
+  margin-bottom: 10px;
+}
+
+.section-box p,
+.section-box p1,
+.section-box p2 {
+  display: block;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #555;
+  margin-top: 8px;
+}
+
+/* ---- Footer ---- */
+footer {
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid #eee;
+  color: #999;
+  font-size: 0.85rem;
+}

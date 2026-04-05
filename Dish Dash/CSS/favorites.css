@@ -1,119 +1,187 @@
-body {
-    font-family: 'Poppins', sans-serif;
-    background: #faf7f2;
-    margin: 0;
-    padding: 0;
+/* ---- Page hero banner ---- */
+.page-hero {
+  text-align: center;
+  padding: 40px 24px 28px;
+  background-color: white;
+  border-bottom: 1px solid #eee;
 }
+
+.page-hero h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 6px;
+}
+
+.page-hero p {
+  font-size: 0.95rem;
+  color: #888;
+}
+
+/* ---- Filter buttons row ---- */
+.filter-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px 24px 0;
+}
+
+.pill-btn {
+  padding: 7px 20px;
+  border: 2px solid #ff8c42;
+  background-color: transparent;
+  color: #ff8c42;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pill-btn.active {
+  background-color: #ff8c42;
+  color: white;
+}
+
+/* ---- Recipe cards grid ---- */
+.grid-wrapper {
+  max-width: 1200px;
+  margin: 28px auto;
+  padding: 0 24px 60px;
+}
+
+#favorites-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* ---- Individual favourite card ---- */
+.fav-card {
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  cursor: pointer;
+}
+
+.fav-card img {
+  width: 100%;
+  height: 170px;
+  display: block;
+  background-color: #f0f0f0;
+}
+
+.fav-card-img-placeholder {
+  width: 100%;
+  height: 170px;
+  background-color: #f0f0f0;
+}
+
+.fav-card-body {
+  padding: 14px 16px 18px;
+}
+
+.fav-card-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.fav-card-meta {
+  display: flex;
+  gap: 8px;
+}
+
+.tag-meal {
+  background-color: #fff3ea;
+  color: #f5890a;
+  border: 1px solid #f5890a;
+  padding: 2px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.tag-time {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+/* ---- Empty state ---- */
+.empty-state {
+  text-align: center;
+  padding: 60px 24px;
+}
+
+.empty-state p {
+  color: #888;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.empty-state a {
+  color: #f5890a;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.loading-msg {
+  text-align: center;
+  padding: 60px;
+  color: #aaa;
+}
+
+/* ---- Older favourite card styles (kept for compatibility) ---- */
 .favorites-title {
-    text-align: center;
-    font-size: 3rem;
-    font-weight: 700;
-    margin-top: 30px;
-    color: #ff8c42;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 30px;
+  color: #ff8c42;
 }
+
 .favorites-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-    padding: 30px;
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .favorite-card {
-    background: white;
-    border-radius: 16px;
-    padding: 20px;
-    
-    
-}
-
-.favorite-card:hover {
-    
-    
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  padding: 16px;
 }
 
 .favorite-card img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 12px;
-    margin-bottom: 15px;
+  width: 100%;
+  height: 160px;
+  margin-bottom: 12px;
 }
 
 .favorite-card h3 {
-    margin: 0;
-    font-size: 1.3rem;
-    color: #333;
+  margin: 0;
+  font-size: 1.1rem;
+  color: #333;
 }
 
 .favorite-card button {
-    margin-top: 12px;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background: #ff8c42;
-    color: white;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 1rem;
+  margin-top: 12px;
+  width: 100%;
+  padding: 9px;
+  border: none;
+  background-color: #ff8c42;
+  color: white;
+  cursor: pointer;
+  font-size: 0.95rem;
 }
 
-.favorite-card button:hover {
-    background: #e6762f;
-}
-.favorites-list {
-    width: 90%;
-    max-width: 700px;
-    margin: 30px auto;
-    background: white;
-    padding: 25px;
-    border-radius: 16px;
-    
-}
-
-.favorites-list-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid #eee;
-    font-size: 1.1rem;
-}
-
-.favorites-list-item:last-child {
-    border-bottom: none;
-}
-
-.favorites-list-item button {
-    background: #ff8c42;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-}
-
-.favorites-list-item button:hover {
-    background: #e6762f;
-}
 .empty-favorites {
-    text-align: center;
-    margin-top: 100px;
-    color: #777;
-    font-size: 1.4rem;
-}
-
-.empty-favorites-icon {
-    font-size: 4rem;
-    margin-bottom: 20px;
-    color: #ff8c42;
-}
-.center {
-    text-align: center;
+  text-align: center;
+  margin-top: 80px;
+  color: #777;
+  font-size: 1.2rem;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }

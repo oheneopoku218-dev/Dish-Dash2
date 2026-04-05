@@ -1,10 +1,10 @@
+/* ---- Recipe form wrapper ---- */
 .form-wrapper {
   max-width: 560px;
   margin: 40px auto;
   padding: 28px;
-  background: white;
+  background-color: white;
   border: 1px solid #e0e0e0;
-  border-radius: 8px;
 }
 
 .form-wrapper h1 {
@@ -14,6 +14,7 @@
   margin-bottom: 24px;
 }
 
+/* ---- Each form field group ---- */
 .form-group {
   margin-bottom: 16px;
 }
@@ -32,22 +33,15 @@
   font-size: 0.85rem;
 }
 
+/* ---- Text inputs, selects, and textareas ---- */
 .form-group input,
 .form-group select,
 .form-group textarea {
   width: 100%;
   padding: 10px 12px;
   border: 1px solid #ccc;
-  border-radius: 6px;
   font-size: 0.95rem;
-  outline: none;
   font-family: inherit;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  border-color: #ffb380;
 }
 
 .form-group textarea {
@@ -55,12 +49,17 @@
   min-height: 80px;
 }
 
+/* ---- Two-column row (time + difficulty) ---- */
 .form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   gap: 16px;
 }
 
+.form-row .form-group {
+  flex: 1;
+}
+
+/* ---- Step rows ---- */
 .step-row {
   display: flex;
   align-items: center;
@@ -79,60 +78,43 @@
   flex: 1;
   padding: 8px 10px;
   border: 1px solid #ccc;
-  border-radius: 6px;
   font-size: 0.9rem;
-  outline: none;
-}
-
-.step-input:focus {
-  border-color: #ffb380;
 }
 
 .add-step {
   padding: 6px 10px;
-  background: #ff8c42;
+  background-color: #ff8c42;
   color: white;
   border: none;
-  border-radius: 6px;
   cursor: pointer;
   font-size: 0.8rem;
 }
 
 .remove-step {
   padding: 6px 10px;
-  background: #eee;
+  background-color: #eee;
   color: #555;
   border: none;
-  border-radius: 6px;
   cursor: pointer;
   font-size: 0.8rem;
 }
 
+/* ---- Submit button ---- */
 .submit-btn {
   width: 100%;
   padding: 12px;
-  background: #ff8c42;
+  background-color: #ff8c42;
   color: white;
   border: none;
-  border-radius: 6px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   margin-top: 8px;
 }
 
-.submit-btn:hover {
-  background: #e6762f;
-}
-
+/* ---- Error message ---- */
 .error {
   color: #cc0000;
   font-size: 0.9rem;
   margin-top: 8px;
-}
-
-@media (max-width: 500px) {
-  .form-row {
-    grid-template-columns: 1fr;
-  }
 }

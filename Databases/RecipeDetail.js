@@ -1,11 +1,5 @@
 /* RecipeDetail.js — populates recipe-detail.html from localStorage */
 
-function getYouTubeEmbed(url) {
-  if (!url) return null;
-  const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/);
-  return match ? `https://www.youtube.com/embed/${match[1]}` : null;
-}
-
 function escHtml(str) {
   return String(str || "")
     .replace(/&/g, "&amp;").replace(/</g, "&lt;")
@@ -36,29 +30,29 @@ async function loadDetail() {
     } catch { /* ignore */ }
   }
 
-  // ── Photo src ─────────────────────────────────────────────────────────
+  /* Photo */
   const photoSrc = r.imageUrl || "";
   const photoHTML = photoSrc
-    ? `<img class="recipe-photo" src="${escHtml(photoSrc)}" alt="${escHtml(r.title)}" onerror="this.style.background='linear-gradient(135deg,#ffe8d4,#fdf0e5)';this.removeAttribute('src')">`
+    ? `<img class="recipe-photo" src="${escHtml(photoSrc)}" alt="${escHtml(r.title)}" onerror="this.style.background='#f0f0f0';this.removeAttribute('src')">`
     : `<div class="recipe-photo"></div>`;
 
-  // ── Pills ─────────────────────────────────────────────────────────────
+  /* Meal type and time pills — no emojis */
   const mealLabel = r.mealType || r.category || "";
   const pillsHTML = [
     mealLabel     ? `<span class="pill">${escHtml(mealLabel)}</span>` : "",
-    r.cookingTime ? `<span class="pill">⏱ ${escHtml(String(r.cookingTime))} min</span>` : "",
+    r.cookingTime ? `<span class="pill">${escHtml(String(r.cookingTime))} min</span>` : "",
     r.difficulty  ? `<span class="pill">${escHtml(r.difficulty)}</span>` : "",
     ...(r.dietaryTags || []).filter(Boolean).map(t => `<span class="pill">${escHtml(t)}</span>`)
   ].filter(Boolean).join("");
 
-  // ── Vault button ──────────────────────────────────────────────────────
+  /* Save to vault button */
   const vaultBtn = !isOwn
     ? `<button id="vault-btn" class="btn-vault${alreadySaved ? " saved" : ""}" data-id="${r.id}" ${alreadySaved ? "disabled" : ""}>
-         ${alreadySaved ? "Saved to Vault ✓" : "+ Add to Meal Vault"}
+         ${alreadySaved ? "Saved to Vault" : "+ Add to Meal Vault"}
        </button>`
     : "";
 
-  // ── Ingredients ───────────────────────────────────────────────────────
+  /* Ingredients list */
   const ingredientsHTML = (r.ingredients && r.ingredients.length)
     ? `<div class="ingredients-box">
          <h3 class="box-heading">Ingredients</h3>
@@ -66,7 +60,7 @@ async function loadDetail() {
        </div>`
     : "";
 
-  // ── Steps ─────────────────────────────────────────────────────────────
+  /* Steps list */
   const stepsHTML = (r.steps && r.steps.length)
     ? `<div class="steps-box">
          <h3 class="box-heading">Instructions</h3>
@@ -78,7 +72,7 @@ async function loadDetail() {
        </div>`
     : "";
 
-  // ── Cultural context ──────────────────────────────────────────────────
+  /* Cultural context */
   const hasCultural = r.origin || r.tradition || cc.story || cc.occasion || cc.variations;
   const culturalHTML = hasCultural
     ? `<div class="cultural-card">
@@ -86,25 +80,12 @@ async function loadDetail() {
          ${cc.story     ? `<p>${escHtml(cc.story)}</p>` : ""}
          ${r.tradition  ? `<p><strong>Tradition:</strong> ${escHtml(r.tradition)}</p>` : ""}
          ${r.origin     ? `<p><strong>Origin:</strong> ${escHtml(r.origin)}</p>` : ""}
-         ${cc.occasion  ? `<p><strong>When it's eaten:</strong> ${escHtml(cc.occasion)}</p>` : ""}
+         ${cc.occasion  ? `<p><strong>When it is eaten:</strong> ${escHtml(cc.occasion)}</p>` : ""}
          ${cc.variations? `<p><strong>Variations:</strong> ${escHtml(cc.variations)}</p>` : ""}
        </div>`
     : "";
 
-  // ── Video ─────────────────────────────────────────────────────────────
-  const embedUrl = getYouTubeEmbed(r.videoUrl);
-  const videoHTML = embedUrl
-    ? `<div class="video-box">
-         <h3>Watch &amp; Learn</h3>
-         <div class="video-wrapper">
-           <iframe src="${embedUrl}" title="Recipe video" frameborder="0"
-             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-             allowfullscreen></iframe>
-         </div>
-       </div>`
-    : "";
-
-  // ── Render ────────────────────────────────────────────────────────────
+  /* Build the page — no video section */
   container.innerHTML = `
     <div class="three-col">
 
@@ -126,18 +107,17 @@ async function loadDetail() {
 
       <aside class="col-right">
         ${culturalHTML}
-        ${videoHTML}
       </aside>
 
     </div>`;
 
-  // ── Vault button handler ──────────────────────────────────────────────
+  /* Vault button handler */
   const btn = document.getElementById("vault-btn");
   if (btn) {
     btn.addEventListener("click", async function () {
       if (!userId) { window.location.href = "Login.html"; return; }
       btn.disabled = true;
-      btn.textContent = "Saving…";
+      btn.textContent = "Saving...";
       try {
         const res = await fetch(`${API_BASE}/api/favorites`, {
           method: "POST",
@@ -146,7 +126,7 @@ async function loadDetail() {
         });
         const data = await res.json();
         if (res.ok || data.message === "Already in favorites.") {
-          btn.textContent = "Saved to Vault ✓";
+          btn.textContent = "Saved to Vault";
           btn.classList.add("saved");
         } else {
           btn.disabled = false;

@@ -4,108 +4,219 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Recipe — Dish Dash</title>
-  <link rel="stylesheet" href="CSS/Dish-Dash.css?v=3">
-  <link rel="stylesheet" href="CSS/Navbar.css?v=3">
+  <link rel="stylesheet" href="CSS/Dish-Dash.css">
+  <link rel="stylesheet" href="CSS/Navbar.css">
   <style>
-    .detail-page { max-width: 1200px; margin: 32px auto; padding: 0 24px 60px; }
+    /* ---- Three-column layout ---- */
+    .detail-page {
+      max-width: 1200px;
+      margin: 32px auto;
+      padding: 0 24px 60px;
+    }
 
     .three-col {
       display: grid;
       grid-template-columns: 200px 1fr 280px;
       gap: 24px;
-      align-items: start;
     }
 
-    /* LEFT */
-    .col-left { display: flex; flex-direction: column; gap: 10px; }
+    /* ---- Left column: photos ---- */
+    .col-left {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
     .recipe-photo {
-      width: 100%; height: 190px; object-fit: cover;
-      border-radius: 4px; display: block; background: #f0f0f0;
+      width: 100%;
+      height: 190px;
+      display: block;
+      background-color: #f0f0f0;
       border: 1px solid #e0e0e0;
     }
 
-    /* CENTRE */
-    .col-centre { display: flex; flex-direction: column; }
-    .recipe-title { font-size: 1.8rem; font-weight: 800; color: #1a1a1a; line-height: 1.2; margin-bottom: 6px; }
-    .recipe-author { font-size: .9rem; color: #999; margin-bottom: 14px; }
+    /* ---- Centre column: title, ingredients, steps ---- */
+    .col-centre {
+      display: flex;
+      flex-direction: column;
+    }
 
-    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .recipe-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 6px;
+    }
+
+    .recipe-author {
+      font-size: 0.9rem;
+      color: #999;
+      margin-bottom: 14px;
+    }
+
+    /* ---- Pill tags (meal type, time, difficulty) ---- */
+    .pill-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
     .pill {
-      background: #fff3ea; color: #F5890A; border: 1px solid #F5890A;
-      border-radius: 4px; padding: 4px 12px; font-size: .82rem; font-weight: 600;
+      background-color: #fff3ea;
+      color: #f5890a;
+      border: 1px solid #f5890a;
+      padding: 4px 12px;
+      font-size: 0.82rem;
+      font-weight: 600;
     }
 
+    /* ---- Description box ---- */
     .recipe-desc {
-      font-size: .95rem; color: #555; line-height: 1.7;
-      padding: 14px 16px; background: #fafafa;
-      border: 1px solid #eee; margin-bottom: 20px;
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.7;
+      padding: 14px 16px;
+      background-color: #fafafa;
+      border: 1px solid #eee;
+      margin-bottom: 20px;
     }
 
+    /* ---- Save to vault button ---- */
     .btn-vault {
-      display: inline-block; padding: 10px 22px; background: #F5890A;
-      color: white; border: none; border-radius: 4px; font-size: .9rem;
-      font-weight: 700; font-family: inherit; cursor: pointer;
-      margin-bottom: 24px; align-self: flex-start;
+      display: inline-block;
+      padding: 10px 22px;
+      background-color: #f5890a;
+      color: white;
+      border: none;
+      font-size: 0.9rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      margin-bottom: 24px;
     }
-    .btn-vault:hover { background: #d9760a; }
-    .btn-vault.saved { background: #ccc; color: #888; cursor: default; }
 
+    .btn-vault.saved {
+      background-color: #ccc;
+      color: #888;
+      cursor: default;
+    }
+
+    /* ---- Section headings (Ingredients, Instructions) ---- */
     .box-heading {
-      font-size: 1rem; font-weight: 700; color: #1a1a1a;
-      margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #eee;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #eee;
     }
 
-    .ingredients-box, .steps-box {
-      border: 1px solid #e0e0e0; padding: 18px 20px;
+    /* ---- Ingredients box ---- */
+    .ingredients-box {
+      border: 1px solid #e0e0e0;
+      padding: 18px 20px;
     }
-    .steps-box { margin-top: 24px; }
 
     .ingredient-row {
-      padding: 6px 0; border-bottom: 1px solid #eee;
-      font-size: .92rem; color: #444;
+      padding: 6px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 0.92rem;
+      color: #444;
     }
-    .ingredient-row:last-child { border-bottom: none; }
 
-    .step-row { display: flex; gap: 14px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid #eee; }
-    .step-row:last-child { border-bottom: none; }
+    .ingredient-row:last-child {
+      border-bottom: none;
+    }
+
+    /* ---- Steps box ---- */
+    .steps-box {
+      border: 1px solid #e0e0e0;
+      padding: 18px 20px;
+      margin-top: 24px;
+    }
+
+    .step-row {
+      display: flex;
+      gap: 14px;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .step-row:last-child {
+      border-bottom: none;
+    }
+
+    /* ---- Step number circle ---- */
     .step-num {
-      min-width: 26px; height: 26px;
-      background: #F5890A; color: white; font-size: .8rem; font-weight: 700;
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      min-width: 26px;
+      height: 26px;
+      background-color: #f5890a;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .step-text { font-size: .92rem; color: #444; line-height: 1.6; }
 
-    /* RIGHT */
-    .col-right { display: flex; flex-direction: column; gap: 20px; }
+    .step-text {
+      font-size: 0.92rem;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    /* ---- Right column: cultural context ---- */
+    .col-right {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
 
     .cultural-card {
-      background: #fff8f3; border-left: 3px solid #F5890A;
-      padding: 18px 20px; border: 1px solid #eee; border-left: 3px solid #F5890A;
+      background-color: #fff8f3;
+      border-left: 3px solid #f5890a;
+      border: 1px solid #eee;
+      border-left: 3px solid #f5890a;
+      padding: 18px 20px;
     }
-    .cultural-card h3 { color: #F5890A; font-size: .95rem; font-weight: 700; margin-bottom: 12px; }
-    .cultural-card p { color: #555; line-height: 1.6; font-size: .9rem; margin-bottom: 8px; }
-    .cultural-card p:last-child { margin-bottom: 0; }
 
-    .video-box { padding: 18px 20px; border: 1px solid #e0e0e0; }
-    .video-box h3 { font-size: .95rem; font-weight: 700; color: #1a1a1a; margin-bottom: 12px; }
-    .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
-    .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .cultural-card h3 {
+      color: #f5890a;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
 
+    .cultural-card p {
+      color: #555;
+      line-height: 1.6;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+
+    /* ---- Back button ---- */
     .back-btn {
-      display: inline-block; padding: 8px 16px; background: white;
-      border: 1px solid #ccc; color: #555; font-size: .9rem; font-weight: 600;
-      font-family: inherit; cursor: pointer; margin-bottom: 24px;
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: white;
+      border: 1px solid #ccc;
+      color: #555;
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      margin-bottom: 24px;
     }
-    .back-btn:hover { color: #F5890A; border-color: #F5890A; }
 
-    .empty-msg { text-align: center; padding: 60px 24px; color: #888; }
-    .empty-msg a { color: #F5890A; font-weight: 700; }
+    .empty-msg {
+      text-align: center;
+      padding: 60px 24px;
+      color: #888;
+    }
 
-    @media (max-width: 1024px) { .three-col { grid-template-columns: 160px 1fr 240px; } }
-    @media (max-width: 768px) {
-      .three-col { grid-template-columns: 1fr; }
-      .col-left { flex-direction: row; overflow-x: auto; gap: 8px; }
-      .recipe-photo { min-width: 130px; }
+    .empty-msg a {
+      color: #f5890a;
+      font-weight: 700;
     }
   </style>
 </head>
@@ -126,7 +237,7 @@
   </header>
 
   <div class="detail-page">
-    <button class="back-btn" onclick="window.history.back()">← Back</button>
+    <button class="back-btn" onclick="window.history.back()">Back</button>
     <div id="detail-content"></div>
   </div>
 
