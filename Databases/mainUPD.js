@@ -7,10 +7,10 @@ function setupnavbar() {
 const navlinks = document.querySelectorAll(".nav-link");
 // correcting section starting here//
 navlinks.forEach(link => {
-    link.addEventListener("click",() => {
-        const page = link.dataset.nav;
-        if (!page)return;
-        loadPage(page);
+ link.addEventListener("click",() => {
+const page = link.dataset.nav;
+if (!page)return;
+ loadPage(page);
     });
 });
 }

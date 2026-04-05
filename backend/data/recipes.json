@@ -60,5 +60,53 @@
     "authorName": "itz.oxene",
     "isPublic": true,
     "createdAt": "2026-03-19T21:26:40.841Z"
+  },
+  {
+    "id": 1775422539675,
+    "title": "Spicy Ghanaian Groundnut Soup",
+    "description": "A rich, creamy West African peanut‑based soup with chicken, spices, and aromatic vegetables.",
+    "ingredients": [
+      "chicken thighs",
+      "peanut butter",
+      "tomatoes",
+      "tomato paste",
+      "onions",
+      "garlic",
+      "ginger",
+      "chilli powder",
+      "chicken stock",
+      "salt",
+      "pepper",
+      "spring onions"
+    ],
+    "steps": [
+      "Blend tomatoes, onions, garlic, and ginger into a smooth mixture.",
+      "Brown chicken in a pot and add the blended mixture.",
+      "Stir in peanut butter and tomato paste until fully dissolved.",
+      "Add chicken stock, chilli powder, salt, and pepper.",
+      "Simmer for 35–45 minutes until thick and aromatic.",
+      "Garnish with spring onions before serving."
+    ],
+    "cookingTime": 45,
+    "difficulty": "Medium",
+    "mealType": "Dinner",
+    "category": "dinner",
+    "dietaryTags": [
+      "gluten-free",
+      "high-protein"
+    ],
+    "origin": "Ghana",
+    "tradition": "Commonly served during family gatherings and festive occasions",
+    "culturalContext": {
+      "story": "Groundnut soup is a beloved West African dish known for its comforting richness. It is often prepared for guests, celebrations, and Sunday family meals.",
+      "occasion": "Weddings, weekend gatherings, festive celebrations",
+      "variations": "Northern Ghana often includes lamb or goat, while southern regions prefer chicken and add more tomatoes for sweetness."
+    },
+    "imageUrl": "https://images.unsplash.com/photo-1604908177522-040a9f1e3c5e",
+    "videoUrl": "https://www.youtube.com/watch?v=Q2yZJp9xJpA",
+    "authorId": 1773850195729,
+    "authorName": "itz.oxene",
+    "isPublic": true,
+    "createdAt": "2026-04-05T20:55:39.675Z"
   }
 ]

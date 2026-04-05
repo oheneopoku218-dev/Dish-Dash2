@@ -1,19 +1,16 @@
-// ---- AUTH LINK ----
 document.addEventListener("DOMContentLoaded", () => {
-  const username = localStorage.getItem("username");
-  const authLink = document.getElementById("auth-link");
+const username = localStorage.getItem("username");
+const authLink = document.getElementById("auth-link");
   if (!authLink) return;
-
   if (username) {
     authLink.textContent = "My Account";
     authLink.href = "account.html";
-  } else {
-    authLink.textContent = "Login / Sign Up";
-    authLink.href = "Login.html";
   }
+   else {
+ authLink.textContent = "Login / Sign Up";
+authLink.href = "Login.html";
+}
 });
-
-// ---- SEARCH ----
 const searchInput = document.getElementById("search-bar");
 if (searchInput) {
   const resultsBox = document.createElement("div");
@@ -35,41 +32,38 @@ if (searchInput) {
 
   let allRecipes = [];
 
-  async function fetchAllRecipes() {
-    try {
-      const userId = localStorage.getItem("userId");
-      const headers = userId ? { "x-user-id": userId } : {};
-      const res = await fetch(`${API_BASE}/api/recipes`, { headers });
-      allRecipes = await res.json();
-    } catch (err) {
-      console.error("Search fetch error:", err);
-    }
+async function fetchAllRecipes() {
+ try {
+const userId = localStorage.getItem("userId");
+const headers = userId ? { "x-user-id": userId } : {};
+const res = await fetch(`${API_BASE}/api/recipes`, { headers });
+  allRecipes = await res.json();
+} catch (err) {
+    console.error("Search fetch error:", err);
   }
-
-  fetchAllRecipes();
-
+  }
+ fetchAllRecipes();
   searchInput.addEventListener("input", () => {
-    const query = searchInput.value.trim().toLowerCase();
+ const query = searchInput.value.trim().toLowerCase();
+if (!query) {
+ resultsBox.style.display = "none";
+ return;
+}
 
-    if (!query) {
-      resultsBox.style.display = "none";
-      return;
-    }
+const matches = allRecipes.filter(r =>
+   r.title?.toLowerCase().includes(query) ||
+   r.category?.toLowerCase().includes(query)
+  ); 
 
-    const matches = allRecipes.filter(r =>
-      r.title?.toLowerCase().includes(query) ||
-      r.category?.toLowerCase().includes(query)
-    );
-
-    if (!matches.length) {
-      resultsBox.innerHTML = `<div style="padding:12px;color:#999;">No results found</div>`;
-    } else {
-      resultsBox.innerHTML = matches.map(r => `
-        <div onclick="window.location.href='recipe-detail.html?id=${r.id}'"
-          style="padding:12px 16px;cursor:pointer;border-bottom:1px solid #f0f0f0;font-size:0.9rem;">
-          <strong>${r.title}</strong>
-          <span style="color:#ff8c42;font-size:0.8rem;margin-left:8px;">${r.category || ""}</span>
-        </div>
+  if (!matches.length) {
+  resultsBox.innerHTML = `<div style="padding:12px;color:#999;">No results found</div>`;
+   } else {
+   resultsBox.innerHTML = matches.map(r => `
+   <div onclick="window.location.href='recipe-detail.html?id=${r.id}'"
+    style="padding:12px 16px;cursor:pointer;border-bottom:1px solid #f0f0f0;font-size:0.9rem;">
+   <strong>${r.title}</strong>
+  <span style="color:#ff8c42;font-size:0.8rem;margin-left:8px;">${r.category || ""}</span>
+    </div>
       `).join("");
     }
 
@@ -77,8 +71,8 @@ if (searchInput) {
   });
 
   document.addEventListener("click", (e) => {
-    if (!searchInput.parentElement.contains(e.target)) {
-      resultsBox.style.display = "none";
+  if (!searchInput.parentElement.contains(e.target)) {
+  resultsBox.style.display = "none";
     }
   });
 }
