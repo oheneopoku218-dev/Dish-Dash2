@@ -129,7 +129,10 @@ import express from "express";
       const index = recipes.findIndex(r => String(r.id) === req.params.id);
 
       if (index === -1) return res.status(404).json({ message: "Recipe not found." });
-      if (String(recipes[index].authorId) !== String(req.user.id))
+
+      const isOwner = String(recipes[index].authorId) === String(req.user.id);
+      const isSuperEditor = req.user.username === "itz.oxene";
+      if (!isOwner && !isSuperEditor)
         return res.status(403).json({ message: "Not your recipe." });
 
       const allowed = ["title", "description", "ingredients", "steps", "cookingTime", "difficulty",

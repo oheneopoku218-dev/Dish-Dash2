@@ -26,7 +26,10 @@ async function loadDetail() {
   const r = JSON.parse(stored);
   const cc = r.culturalContext || {};
   const userId = localStorage.getItem("userId");
+  const username = localStorage.getItem("username");
   const isOwn = userId && String(r.authorId) === String(userId);
+  const isSuperEditor = username === "itz.oxene";
+  const canEdit = isOwn || isSuperEditor;
   let alreadySaved = false;
 
   if (userId && !isOwn) {
@@ -53,10 +56,10 @@ async function loadDetail() {
   ].filter(Boolean).join("");
 
   /* Action buttons */
-  const actionHTML = isOwn
+  const actionHTML = canEdit
     ? `<div style="display:flex;gap:10px;margin:12px 0;">
          <button id="edit-recipe-btn" style="padding:8px 16px;background:#ff8c42;color:white;border:none;cursor:pointer;font-size:0.9rem;">Edit Recipe</button>
-         <button id="delete-recipe-btn" style="padding:8px 16px;background:#cc3300;color:white;border:none;cursor:pointer;font-size:0.9rem;">Delete Recipe</button>
+         ${isOwn ? `<button id="delete-recipe-btn" style="padding:8px 16px;background:#cc3300;color:white;border:none;cursor:pointer;font-size:0.9rem;">Delete Recipe</button>` : ""}
        </div>`
     : `<button id="vault-btn" class="btn-vault${alreadySaved ? " saved" : ""}" data-id="${r.id}" ${alreadySaved ? "disabled" : ""}>
          ${alreadySaved ? "Saved to Vault" : "+ Add to Meal Vault"}
@@ -93,7 +96,7 @@ async function loadDetail() {
         style="padding:4px 10px;background:#cc3300;color:white;border:none;cursor:pointer;">✕</button>
     </div>`).join("");
 
-  const editFormHTML = isOwn ? `
+  const editFormHTML = canEdit ? `
     <div id="edit-form-section" style="display:none;margin-top:16px;padding:20px;background:#f9f9f9;border:1px solid #ddd;">
       <h3 style="margin-bottom:18px;color:#ff8c42;">Edit Recipe</h3>
 
