@@ -75,7 +75,16 @@ router.delete("/:id", (req, res) => {
     const review = reviews.find(r => String(r.id) === req.params.id);
 
     if (!review) return res.status(404).json({ message: "Review not found." });
-    if (String(review.userId) !== String(userId))
+    const reviews2 = readJson(reviewsFile);
+    const usersFile = path.join(process.cwd(), "data", "users.json");
+    let callerUsername = "";
+    try {
+      const users = JSON.parse(fs.readFileSync(usersFile, "utf8") || "[]");
+      const caller = users.find(u => String(u.id) === String(userId));
+      if (caller) callerUsername = caller.username;
+    } catch {}
+    const isSuperEditor = callerUsername === "itz.oxene";
+    if (String(review.userId) !== String(userId) && !isSuperEditor)
       return res.status(403).json({ message: "Not your review." });
 
     const filtered = reviews.filter(r => String(r.id) !== req.params.id);

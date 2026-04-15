@@ -6,6 +6,7 @@
   import dotenv from "dotenv";
   import cors from "cors";
   import path from "path";
+  import fs from "fs";
   import { fileURLToPath } from "url";
 
   // -----------------------------------------------------
@@ -70,6 +71,42 @@
   app.use("/api/favorites", favoriteRoutes);
   app.use("/recipe", recipeDetailRoutes);
   app.use("/recipebox", recipeBoxPageRoutes);
+
+  // -----------------------------------------------------
+  // ADMIN STATS (itz.oxene only)
+  // -----------------------------------------------------
+  app.get("/api/admin/stats", (req, res) => {
+    const userId = req.headers["x-user-id"];
+    const dataDir = path.join(__dirname, "data");
+    const readFile = (name) => {
+      try { return JSON.parse(fs.readFileSync(path.join(dataDir, name), "utf8") || "[]"); }
+      catch { return []; }
+    };
+    const users     = readFile("users.json");
+    const recipes   = readFile("recipes.json");
+    const reviews   = readFile("reviews.json");
+    const favorites = readFile("favorites.json");
+
+    const user = users.find(u => String(u.id) === String(userId));
+    if (!user || user.username !== "itz.oxene")
+      return res.status(403).json({ message: "Access denied." });
+
+    const byCategory = {};
+    recipes.forEach(r => {
+      const cat = (r.category || "other").toLowerCase();
+      byCategory[cat] = (byCategory[cat] || 0) + 1;
+    });
+
+    res.json({
+      totalUsers:     users.length,
+      totalRecipes:   recipes.length,
+      publicRecipes:  recipes.filter(r => r.isPublic).length,
+      privateRecipes: recipes.filter(r => !r.isPublic).length,
+      totalReviews:   reviews.length,
+      totalFavorites: favorites.length,
+      byCategory
+    });
+  });
 
   // -----------------------------------------------------
   // TEST ROUTES

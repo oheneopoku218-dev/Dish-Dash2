@@ -27,9 +27,12 @@ import express from "express";
   router.get("/", optionalAuth, (req, res) => {
     try {
       const recipes = readJson(recipesFile);
-      const visible = recipes.filter(r =>
-        r.isPublic || (req.user && String(r.authorId) === String(req.user.id))
-      );
+      const isSuperEditor = req.user && req.user.username === "itz.oxene";
+      const visible = isSuperEditor
+        ? recipes
+        : recipes.filter(r =>
+            r.isPublic || (req.user && String(r.authorId) === String(req.user.id))
+          );
       res.json(visible);
     } catch (error) {
       console.error("GET RECIPES ERROR:", error);
@@ -158,7 +161,8 @@ import express from "express";
       const recipe = recipes.find(r => String(r.id) === req.params.id);
 
       if (!recipe) return res.status(404).json({ message: "Recipe not found." });
-      if (String(recipe.authorId) !== String(req.user.id))
+      const isSuperEditor = req.user.username === "itz.oxene";
+      if (String(recipe.authorId) !== String(req.user.id) && !isSuperEditor)
         return res.status(403).json({ message: "Not your recipe." });
 
       const filtered = recipes.filter(r => String(r.id) !== req.params.id);

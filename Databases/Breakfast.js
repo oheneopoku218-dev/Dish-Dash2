@@ -38,6 +38,7 @@ function renderBreakfastItems(items) {
     return `
       <div class="meal-card" onclick='viewRecipe(${JSON.stringify(item).replace(/'/g, "&#39;")})' style="cursor:pointer">
         ${item.imageUrl ? `<img src="${item.imageUrl}" alt="${item.title || ""}" style="width:100%;height:180px;margin-bottom:12px;" onerror="this.style.display='none'">` : ""}
+        ${item.authorName === "itz.oxene" ? `<div style="display:inline-block;background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;font-size:0.72rem;font-weight:800;padding:3px 9px;margin-bottom:6px;letter-spacing:0.04em;">★ FEATURED</div>` : ""}
         <h3>${item.title || item.name || "Untitled"}</h3>
         ${!item.isPublic ? `<span class="private-badge">Private</span>` : ""}
         <p style="color:#666;font-size:0.85rem;">By ${item.authorName || "Unknown"}</p>

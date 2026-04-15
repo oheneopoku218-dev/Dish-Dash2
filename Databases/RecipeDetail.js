@@ -57,9 +57,9 @@ async function loadDetail() {
 
   /* Action buttons */
   const actionHTML = canEdit
-    ? `<div style="display:flex;gap:10px;margin:12px 0;">
+    ? `<div style="display:flex;gap:10px;margin:12px 0;flex-wrap:wrap;">
          <button id="edit-recipe-btn" style="padding:8px 16px;background:#ff8c42;color:white;border:none;cursor:pointer;font-size:0.9rem;">Edit Recipe</button>
-         ${isOwn ? `<button id="delete-recipe-btn" style="padding:8px 16px;background:#cc3300;color:white;border:none;cursor:pointer;font-size:0.9rem;">Delete Recipe</button>` : ""}
+         ${(isOwn || isSuperEditor) ? `<button id="delete-recipe-btn" style="padding:8px 16px;background:#cc3300;color:white;border:none;cursor:pointer;font-size:0.9rem;">Delete Recipe</button>` : ""}
        </div>`
     : `<button id="vault-btn" class="btn-vault${alreadySaved ? " saved" : ""}" data-id="${r.id}" ${alreadySaved ? "disabled" : ""}>
          ${alreadySaved ? "Saved to Vault" : "+ Add to Meal Vault"}
@@ -230,7 +230,7 @@ async function loadDetail() {
       </aside>
       <section class="col-centre">
         <h1 class="recipe-title">${escHtml(r.title || r.name || "Untitled")}</h1>
-        ${r.authorName ? `<p class="recipe-author">By ${escHtml(r.authorName)}</p>` : ""}
+        ${r.authorName ? `<p class="recipe-author">By ${escHtml(r.authorName)}${r.authorName === "itz.oxene" ? ' <span style="display:inline-block;background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;font-size:0.7rem;font-weight:800;padding:2px 8px;vertical-align:middle;letter-spacing:0.05em;">★ CREATOR</span>' : ""}</p>` : ""}
         ${pillsHTML ? `<div class="pill-row">${pillsHTML}</div>` : ""}
         ${r.description ? `<p class="recipe-desc">${escHtml(r.description)}</p>` : ""}
         ${actionHTML}
