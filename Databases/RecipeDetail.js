@@ -62,31 +62,112 @@ async function loadDetail() {
          ${alreadySaved ? "Saved to Vault" : "+ Add to Meal Vault"}
        </button>`;
 
-  /* Inline edit form (owner only) */
+  /* Inline edit form (owner only) — all fields */
+  const efLabel = (text, content) =>
+    `<label style="display:block;margin-bottom:12px;font-weight:bold;">${text}${content}</label>`;
+  const efInput = (id, val, type = "text", extra = "") =>
+    `<input id="${id}" type="${type}" value="${escHtml(String(val || ""))}" ${extra}
+      style="display:block;width:100%;padding:8px;margin-top:4px;box-sizing:border-box;border:1px solid #ccc;font-size:0.95rem;">`;
+  const efTextarea = (id, val, rows = 3) =>
+    `<textarea id="${id}" rows="${rows}"
+      style="display:block;width:100%;padding:8px;margin-top:4px;box-sizing:border-box;border:1px solid #ccc;font-size:0.95rem;">${escHtml(String(val || ""))}</textarea>`;
+  const efSelect = (id, options, selected) =>
+    `<select id="${id}" style="display:block;width:100%;padding:8px;margin-top:4px;border:1px solid #ccc;font-size:0.95rem;">
+      ${options.map(([v, l]) => `<option value="${v}" ${selected === v ? "selected" : ""}>${l}</option>`).join("")}
+    </select>`;
+
+  const ingredientRows = (r.ingredients && r.ingredients.length ? r.ingredients : [""]).map((ing, i) => `
+    <div class="ef-ing-row" style="display:flex;gap:6px;margin-bottom:6px;">
+      <input type="text" class="ef-ing-input" value="${escHtml(ing)}" placeholder="Ingredient ${i+1}"
+        style="flex:1;padding:7px;border:1px solid #ccc;font-size:0.9rem;">
+      <button type="button" onclick="efRemoveRow(this,'ef-ingredients-box')"
+        style="padding:4px 10px;background:#cc3300;color:white;border:none;cursor:pointer;">✕</button>
+    </div>`).join("");
+
+  const stepRows = (r.steps && r.steps.length ? r.steps : [""]).map((s, i) => `
+    <div class="ef-step-row" style="display:flex;gap:6px;margin-bottom:6px;align-items:flex-start;">
+      <span style="padding:8px 4px;font-weight:bold;color:#ff8c42;min-width:24px;">${i+1}.</span>
+      <input type="text" class="ef-step-input" value="${escHtml(s)}" placeholder="Step ${i+1}"
+        style="flex:1;padding:7px;border:1px solid #ccc;font-size:0.9rem;">
+      <button type="button" onclick="efRemoveRow(this,'ef-steps-box')"
+        style="padding:4px 10px;background:#cc3300;color:white;border:none;cursor:pointer;">✕</button>
+    </div>`).join("");
+
+  const cc = r.culturalContext || {};
+
   const editFormHTML = isOwn ? `
-    <div id="edit-form-section" style="display:none;margin-top:16px;padding:18px;background:#f9f9f9;border:1px solid #ddd;">
-      <h3 style="margin-bottom:14px;">Edit Recipe</h3>
-      <label style="display:block;margin-bottom:10px;">Title
-        <input id="ef-title" value="${escHtml(r.title || "")}" style="display:block;width:100%;padding:8px;margin-top:4px;box-sizing:border-box;border:1px solid #ccc;">
+    <div id="edit-form-section" style="display:none;margin-top:16px;padding:20px;background:#f9f9f9;border:1px solid #ddd;">
+      <h3 style="margin-bottom:18px;color:#ff8c42;">Edit Recipe</h3>
+
+      ${efLabel("Recipe Name", efInput("ef-title", r.title))}
+      ${efLabel("Description", efTextarea("ef-desc", r.description, 3))}
+
+      <label style="display:block;margin-bottom:12px;font-weight:bold;">Category
+        ${efSelect("ef-category",
+          [["breakfast","Breakfast"],["lunch","Lunch"],["dinner","Dinner"],["dessert","Dessert"],["snack","Snack"]],
+          (r.category || "").toLowerCase()
+        )}
       </label>
-      <label style="display:block;margin-bottom:10px;">Description
-        <textarea id="ef-desc" style="display:block;width:100%;padding:8px;margin-top:4px;box-sizing:border-box;border:1px solid #ccc;height:80px;">${escHtml(r.description || "")}</textarea>
+
+      <label style="display:block;margin-bottom:12px;font-weight:bold;">Ingredients
+        <div id="ef-ingredients-box" style="margin-top:6px;">${ingredientRows}</div>
+        <button type="button" onclick="efAddIngredient()"
+          style="margin-top:4px;padding:5px 12px;background:#ff8c42;color:white;border:none;cursor:pointer;font-size:0.85rem;">+ Add Ingredient</button>
       </label>
-      <label style="display:block;margin-bottom:10px;">Image URL
-        <input id="ef-image" value="${escHtml(r.imageUrl || "")}" style="display:block;width:100%;padding:8px;margin-top:4px;box-sizing:border-box;border:1px solid #ccc;">
+
+      <label style="display:block;margin-bottom:12px;font-weight:bold;">Steps
+        <div id="ef-steps-box" style="margin-top:6px;">${stepRows}</div>
+        <button type="button" onclick="efAddStep()"
+          style="margin-top:4px;padding:5px 12px;background:#ff8c42;color:white;border:none;cursor:pointer;font-size:0.85rem;">+ Add Step</button>
       </label>
-      <label style="display:block;margin-bottom:10px;">Cooking Time (mins)
-        <input id="ef-time" type="number" value="${escHtml(String(r.cookingTime || ""))}" style="display:block;width:100%;padding:8px;margin-top:4px;box-sizing:border-box;border:1px solid #ccc;">
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+        <label style="font-weight:bold;">Cooking Time (mins)
+          ${efInput("ef-time", r.cookingTime, "number")}
+        </label>
+        <label style="font-weight:bold;">Difficulty
+          ${efSelect("ef-difficulty",
+            [["","Select"],["Easy","Easy"],["Medium","Medium"],["Hard","Hard"]],
+            r.difficulty || ""
+          )}
+        </label>
+      </div>
+
+      ${efLabel("Dietary Tags <span style='font-weight:normal;font-size:0.85rem;'>(comma separated)</span>",
+        efInput("ef-tags", (r.dietaryTags || []).join(", ")))}
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+        <label style="font-weight:bold;">Origin
+          ${efInput("ef-origin", r.origin)}
+        </label>
+        <label style="font-weight:bold;">Tradition
+          ${efInput("ef-tradition", r.tradition)}
+        </label>
+      </div>
+
+      <div style="border-top:2px solid #ff8c42;padding-top:16px;margin-bottom:12px;">
+        <h4 style="color:#ff8c42;margin-bottom:12px;">Media</h4>
+        ${efLabel("Image URL", efInput("ef-image", r.imageUrl, "url"))}
+        ${efLabel("Video URL", efInput("ef-video", r.videoUrl, "url"))}
+      </div>
+
+      <div style="border-top:2px solid #ff8c42;padding-top:16px;margin-bottom:12px;">
+        <h4 style="color:#ff8c42;margin-bottom:12px;">Cultural Context</h4>
+        ${efLabel("Cultural Story", efTextarea("ef-story", cc.story, 3))}
+        ${efLabel("When is it typically eaten?", efInput("ef-occasion", cc.occasion))}
+        ${efLabel("Regional Variations", efTextarea("ef-variations", cc.variations, 2))}
+      </div>
+
+      <label style="display:block;margin-bottom:16px;font-weight:bold;">Visibility
+        ${efSelect("ef-public",
+          [["true","Public — everyone can see this"],["false","Private — only you can see this"]],
+          r.isPublic ? "true" : "false"
+        )}
       </label>
-      <label style="display:block;margin-bottom:10px;">Visibility
-        <select id="ef-public" style="display:block;padding:8px;margin-top:4px;border:1px solid #ccc;">
-          <option value="true" ${r.isPublic ? "selected" : ""}>Public</option>
-          <option value="false" ${!r.isPublic ? "selected" : ""}>Private</option>
-        </select>
-      </label>
-      <div style="display:flex;gap:10px;margin-top:12px;">
-        <button id="save-edit-btn" style="padding:8px 16px;background:#ff8c42;color:white;border:none;cursor:pointer;">Save Changes</button>
-        <button id="cancel-edit-btn" style="padding:8px 16px;background:#aaa;color:white;border:none;cursor:pointer;">Cancel</button>
+
+      <div style="display:flex;gap:10px;">
+        <button id="save-edit-btn" style="padding:10px 20px;background:#ff8c42;color:white;border:none;cursor:pointer;font-size:0.95rem;">Save Changes</button>
+        <button id="cancel-edit-btn" style="padding:10px 20px;background:#aaa;color:white;border:none;cursor:pointer;font-size:0.95rem;">Cancel</button>
       </div>
       <p id="edit-msg" style="margin-top:8px;color:#cc3300;"></p>
     </div>` : "";
@@ -235,13 +316,35 @@ async function loadDetail() {
       msg.textContent = "";
       saveBtn.disabled = true;
       saveBtn.textContent = "Saving...";
+
+      const ingredients = [...document.querySelectorAll(".ef-ing-input")]
+        .map(i => i.value.trim()).filter(Boolean);
+      const steps = [...document.querySelectorAll(".ef-step-input")]
+        .map(i => i.value.trim()).filter(Boolean);
+      const category = document.getElementById("ef-category").value;
+
       const body = {
         title: document.getElementById("ef-title").value.trim(),
         description: document.getElementById("ef-desc").value.trim(),
-        imageUrl: document.getElementById("ef-image").value.trim(),
+        category,
+        mealType: category,
+        ingredients,
+        steps,
         cookingTime: parseInt(document.getElementById("ef-time").value) || null,
+        difficulty: document.getElementById("ef-difficulty").value,
+        dietaryTags: document.getElementById("ef-tags").value.split(",").map(t => t.trim()).filter(Boolean),
+        origin: document.getElementById("ef-origin").value.trim(),
+        tradition: document.getElementById("ef-tradition").value.trim(),
+        imageUrl: document.getElementById("ef-image").value.trim(),
+        videoUrl: document.getElementById("ef-video").value.trim(),
+        culturalContext: {
+          story: document.getElementById("ef-story").value.trim(),
+          occasion: document.getElementById("ef-occasion").value.trim(),
+          variations: document.getElementById("ef-variations").value.trim()
+        },
         isPublic: document.getElementById("ef-public").value === "true"
       };
+
       if (!body.title) {
         msg.textContent = "Title is required.";
         saveBtn.disabled = false;
@@ -372,6 +475,51 @@ async function deleteReview(reviewId) {
   } catch {
     alert("Error deleting review.");
   }
+}
+
+/* ── Edit form helpers ─────────────────────────────────────────────── */
+function efRemoveRow(btn, boxId) {
+  const box = document.getElementById(boxId);
+  const rows = box.querySelectorAll("div");
+  if (rows.length > 1) {
+    btn.parentElement.remove();
+    if (boxId === "ef-steps-box") efRenumberSteps();
+  }
+}
+
+function efRenumberSteps() {
+  document.querySelectorAll("#ef-steps-box .ef-step-row span").forEach((span, i) => {
+    span.textContent = `${i + 1}.`;
+  });
+}
+
+function efAddIngredient() {
+  const box = document.getElementById("ef-ingredients-box");
+  const count = box.querySelectorAll("div").length + 1;
+  const div = document.createElement("div");
+  div.className = "ef-ing-row";
+  div.style.cssText = "display:flex;gap:6px;margin-bottom:6px;";
+  div.innerHTML = `
+    <input type="text" class="ef-ing-input" placeholder="Ingredient ${count}"
+      style="flex:1;padding:7px;border:1px solid #ccc;font-size:0.9rem;">
+    <button type="button" onclick="efRemoveRow(this,'ef-ingredients-box')"
+      style="padding:4px 10px;background:#cc3300;color:white;border:none;cursor:pointer;">✕</button>`;
+  box.appendChild(div);
+}
+
+function efAddStep() {
+  const box = document.getElementById("ef-steps-box");
+  const count = box.querySelectorAll("div").length + 1;
+  const div = document.createElement("div");
+  div.className = "ef-step-row";
+  div.style.cssText = "display:flex;gap:6px;margin-bottom:6px;align-items:flex-start;";
+  div.innerHTML = `
+    <span style="padding:8px 4px;font-weight:bold;color:#ff8c42;min-width:24px;">${count}.</span>
+    <input type="text" class="ef-step-input" placeholder="Step ${count}"
+      style="flex:1;padding:7px;border:1px solid #ccc;font-size:0.9rem;">
+    <button type="button" onclick="efRemoveRow(this,'ef-steps-box')"
+      style="padding:4px 10px;background:#cc3300;color:white;border:none;cursor:pointer;">✕</button>`;
+  box.appendChild(div);
 }
 
 window.addEventListener("DOMContentLoaded", loadDetail);
