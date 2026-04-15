@@ -73,23 +73,51 @@
   app.use("/recipebox", recipeBoxPageRoutes);
 
   // -----------------------------------------------------
-  // ADMIN STATS (itz.oxene only)
+  // ADMIN HELPERS
+  // -----------------------------------------------------
+  const _adminFiles = {
+    users:     path.join(process.cwd(), "data", "users.json"),
+    recipes:   path.join(process.cwd(), "data", "recipes.json"),
+    reviews:   path.join(process.cwd(), "data", "reviews.json"),
+    favorites: path.join(process.cwd(), "data", "favorites.json"),
+    admin:     path.join(process.cwd(), "data", "admin.json"),
+  };
+
+  function _readJson(file, fallback = []) {
+    try {
+      if (!fs.existsSync(file)) return fallback;
+      return JSON.parse(fs.readFileSync(file, "utf8") || JSON.stringify(fallback));
+    } catch (e) {
+      console.error("_readJson error:", file, e.message);
+      return fallback;
+    }
+  }
+
+  function _writeJson(file, data) {
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, JSON.stringify(data, null, 2), "utf8");
+  }
+
+  function _requireAdmin(req, res) {
+    const userId = req.headers["x-user-id"];
+    const users = _readJson(_adminFiles.users, []);
+    const user = users.find(u => String(u.id) === String(userId));
+    if (!user || user.username !== "itz.oxene") {
+      res.status(403).json({ message: "Access denied." });
+      return null;
+    }
+    return user;
+  }
+
+  // -----------------------------------------------------
+  // ADMIN — STATS
   // -----------------------------------------------------
   app.get("/api/admin/stats", (req, res) => {
-    const userId = req.headers["x-user-id"];
-    const dataDir = path.join(__dirname, "data");
-    const readFile = (name) => {
-      try { return JSON.parse(fs.readFileSync(path.join(dataDir, name), "utf8") || "[]"); }
-      catch { return []; }
-    };
-    const users     = readFile("users.json");
-    const recipes   = readFile("recipes.json");
-    const reviews   = readFile("reviews.json");
-    const favorites = readFile("favorites.json");
-
-    const user = users.find(u => String(u.id) === String(userId));
-    if (!user || user.username !== "itz.oxene")
-      return res.status(403).json({ message: "Access denied." });
+    if (!_requireAdmin(req, res)) return;
+    const recipes   = _readJson(_adminFiles.recipes,   []);
+    const users     = _readJson(_adminFiles.users,     []);
+    const reviews   = _readJson(_adminFiles.reviews,   []);
+    const favorites = _readJson(_adminFiles.favorites, []);
 
     const byCategory = {};
     recipes.forEach(r => {
@@ -106,6 +134,93 @@
       totalFavorites: favorites.length,
       byCategory
     });
+  });
+
+  // -----------------------------------------------------
+  // ADMIN — USERS
+  // -----------------------------------------------------
+  app.get("/api/admin/users", (req, res) => {
+    if (!_requireAdmin(req, res)) return;
+    const users   = _readJson(_adminFiles.users,   []);
+    const recipes = _readJson(_adminFiles.recipes, []);
+    res.json(users.map(u => ({
+      id:          u.id,
+      username:    u.username,
+      email:       u.email || "",
+      recipeCount: recipes.filter(r => String(r.authorId) === String(u.id)).length
+    })));
+  });
+
+  app.delete("/api/admin/users/:id", (req, res) => {
+    if (!_requireAdmin(req, res)) return;
+    const users = _readJson(_adminFiles.users, []);
+    const target = users.find(u => String(u.id) === req.params.id);
+    if (!target) return res.status(404).json({ message: "User not found." });
+    if (target.username === "itz.oxene") return res.status(400).json({ message: "Cannot delete admin account." });
+    _writeJson(_adminFiles.users, users.filter(u => String(u.id) !== req.params.id));
+    res.json({ message: "User deleted." });
+  });
+
+  // -----------------------------------------------------
+  // ADMIN — RECIPES
+  // -----------------------------------------------------
+  app.get("/api/admin/recipes", (req, res) => {
+    if (!_requireAdmin(req, res)) return;
+    res.json(_readJson(_adminFiles.recipes, []));
+  });
+
+  app.patch("/api/admin/recipes/:id", (req, res) => {
+    if (!_requireAdmin(req, res)) return;
+    const recipes = _readJson(_adminFiles.recipes, []);
+    const idx = recipes.findIndex(r => String(r.id) === req.params.id);
+    if (idx === -1) return res.status(404).json({ message: "Recipe not found." });
+    if (req.body.isPublic !== undefined) recipes[idx].isPublic = !!req.body.isPublic;
+    _writeJson(_adminFiles.recipes, recipes);
+    res.json(recipes[idx]);
+  });
+
+  app.delete("/api/admin/recipes/:id", (req, res) => {
+    if (!_requireAdmin(req, res)) return;
+    const recipes = _readJson(_adminFiles.recipes, []);
+    if (!recipes.find(r => String(r.id) === req.params.id))
+      return res.status(404).json({ message: "Recipe not found." });
+    _writeJson(_adminFiles.recipes, recipes.filter(r => String(r.id) !== req.params.id));
+    res.json({ message: "Recipe deleted." });
+  });
+
+  // -----------------------------------------------------
+  // ADMIN — ANNOUNCEMENT BANNER (public read)
+  // -----------------------------------------------------
+  app.get("/api/admin/announcement", (req, res) => {
+    const cfg = _readJson(_adminFiles.admin, {});
+    res.json({ announcement: cfg.announcement || "" });
+  });
+
+  app.post("/api/admin/announcement", (req, res) => {
+    if (!_requireAdmin(req, res)) return;
+    const cfg = _readJson(_adminFiles.admin, {});
+    cfg.announcement = req.body.text || "";
+    _writeJson(_adminFiles.admin, cfg);
+    res.json({ announcement: cfg.announcement });
+  });
+
+  // -----------------------------------------------------
+  // ADMIN — RECIPE OF THE DAY (public read)
+  // -----------------------------------------------------
+  app.get("/api/admin/rotd", (req, res) => {
+    const cfg = _readJson(_adminFiles.admin, {});
+    if (!cfg.rotdId) return res.json(null);
+    const recipes = _readJson(_adminFiles.recipes, []);
+    const recipe = recipes.find(r => String(r.id) === String(cfg.rotdId));
+    res.json(recipe || null);
+  });
+
+  app.post("/api/admin/rotd", (req, res) => {
+    if (!_requireAdmin(req, res)) return;
+    const cfg = _readJson(_adminFiles.admin, {});
+    cfg.rotdId = req.body.recipeId || null;
+    _writeJson(_adminFiles.admin, cfg);
+    res.json({ rotdId: cfg.rotdId });
   });
 
   // -----------------------------------------------------

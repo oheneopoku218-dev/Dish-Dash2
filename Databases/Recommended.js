@@ -21,6 +21,41 @@ function openRecipe(recipe) {
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
+  // ---- RECIPE OF THE DAY ----
+  try {
+    var rotdRes = await fetch(API_BASE + "/api/admin/rotd");
+    if (rotdRes.ok) {
+      var rotd = await rotdRes.json();
+      if (rotd && rotd.id) {
+        var rotdSection = document.getElementById("rotd-section");
+        var rotdCard    = document.getElementById("rotd-card");
+        if (rotdSection && rotdCard) {
+          rotdSection.style.display = "block";
+          rotdCard.innerHTML =
+            '<div style="background:#fff;border:2px solid #FFD700;box-shadow:0 0 20px rgba(255,215,0,0.25);' +
+            'display:flex;gap:0;overflow:hidden;cursor:pointer;" ' +
+            'onclick=\'openRecipe(' + JSON.stringify(rotd).replace(/'/g, "&#39;") + ')\'>' +
+              (rotd.imageUrl
+                ? '<img src="' + escHtml(rotd.imageUrl) + '" alt="' + escHtml(rotd.title) + '" ' +
+                  'style="width:280px;max-width:38%;object-fit:cover;flex-shrink:0;" onerror="this.style.display=\'none\'">'
+                : '') +
+              '<div style="padding:24px 28px;display:flex;flex-direction:column;justify-content:center;">' +
+                '<div style="display:inline-block;background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;' +
+                'font-size:0.72rem;font-weight:800;padding:4px 12px;letter-spacing:0.06em;margin-bottom:10px;width:fit-content;">⭐ RECIPE OF THE DAY</div>' +
+                '<h2 style="margin:0 0 8px;font-size:1.4rem;color:#1a1a1a;">' + escHtml(rotd.title || "Untitled") + '</h2>' +
+                (rotd.description ? '<p style="color:#666;font-size:0.92rem;margin:0 0 12px;line-height:1.5;">' + escHtml(rotd.description) + '</p>' : '') +
+                '<div style="display:flex;gap:12px;flex-wrap:wrap;">' +
+                  (rotd.category ? '<span style="background:#fff8f3;border:1px solid #ffe0c0;color:#ff8c42;font-size:0.78rem;font-weight:700;padding:3px 10px;text-transform:capitalize;">' + escHtml(rotd.category) + '</span>' : '') +
+                  (rotd.cookingTime ? '<span style="background:#f5f5f5;color:#666;font-size:0.78rem;padding:3px 10px;">⏱ ' + escHtml(String(rotd.cookingTime)) + ' min</span>' : '') +
+                  (rotd.difficulty ? '<span style="background:#f5f5f5;color:#666;font-size:0.78rem;padding:3px 10px;">📊 ' + escHtml(rotd.difficulty) + '</span>' : '') +
+                '</div>' +
+              '</div>' +
+            '</div>';
+        }
+      }
+    }
+  } catch {}
+
   var grid = document.getElementById("recommended-grid");
   if (!grid) return;
 
