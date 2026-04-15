@@ -93,8 +93,6 @@ async function loadDetail() {
         style="padding:4px 10px;background:#cc3300;color:white;border:none;cursor:pointer;">✕</button>
     </div>`).join("");
 
-  const cc = r.culturalContext || {};
-
   const editFormHTML = isOwn ? `
     <div id="edit-form-section" style="display:none;margin-top:16px;padding:20px;background:#f9f9f9;border:1px solid #ddd;">
       <h3 style="margin-bottom:18px;color:#ff8c42;">Edit Recipe</h3>
