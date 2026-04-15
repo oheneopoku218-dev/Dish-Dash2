@@ -15,7 +15,7 @@
   router.get("/", optionalAuth, (req, res) => {
     const recipes = readJson();
     const visible = recipes.filter(r =>
-      r.category === "breakfast" &&
+      (r.category || "").toLowerCase() === "breakfast" &&
       (r.isPublic || (req.user && String(r.authorId) === String(req.user.id)))
     );
     res.json(visible);

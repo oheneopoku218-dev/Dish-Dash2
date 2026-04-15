@@ -26,7 +26,13 @@
   // -----------------------------------------------------
   // CORS
   // -----------------------------------------------------
-  app.use(cors());
+  const corsOptions = {
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "x-user-id", "Authorization"]
+  };
+  app.use(cors(corsOptions));
+  app.options("*", cors(corsOptions));
 
   // -----------------------------------------------------
   // MIDDLEWARE

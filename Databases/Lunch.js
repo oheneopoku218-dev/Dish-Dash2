@@ -63,10 +63,9 @@ async function loadLunch() {
   const headers = _lnUserId ? { "x-user-id": _lnUserId } : {};
 
   try {
-    const res = await fetch(`${API_BASE}/api/recipes`, { headers });
+    const res = await fetch(`${API_BASE}/api/lunch`, { headers });
     if (!res.ok) throw new Error("Failed to load");
-    const allRecipes = await res.json();
-    _lnAllItems = allRecipes.filter(item => (item.category || "").toLowerCase() === "lunch");
+    _lnAllItems = await res.json();
     localStorage.setItem("cachedLunchRecipes", JSON.stringify(_lnAllItems));
   } catch (err) {
     const cached = localStorage.getItem("cachedLunchRecipes");

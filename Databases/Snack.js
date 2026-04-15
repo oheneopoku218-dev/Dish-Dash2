@@ -63,10 +63,9 @@ async function loadSnack() {
   const headers = _skUserId ? { "x-user-id": _skUserId } : {};
 
   try {
-    const res = await fetch(`${API_BASE}/api/recipes`, { headers });
+    const res = await fetch(`${API_BASE}/api/snack`, { headers });
     if (!res.ok) throw new Error("Failed to load");
-    const allRecipes = await res.json();
-    _skAllItems = allRecipes.filter(item => (item.category || "").toLowerCase() === "snack");
+    _skAllItems = await res.json();
     localStorage.setItem("cachedSnackRecipes", JSON.stringify(_skAllItems));
   } catch (err) {
     const cached = localStorage.getItem("cachedSnackRecipes");
