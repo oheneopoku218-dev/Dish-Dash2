@@ -1,70 +1,25 @@
 [
   {
-    "id": 1773912452145,
-    "title": "Jollof Test",
-    "description": "Testing 123",
-    "ingredients": [
-      "rice",
-      "tomates",
-      "test"
-    ],
-    "steps": [
-      "test",
-      "test"
-    ],
-    "authorId": null,
-    "createdAt": "2026-03-19T09:27:32.145Z"
-  },
-  {
     "id": 1773955600816,
     "title": "Test",
-    "ingredients": [
-      "Test"
-    ],
-    "steps": [
-      "Test"
-    ],
+    "ingredients": ["Test"],
+    "steps": ["Test"],
     "cookingTime": 60,
     "difficulty": "Medium",
     "mealType": "Dessert",
     "category": "dessert",
-    "dietaryTags": [
-      "gluten free"
-    ],
+    "dietaryTags": ["gluten free"],
     "origin": "Jamacia",
     "tradition": "Carribean",
     "authorId": 1773850195729,
     "authorName": "itz.oxene",
-    "isPublic": true,
+    "isPublic": false,
     "createdAt": "2026-03-19T21:26:40.816Z"
-  },
-  {
-    "id": 1773955600841,
-    "title": "Test",
-    "ingredients": [
-      "Test"
-    ],
-    "steps": [
-      "Test"
-    ],
-    "cookingTime": 60,
-    "difficulty": "Medium",
-    "mealType": "Dessert",
-    "category": "dessert",
-    "dietaryTags": [
-      "gluten free"
-    ],
-    "origin": "Jamacia",
-    "tradition": "Carribean",
-    "authorId": 1773850195729,
-    "authorName": "itz.oxene",
-    "isPublic": true,
-    "createdAt": "2026-03-19T21:26:40.841Z"
   },
   {
     "id": 1775422539675,
     "title": "Spicy Ghanaian Groundnut Soup",
-    "description": "A rich, creamy West African peanut‑based soup with chicken, spices, and aromatic vegetables.",
+    "description": "A rich, creamy West African peanut-based soup with chicken, spices, and aromatic vegetables.",
     "ingredients": [
       "chicken thighs",
       "peanut butter",
@@ -84,17 +39,14 @@
       "Brown chicken in a pot and add the blended mixture.",
       "Stir in peanut butter and tomato paste until fully dissolved.",
       "Add chicken stock, chilli powder, salt, and pepper.",
-      "Simmer for 35–45 minutes until thick and aromatic.",
+      "Simmer for 35-45 minutes until thick and aromatic.",
       "Garnish with spring onions before serving."
     ],
     "cookingTime": 45,
     "difficulty": "Medium",
     "mealType": "Dinner",
     "category": "dinner",
-    "dietaryTags": [
-      "gluten-free",
-      "high-protein"
-    ],
+    "dietaryTags": ["gluten-free", "high-protein"],
     "origin": "Ghana",
     "tradition": "Commonly served during family gatherings and festive occasions",
     "culturalContext": {
@@ -102,11 +54,868 @@
       "occasion": "Weddings, weekend gatherings, festive celebrations",
       "variations": "Northern Ghana often includes lamb or goat, while southern regions prefer chicken and add more tomatoes for sweetness."
     },
-    "imageUrl": "https://images.unsplash.com/photo-1604908177522-040a9f1e3c5e",
-    "videoUrl": "https://www.youtube.com/watch?v=Q2yZJp9xJpA",
+    "imageUrl": "https://images.unsplash.com/photo-1604908177522-040a9f1e3c5e?w=600&q=80",
+    "videoUrl": "",
     "authorId": 1773850195729,
     "authorName": "itz.oxene",
     "isPublic": true,
     "createdAt": "2026-04-05T20:55:39.675Z"
+  },
+  {
+    "id": 1780000000001,
+    "title": "Classic French Toast",
+    "description": "Golden, custard-soaked bread slices pan-fried until crisp on the outside and fluffy inside. A timeless breakfast favourite.",
+    "ingredients": [
+      "4 thick slices of brioche or white bread",
+      "2 eggs",
+      "60ml whole milk",
+      "1 tsp vanilla extract",
+      "1/2 tsp cinnamon",
+      "1 tbsp butter",
+      "maple syrup and fresh berries to serve"
+    ],
+    "steps": [
+      "Whisk together eggs, milk, vanilla, and cinnamon in a shallow bowl.",
+      "Heat butter in a non-stick frying pan over medium heat.",
+      "Dip each bread slice into the egg mixture, letting it soak for 20 seconds per side.",
+      "Cook in the pan for 2-3 minutes each side until golden brown.",
+      "Serve immediately with maple syrup and fresh berries."
+    ],
+    "cookingTime": 15,
+    "difficulty": "Easy",
+    "mealType": "Breakfast",
+    "category": "breakfast",
+    "dietaryTags": ["vegetarian"],
+    "origin": "France",
+    "tradition": "A classic brunch staple enjoyed across Europe and North America",
+    "culturalContext": {
+      "story": "Known as pain perdu (lost bread) in France, this dish was originally invented to use up stale bread. Today it is a beloved breakfast treat worldwide.",
+      "occasion": "Weekend brunch, family breakfast",
+      "variations": "Add a pinch of nutmeg, use challah bread, or top with whipped cream and bacon for a sweet-savoury twist."
+    },
+    "imageUrl": "https://images.unsplash.com/photo-1484723091739-25b2b04bfa49?w=600&q=80",
+    "videoUrl": "",
+    "authorId": 1750000000001,
+    "authorName": "admin",
+    "isPublic": true,
+    "createdAt": "2026-04-06T08:00:00.000Z"
+  },
+  {
+    "id": 1780000000002,
+    "title": "Avocado Toast with Poached Eggs",
+    "description": "Creamy smashed avocado on sourdough topped with perfectly poached eggs, chilli flakes, and a squeeze of lemon.",
+    "ingredients": [
+      "2 slices sourdough bread",
+      "1 ripe avocado",
+      "2 eggs",
+      "juice of half a lemon",
+      "chilli flakes",
+      "salt and pepper",
+      "fresh rocket leaves",
+      "splash of white wine vinegar"
+    ],
+    "steps": [
+      "Toast the sourdough until golden and crisp.",
+      "Halve the avocado, remove the stone, and mash the flesh with lemon juice, salt, and pepper.",
+      "Bring a pot of water to a gentle simmer and add the vinegar.",
+      "Crack each egg into a small cup and slide gently into the simmering water. Poach for 3 minutes.",
+      "Spread the avocado mixture over the toast.",
+      "Top with the poached eggs, chilli flakes, and rocket leaves."
+    ],
+    "cookingTime": 12,
+    "difficulty": "Easy",
+    "mealType": "Breakfast",
+    "category": "breakfast",
+    "dietaryTags": ["vegetarian"],
+    "origin": "Australia",
+    "tradition": "A cafe culture staple that became a global brunch icon",
+    "culturalContext": {
+      "story": "Avocado toast became famous in Australian brunch culture in the early 2000s before spreading worldwide. It is now synonymous with modern, health-conscious eating.",
+      "occasion": "Weekend brunch, light morning meal",
+      "variations": "Add smoked salmon, feta, or a drizzle of hot honey for extra flavour."
+    },
+    "imageUrl": "https://images.unsplash.com/photo-1541519227354-08fa5d50c820?w=600&q=80",
+    "videoUrl": "",
+    "authorId": 1773850195729,
+    "authorName": "itz.oxene",
+    "isPublic": true,
+    "createdAt": "2026-04-06T08:30:00.000Z"
+  },
+  {
+    "id": 1780000000003,
+    "title": "Overnight Oats with Berries",
+    "description": "No-cook creamy oats soaked overnight in milk and yoghurt, topped with fresh berries and honey. Ready in minutes each morning.",
+    "ingredients": [
+      "80g rolled oats",
+      "200ml milk of choice",
+      "3 tbsp Greek yoghurt",
+      "1 tbsp chia seeds",
+      "1 tbsp honey",
+      "1 tsp vanilla extract",
+      "handful of mixed berries",
+      "pinch of cinnamon"
+    ],
+    "steps": [
+      "Combine oats, milk, yoghurt, chia seeds, honey, vanilla, and cinnamon in a jar or bowl.",
+      "Stir well, cover, and refrigerate overnight or for at least 6 hours.",
+      "In the morning, stir and add a splash of milk if the mixture is too thick.",
+      "Top with fresh berries and an extra drizzle of honey before serving."
+    ],
+    "cookingTime": 5,
+    "difficulty": "Easy",
+    "mealType": "Breakfast",
+    "category": "breakfast",
+    "dietaryTags": ["vegetarian", "high-fibre"],
+    "origin": "Switzerland",
+    "tradition": "Inspired by the Swiss Birchermuesli, a cold oat dish created by physician Maximilian Bircher-Brenner",
+    "culturalContext": {
+      "story": "Muesli was invented in Switzerland around 1900 as a nutritious meal for hospital patients. The overnight version became popular globally as a quick, healthy breakfast.",
+      "occasion": "Busy weekday mornings, meal-prep breakfasts",
+      "variations": "Try peanut butter and banana, mango and coconut, or apple and cinnamon variations."
+    },
+    "imageUrl": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80",
+    "videoUrl": "",
+    "authorId": 1750000000001,
+    "authorName": "admin",
+    "isPublic": true,
+    "createdAt": "2026-04-06T09:00:00.000Z"
+  },
+  {
+    "id": 1780000000004,
+    "title": "Shakshuka",
+    "description": "Eggs poached directly in a spiced tomato and pepper sauce — a bold, flavourful one-pan breakfast with North African roots.",
+    "ingredients": [
+      "6 eggs",
+      "2 cans chopped tomatoes",
+      "1 red pepper, diced",
+      "1 onion, diced",
+      "4 garlic cloves, minced",
+      "1 tsp cumin",
+      "1 tsp smoked paprika",
+      "1/2 tsp chilli flakes",
+      "salt and pepper",
+      "fresh coriander",
+      "crusty bread to serve"
+    ],
+    "steps": [
+      "Heat olive oil in a large frying pan. Sauté onion and pepper for 5 minutes until soft.",
+      "Add garlic, cumin, paprika, and chilli flakes. Cook for 1 minute until fragrant.",
+      "Pour in the tomatoes, season, and simmer for 10 minutes until the sauce thickens.",
+      "Make 6 wells in the sauce and crack an egg into each well.",
+      "Cover and cook over low heat for 5-8 minutes until the whites are set but yolks are still runny.",
+      "Scatter with fresh coriander and serve with crusty bread."
+    ],
+    "cookingTime": 25,
+    "difficulty": "Easy",
+    "mealType": "Breakfast",
+    "category": "breakfast",
+    "dietaryTags": ["vegetarian", "gluten-free"],
+    "origin": "Tunisia",
+    "tradition": "A staple of North African and Middle Eastern morning meals",
+    "culturalContext": {
+      "story": "Shakshuka means 'a mixture' in Arabic. Originating in Tunisia, it spread through North Africa and the Middle East and is now a beloved dish in Israel and globally.",
+      "occasion": "Weekend breakfasts, communal meals",
+      "variations": "Add crumbled feta, spinach, or merguez sausage. Green shakshuka uses tomatillos instead of tomatoes."
+    },
+    "imageUrl": "https://images.unsplash.com/photo-1590412200988-a436970781fa?w=600&q=80",
+    "videoUrl": "",
+    "authorId": 1773850195729,
+    "authorName": "itz.oxene",
+    "isPublic": true,
+    "createdAt": "2026-04-06T09:30:00.000Z"
+  },
+  {
+    "id": 1780000000005,
+    "title": "Grilled Chicken Caesar Salad",
+    "description": "Crisp romaine lettuce, crunchy croutons, and juicy grilled chicken dressed in a tangy Caesar dressing with shaved parmesan.",
+    "ingredients": [
+      "2 chicken breasts",
+      "1 large romaine lettuce",
+      "50g parmesan, shaved",
+      "1 cup croutons",
+      "3 tbsp Caesar dressing",
+      "1 lemon",
+      "olive oil",
+      "salt and pepper",
+      "garlic powder"
+    ],
+    "steps": [
+      "Season chicken with olive oil, garlic powder, salt, and pepper.",
+      "Grill for 6-7 minutes per side until cooked through. Rest for 5 minutes then slice.",
+      "Tear romaine into a large bowl.",
+      "Add croutons, parmesan shavings, and sliced chicken.",
+      "Drizzle with Caesar dressing and a squeeze of lemon. Toss and serve."
+    ],
+    "cookingTime": 20,
+    "difficulty": "Easy",
+    "mealType": "Lunch",
+    "category": "lunch",
+    "dietaryTags": ["high-protein"],
+    "origin": "Mexico",
+    "tradition": "Created by Italian-Mexican restaurateur Caesar Cardini in Tijuana in the 1920s",
+    "culturalContext": {
+      "story": "Caesar salad was invented by Caesar Cardini on a busy 4th of July weekend when he improvised a dish from leftover ingredients. It became one of the most recognised salads worldwide.",
+      "occasion": "Everyday lunch, restaurant dining",
+      "variations": "Add anchovies, bacon, or swap chicken for grilled prawns."
+    },
+    "imageUrl": "https://images.unsplash.com/photo-1550304943-4f24f54ddde9?w=600&q=80",
+    "videoUrl": "",
+    "authorId": 1750000000001,
+    "authorName": "admin",
+    "isPublic": true,
+    "createdAt": "2026-04-07T12:00:00.000Z"
+  },
+  {
+    "id": 1780000000006,
+    "title": "Jollof Rice",
+    "description": "The iconic West African one-pot rice dish cooked in a rich tomato and pepper sauce with aromatic spices. Smoky, bold, and irresistible.",
+    "ingredients": [
+      "2 cups long grain rice",
+      "4 large tomatoes",
+      "2 red peppers",
+      "1 scotch bonnet pepper",
+      "1 onion",
+      "3 tbsp tomato paste",
+      "2 cups chicken stock",
+      "1 tsp thyme",
+      "1 tsp curry powder",
+      "2 bay leaves",
+      "salt and pepper",
+      "vegetable oil"
+    ],
+    "steps": [
+      "Blend tomatoes, red peppers, scotch bonnet, and onion into a smooth sauce.",
+      "Heat oil in a heavy pot and fry the tomato paste for 2 minutes.",
+      "Add the blended sauce and cook on medium heat for 20-25 minutes, stirring regularly.",
+      "Season with thyme, curry powder, bay leaves, salt, and pepper.",
+      "Wash the rice and add to the pot along with chicken stock.",
+      "Stir, cover tightly, and cook on very low heat for 25-30 minutes until rice is tender.",
+      "Stir gently from the bottom for the smoky base layer before serving."
+    ],
+    "cookingTime": 60,
+    "difficulty": "Medium",
+    "mealType": "Lunch",
+    "category": "lunch",
+    "dietaryTags": ["gluten-free", "dairy-free"],
+    "origin": "West Africa",
+    "tradition": "A cornerstone of West African cuisine fought over lovingly between Ghana, Nigeria, and Senegal",
+    "culturalContext": {
+      "story": "The Jollof Wars between Ghana and Nigeria are legendary — both claim to make the best version. Originating from the Wolof people of Senegal, jollof rice has become a pan-West African icon.",
+      "occasion": "Parties, funerals, weddings, every occasion",
+      "variations": "Nigerian jollof uses roma tomatoes and party rice is cooked over firewood for extra smoke. Ghanaian jollof is often milder and uses basmati rice."
+    },
+    "imageUrl": "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=600&q=80",
+    "videoUrl": "",
+    "authorId": 1773850195729,
+    "authorName": "itz.oxene",
+    "isPublic": true,
+    "createdAt": "2026-04-07T12:30:00.000Z"
+  },
+  {
+    "id": 1780000000007,
+    "title": "Classic Club Sandwich",
+    "description": "Triple-decker toasted sandwich layered with turkey, crispy bacon, lettuce, tomato, and mayo. A timeless lunch crowd-pleaser.",
+    "ingredients": [
+      "3 slices white bread, toasted",
+      "4 slices cooked turkey breast",
+      "3 rashers crispy bacon",
+      "2 leaves romaine lettuce",
+      "2 slices tomato",
+      "2 tbsp mayonnaise",
+      "salt and pepper",
+      "cocktail sticks to hold"
+    ],
+    "steps": [
+      "Toast all three slices of bread.",
+      "Spread mayonnaise on one side of each slice.",
+      "Layer the first slice with turkey and lettuce.",
+      "Place the second slice of toast on top and layer with bacon and tomato slices. Season.",
+      "Top with the third slice of toast, mayo side down.",
+      "Press gently, cut diagonally into quarters, and secure each piece with a cocktail stick."
+    ],
+    "cookingTime": 10,
+    "difficulty": "Easy",
+    "mealType": "Lunch",
+    "category": "lunch",
+    "dietaryTags": ["high-protein"],
+    "origin": "United States",
+    "tradition": "A classic American diner and hotel restaurant staple since the late 1800s",
+    "culturalContext": {
+      "story": "The club sandwich first appeared in American gentlemen's clubs around 1894. Its triple-decker construction and toothpick presentation have remained largely unchanged for over a century.",
+      "occasion": "Lunch, casual dining",
+      "variations": "Use chicken instead of turkey, add avocado, or go vegetarian with grilled halloumi."
+    },
+    "imageUrl": "https://images.unsplash.com/photo-1528735602780-2552fd46c7ba?w=600&q=80",
+    "videoUrl": "",
+    "authorId": 1750000000001,
+    "authorName": "admin",
+    "isPublic": true,
+    "createdAt": "2026-04-07T13:00:00.000Z"
+  },
+  {
+    "id": 1780000000008,
+    "title": "Spicy Tuna Rice Bowl",
+    "description": "Fluffy seasoned rice topped with spicy sriracha tuna, cucumber, avocado, sesame seeds, and a soy-ginger drizzle.",
+    "ingredients": [
+      "1 can tuna, drained",
+      "2 cups cooked white rice",
+      "1/2 avocado, sliced",
+      "1/2 cucumber, julienned",
+      "2 tbsp sriracha mayo",
+      "1 tbsp soy sauce",
+      "1 tsp sesame oil",
+      "1 tsp grated ginger",
+      "sesame seeds",
+      "spring onions",
+      "nori strips (optional)"
+    ],
+    "steps": [
+      "Mix tuna with sriracha mayo until well coated.",
+      "Combine soy sauce, sesame oil, and grated ginger in a small bowl for the drizzle.",
+      "Divide rice between bowls.",
+      "Top with spicy tuna, sliced avocado, and cucumber.",
+      "Drizzle with the soy-ginger sauce.",
+      "Garnish with sesame seeds, spring onions, and nori strips."
+    ],
+    "cookingTime": 15,
+    "difficulty": "Easy",
+    "mealType": "Lunch",
+    "category": "lunch",
+    "dietaryTags": ["dairy-free", "high-protein"],
+    "origin": "Japan",
+    "tradition": "Inspired by Japanese donburi rice bowls and Hawaiian poke",
+    "culturalContext": {
+      "story": "Rice bowls have been a cornerstone of Japanese cuisine for centuries. The spicy tuna bowl fuses Japanese donburi traditions with the bold flavours of Hawaiian poke culture.",
+      "occasion": "Quick weekday lunches, meal prep",
+      "variations": "Use salmon instead of tuna, add edamame, or make it with brown rice for extra fibre."
+    },
+    "imageUrl": "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=600&q=80",
+    "videoUrl": "",
+    "authorId": 1773850195729,
+    "authorName": "itz.oxene",
+    "isPublic": true,
+    "createdAt": "2026-04-07T13:30:00.000Z"
+  },
+  {
+    "id": 1780000000009,
+    "title": "Spaghetti Bolognese",
+    "description": "A slow-cooked Italian meat sauce with rich tomatoes, red wine, and herbs, served over al dente spaghetti with parmesan.",
+    "ingredients": [
+      "400g spaghetti",
+      "500g beef mince",
+      "1 onion, finely diced",
+      "2 carrots, finely diced",
+      "2 celery stalks, finely diced",
+      "4 garlic cloves, minced",
+      "2 cans chopped tomatoes",
+      "150ml red wine",
+      "2 tbsp tomato paste",
+      "1 tsp dried oregano",
+      "1 tsp dried basil",
+      "salt and pepper",
+      "parmesan to serve",
+      "olive oil"
+    ],
+    "steps": [
+      "Heat olive oil in a large pan. Sauté onion, carrot, and celery for 8 minutes until soft.",
+      "Add garlic and cook for 1 minute.",
+      "Add beef mince and brown thoroughly, breaking up any lumps.",
+      "Pour in the red wine and cook until mostly evaporated.",
+      "Stir in tomato paste, chopped tomatoes, oregano, basil, salt, and pepper.",
+      "Simmer uncovered on low heat for at least 45 minutes, stirring occasionally.",
+      "Cook spaghetti according to package instructions. Reserve a cup of pasta water.",
+      "Toss spaghetti with the sauce, adding pasta water to loosen if needed.",
+      "Serve with generous shavings of parmesan."
+    ],
+    "cookingTime": 70,
+    "difficulty": "Medium",
+    "mealType": "Dinner",
+    "category": "dinner",
+    "dietaryTags": ["high-protein"],
+    "origin": "Italy",
+    "tradition": "A slow-cooked meat ragu from Bologna, Emilia-Romagna",
+    "culturalContext": {
+      "story": "The original Bolognese sauce, ragu alla Bolognese, was registered with the Bologna Chamber of Commerce in 1982. The authentic version uses tagliatelle, not spaghetti, but the spaghetti version has conquered the world.",
+      "occasion": "Family Sunday dinners, date nights",
+      "variations": "Use pork and beef mixed mince, add chicken livers for richness, or substitute with lentils for a vegetarian version."
+    },
+    "imageUrl": "https://images.unsplash.com/photo-1551183053-bf91798d773e?w=600&q=80",
+    "videoUrl": "",
+    "authorId": 1750000000001,
+    "authorName": "admin",
+    "isPublic": true,
+    "createdAt": "2026-04-08T18:00:00.000Z"
+  },
+  {
+    "id": 1780000000010,
+    "title": "Grilled Salmon with Lemon Butter",
+    "description": "Perfectly grilled salmon fillets with crispy skin, finished with a silky lemon butter sauce and fresh herbs.",
+    "ingredients": [
+      "4 salmon fillets, skin on",
+      "3 tbsp butter",
+      "2 garlic cloves, minced",
+      "juice and zest of 1 lemon",
+      "1 tbsp fresh dill or parsley",
+      "olive oil",
+      "salt and pepper",
+      "steamed greens to serve"
+    ],
+    "steps": [
+      "Pat salmon dry and season generously with salt and pepper.",
+      "Heat olive oil in a grill pan over high heat until smoking.",
+      "Place salmon skin-side down. Press gently with a spatula for 30 seconds.",
+      "Cook for 4-5 minutes until the skin is crispy, then flip and cook for 2-3 minutes more.",
+      "Remove salmon and reduce heat. Melt butter in the same pan.",
+      "Add garlic and cook for 30 seconds. Stir in lemon juice and zest.",
+      "Pour the lemon butter sauce over the salmon and garnish with fresh herbs."
+    ],
+    "cookingTime": 20,
+    "difficulty": "Easy",
+    "mealType": "Dinner",
+    "category": "dinner",
+    "dietaryTags": ["gluten-free", "high-protein", "omega-3"],
+    "origin": "Scandinavia",
+    "tradition": "Salmon has been a cornerstone of Nordic cuisine for thousands of years",
+    "culturalContext": {
+      "story": "Salmon has been at the heart of Scandinavian culture since the Vikings. Today it is one of the most popular fish dishes worldwide thanks to its rich flavour and health benefits.",
+      "occasion": "Weeknight dinners, dinner parties",
+      "variations": "Add a honey-soy glaze, top with mango salsa, or bake in parchment with vegetables."
+    },
+    "imageUrl": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600&q=80",
+    "videoUrl": "",
+    "authorId": 1773850195729,
+    "authorName": "itz.oxene",
+    "isPublic": true,
+    "createdAt": "2026-04-08T18:30:00.000Z"
+  },
+  {
+    "id": 1780000000011,
+    "title": "Chicken Tikka Masala",
+    "description": "Tender marinated chicken in a lusciously creamy, spiced tomato sauce — one of the most loved curries in the world.",
+    "ingredients": [
+      "700g chicken breast, cubed",
+      "200g Greek yoghurt",
+      "2 tsp garam masala",
+      "2 tsp turmeric",
+      "2 tsp cumin",
+      "2 tsp coriander",
+      "1 tsp chilli powder",
+      "3 garlic cloves",
+      "1 tbsp grated ginger",
+      "2 cans chopped tomatoes",
+      "200ml double cream",
+      "1 onion",
+      "2 tbsp butter",
+      "fresh coriander",
+      "rice or naan to serve"
+    ],
+    "steps": [
+      "Mix yoghurt with half the spices, garlic, and ginger. Marinate chicken for at least 2 hours.",
+      "Grill or bake marinated chicken at 220C for 15 minutes until slightly charred.",
+      "Sauté onion in butter until golden. Add remaining spices and cook for 1 minute.",
+      "Add tomatoes and simmer for 15 minutes.",
+      "Blend the sauce until smooth, return to heat, and stir in cream.",
+      "Add grilled chicken to the sauce and simmer for 10 minutes.",
+      "Garnish with fresh coriander and serve with rice or warm naan."
+    ],
+    "cookingTime": 50,
+    "difficulty": "Medium",
+    "mealType": "Dinner",
+    "category": "dinner",
+    "dietaryTags": ["gluten-free", "high-protein"],
+    "origin": "United Kingdom",
+    "tradition": "A British-Indian fusion dish said to have been invented by South Asian chefs in UK restaurants",
+    "culturalContext": {
+      "story": "Chicken Tikka Masala was reportedly invented in Glasgow in the 1970s when a chef added a creamy tomato sauce to traditional tikka to suit British tastes. It became Britain's unofficial national dish.",
+      "occasion": "Friday night takeaway, dinner parties, family meals",
+      "variations": "Swap chicken for paneer or lamb, increase the chilli for extra heat, or use coconut cream instead of dairy."
+    },
+    "imageUrl": "https://images.unsplash.com/photo-1565557623262-b51531d80490?w=600&q=80",
+    "videoUrl": "",
+    "authorId": 1750000000001,
+    "authorName": "admin",
+    "isPublic": true,
+    "createdAt": "2026-04-08T19:00:00.000Z"
+  },
+  {
+    "id": 1780000000012,
+    "title": "Beef Stir Fry with Noodles",
+    "description": "Tender strips of beef tossed with crisp vegetables and noodles in a savoury ginger-soy sauce. On the table in 20 minutes.",
+    "ingredients": [
+      "300g beef sirloin, sliced thin",
+      "200g egg noodles",
+      "1 red pepper, sliced",
+      "1 cup broccoli florets",
+      "2 spring onions",
+      "3 tbsp soy sauce",
+      "1 tbsp oyster sauce",
+      "1 tbsp sesame oil",
+      "2 garlic cloves, minced",
+      "1 tsp grated ginger",
+      "1 tsp cornstarch",
+      "vegetable oil",
+      "sesame seeds to garnish"
+    ],
+    "steps": [
+      "Toss beef strips with cornstarch, 1 tbsp soy sauce, and a pinch of pepper. Set aside.",
+      "Cook noodles according to package instructions. Drain and set aside.",
+      "Heat oil in a wok over high heat until smoking.",
+      "Stir-fry beef for 2-3 minutes until browned. Remove and set aside.",
+      "Add more oil to the wok. Stir-fry broccoli and pepper for 3 minutes.",
+      "Add garlic and ginger. Cook for 30 seconds.",
+      "Return beef to the wok with the noodles. Add remaining soy sauce, oyster sauce, and sesame oil.",
+      "Toss everything together over high heat for 1-2 minutes.",
+      "Garnish with spring onions and sesame seeds."
+    ],
+    "cookingTime": 20,
+    "difficulty": "Easy",
+    "mealType": "Dinner",
+    "category": "dinner",
+    "dietaryTags": ["dairy-free", "high-protein"],
+    "origin": "China",
+    "tradition": "Stir-frying over intense heat is a centuries-old Chinese cooking technique",
+    "culturalContext": {
+      "story": "Stir-frying was developed in China as an efficient cooking method using very high heat to quickly cook food while preserving colour, texture, and nutrients.",
+      "occasion": "Quick weeknight dinners",
+      "variations": "Use chicken, prawns, or tofu. Add bok choy, snap peas, or water chestnuts."
+    },
+    "imageUrl": "https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=600&q=80",
+    "videoUrl": "",
+    "authorId": 1773850195729,
+    "authorName": "itz.oxene",
+    "isPublic": true,
+    "createdAt": "2026-04-08T19:30:00.000Z"
+  },
+  {
+    "id": 1780000000013,
+    "title": "Guacamole with Tortilla Chips",
+    "description": "Fresh, chunky guacamole made with ripe avocados, lime, coriander, and a kick of jalapeño. The ultimate snack dip.",
+    "ingredients": [
+      "3 ripe avocados",
+      "juice of 2 limes",
+      "1 small red onion, finely diced",
+      "2 tomatoes, deseeded and diced",
+      "1 jalapeño, finely chopped",
+      "small handful of fresh coriander",
+      "salt and pepper",
+      "tortilla chips to serve"
+    ],
+    "steps": [
+      "Halve the avocados, remove stones, and scoop flesh into a bowl.",
+      "Add lime juice immediately and mash to your preferred texture.",
+      "Fold in red onion, tomatoes, jalapeño, and coriander.",
+      "Season well with salt and pepper. Taste and adjust lime if needed.",
+      "Serve immediately with tortilla chips or cover tightly with cling film directly touching the surface to prevent browning."
+    ],
+    "cookingTime": 10,
+    "difficulty": "Easy",
+    "mealType": "Snack",
+    "category": "snack",
+    "dietaryTags": ["vegan", "gluten-free", "dairy-free"],
+    "origin": "Mexico",
+    "tradition": "Made from the Aztec word ahuacamolli, avocado sauce has been made in Mexico for over 500 years",
+    "culturalContext": {
+      "story": "Guacamole dates back to the Aztecs who mashed avocados in molcajetes (stone mortars). Spanish conquistadors encountered it in the 16th century and brought avocados to Europe.",
+      "occasion": "Parties, Super Bowl, barbecues, everyday snacking",
+      "variations": "Add mango for a sweet-spicy version, pomegranate seeds for crunch, or roasted garlic for a deeper flavour."
+    },
+    "imageUrl": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=600&q=80",
+    "videoUrl": "",
+    "authorId": 1750000000001,
+    "authorName": "admin",
+    "isPublic": true,
+    "createdAt": "2026-04-09T15:00:00.000Z"
+  },
+  {
+    "id": 1780000000014,
+    "title": "Fried Plantains",
+    "description": "Sweet, caramelised plantain slices fried until golden and tender — a beloved West African and Caribbean snack.",
+    "ingredients": [
+      "2 very ripe plantains (mostly black skin)",
+      "vegetable oil for frying",
+      "pinch of salt",
+      "pinch of cinnamon (optional)"
+    ],
+    "steps": [
+      "Peel the plantains and slice diagonally into 1cm thick pieces.",
+      "Sprinkle lightly with salt and cinnamon if using.",
+      "Heat about 1cm of oil in a frying pan over medium heat.",
+      "Fry plantain slices for 2-3 minutes each side until deep golden and caramelised.",
+      "Remove with a slotted spoon and drain on kitchen paper.",
+      "Serve immediately as a snack or side dish."
+    ],
+    "cookingTime": 10,
+    "difficulty": "Easy",
+    "mealType": "Snack",
+    "category": "snack",
+    "dietaryTags": ["vegan", "gluten-free", "dairy-free"],
+    "origin": "West Africa",
+    "tradition": "A staple snack across West Africa, the Caribbean, and Latin America",
+    "culturalContext": {
+      "story": "Plantains have fed communities across West Africa, the Caribbean, and South America for centuries. Fried plantains, known as kelewele in Ghana or dodo in Nigeria, are eaten as snacks, starters, and side dishes.",
+      "occasion": "Everyday snacking, alongside rice dishes, barbecues",
+      "variations": "Kelewele adds spiced ginger and chilli. Tostones (twice-fried) use unripe plantains and are popular in the Caribbean."
+    },
+    "imageUrl": "https://images.unsplash.com/photo-1574226516831-e1dff420e562?w=600&q=80",
+    "videoUrl": "",
+    "authorId": 1773850195729,
+    "authorName": "itz.oxene",
+    "isPublic": true,
+    "createdAt": "2026-04-09T15:30:00.000Z"
+  },
+  {
+    "id": 1780000000015,
+    "title": "Hummus with Pita Bread",
+    "description": "Silky smooth homemade hummus made from blended chickpeas, tahini, lemon, and garlic — served with warm toasted pita.",
+    "ingredients": [
+      "2 cans chickpeas, drained (reserve liquid)",
+      "4 tbsp tahini",
+      "juice of 2 lemons",
+      "2 garlic cloves",
+      "4 tbsp olive oil",
+      "1/2 tsp cumin",
+      "salt",
+      "paprika and extra olive oil to garnish",
+      "4 pita breads"
+    ],
+    "steps": [
+      "Add chickpeas, tahini, lemon juice, garlic, and cumin to a food processor.",
+      "Blend for 1 minute. With the motor running, slowly drizzle in olive oil.",
+      "Add 3-4 tbsp of the reserved chickpea liquid and blend for 3-4 minutes until very smooth.",
+      "Taste and adjust with more lemon or salt.",
+      "Toast pita breads and cut into triangles.",
+      "Serve hummus in a bowl drizzled with olive oil and a dusting of paprika."
+    ],
+    "cookingTime": 10,
+    "difficulty": "Easy",
+    "mealType": "Snack",
+    "category": "snack",
+    "dietaryTags": ["vegan", "gluten-free option", "high-protein"],
+    "origin": "Middle East",
+    "tradition": "Hummus bi tahini has been eaten across the Levant, Egypt, and Turkey for centuries",
+    "culturalContext": {
+      "story": "Hummus is one of the oldest recorded foods in the world. Its origins are disputed between Lebanon, Israel, and Greece, but it has been a common food across the Middle East for hundreds of years.",
+      "occasion": "Meze spreads, everyday snacking, party platters",
+      "variations": "Top with roasted red pepper, pine nuts and pomegranate, or caramelised onions. Add jalapeño for a spicy version."
+    },
+    "imageUrl": "https://images.unsplash.com/photo-1615361200141-f45040f367be?w=600&q=80",
+    "videoUrl": "",
+    "authorId": 1750000000001,
+    "authorName": "admin",
+    "isPublic": true,
+    "createdAt": "2026-04-09T16:00:00.000Z"
+  },
+  {
+    "id": 1780000000016,
+    "title": "Loaded Nachos",
+    "description": "Crispy tortilla chips piled high with melted cheese, jalapeños, black beans, sour cream, and fresh salsa.",
+    "ingredients": [
+      "200g tortilla chips",
+      "150g grated cheddar and mozzarella mix",
+      "1 can black beans, drained",
+      "1 jalapeño, sliced",
+      "4 tbsp sour cream",
+      "4 tbsp fresh salsa",
+      "1 avocado, diced",
+      "fresh coriander",
+      "1 lime"
+    ],
+    "steps": [
+      "Preheat oven to 200C.",
+      "Spread tortilla chips in a single layer on a baking tray.",
+      "Scatter black beans and jalapeño slices over the chips.",
+      "Cover generously with grated cheese.",
+      "Bake for 8-10 minutes until the cheese is fully melted and bubbling.",
+      "Remove from oven and top with sour cream, salsa, and diced avocado.",
+      "Finish with fresh coriander and a squeeze of lime. Serve immediately."
+    ],
+    "cookingTime": 15,
+    "difficulty": "Easy",
+    "mealType": "Snack",
+    "category": "snack",
+    "dietaryTags": ["vegetarian"],
+    "origin": "United States",
+    "tradition": "Invented in 1943 at a Texas restaurant by Ignacio Nacho Anaya",
+    "culturalContext": {
+      "story": "Nachos were invented by Ignacio Anaya in 1943 when a group of US military wives arrived at his restaurant after closing time. He improvised with chips, cheese, and jalapeños — and a snack icon was born.",
+      "occasion": "Game nights, parties, casual snacking",
+      "variations": "Add pulled pork, grilled chicken, or go fully loaded with refried beans and pickled onions."
+    },
+    "imageUrl": "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?w=600&q=80",
+    "videoUrl": "",
+    "authorId": 1773850195729,
+    "authorName": "itz.oxene",
+    "isPublic": true,
+    "createdAt": "2026-04-09T16:30:00.000Z"
+  },
+  {
+    "id": 1780000000017,
+    "title": "Chocolate Lava Cake",
+    "description": "Warm, deeply chocolatey individual cakes with a molten flowing centre. Rich, indulgent, and impressively easy to make.",
+    "ingredients": [
+      "200g dark chocolate (70%)",
+      "200g butter",
+      "4 eggs",
+      "4 egg yolks",
+      "120g caster sugar",
+      "80g plain flour",
+      "pinch of salt",
+      "cocoa powder for dusting",
+      "vanilla ice cream to serve"
+    ],
+    "steps": [
+      "Preheat oven to 200C. Butter 6 ramekins and dust with cocoa powder.",
+      "Melt chocolate and butter together in a heatproof bowl over simmering water. Stir until smooth.",
+      "Whisk eggs, yolks, and sugar together until pale and slightly thickened.",
+      "Fold the chocolate mixture into the egg mixture.",
+      "Sift in flour and salt and fold until just combined.",
+      "Divide between the prepared ramekins.",
+      "Bake for 10-12 minutes — the edges should be set but the centre still has a slight wobble.",
+      "Run a knife around the edge, invert onto plates, and serve immediately with ice cream."
+    ],
+    "cookingTime": 20,
+    "difficulty": "Medium",
+    "mealType": "Dessert",
+    "category": "dessert",
+    "dietaryTags": ["vegetarian"],
+    "origin": "France",
+    "tradition": "Popularised by French chef Michel Bras and later Jean-Georges Vongerichten in New York",
+    "culturalContext": {
+      "story": "The lava cake's origin is hotly disputed between French chef Michel Bras and Jean-Georges Vongerichten. Regardless of its inventor, it became one of the most popular restaurant desserts of the 1990s and 2000s.",
+      "occasion": "Dinner parties, Valentine's Day, special occasions",
+      "variations": "Use salted caramel, white chocolate, or add a frozen Nutella centre before baking."
+    },
+    "imageUrl": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&q=80",
+    "videoUrl": "",
+    "authorId": 1750000000001,
+    "authorName": "admin",
+    "isPublic": true,
+    "createdAt": "2026-04-10T19:00:00.000Z"
+  },
+  {
+    "id": 1780000000018,
+    "title": "Mango Sticky Rice",
+    "description": "Sweet glutinous rice drenched in rich coconut cream, served with ripe fresh mango slices. A Thai dessert perfection.",
+    "ingredients": [
+      "300g glutinous (sticky) rice",
+      "400ml coconut milk",
+      "4 tbsp sugar",
+      "1/2 tsp salt",
+      "2 ripe mangoes, peeled and sliced",
+      "sesame seeds or mung beans to garnish"
+    ],
+    "steps": [
+      "Soak glutinous rice in cold water for at least 4 hours or overnight.",
+      "Drain and steam the rice for 20-25 minutes until tender and translucent.",
+      "Meanwhile, heat coconut milk with sugar and salt over medium heat. Stir until sugar dissolves. Do not boil.",
+      "Pour two-thirds of the warm coconut sauce over the cooked rice and stir gently. Cover and let absorb for 15 minutes.",
+      "Slice mangoes and arrange on plates.",
+      "Serve the sticky rice alongside the mango and drizzle with remaining coconut sauce.",
+      "Garnish with sesame seeds or crispy mung beans."
+    ],
+    "cookingTime": 35,
+    "difficulty": "Medium",
+    "mealType": "Dessert",
+    "category": "dessert",
+    "dietaryTags": ["vegan", "gluten-free", "dairy-free"],
+    "origin": "Thailand",
+    "tradition": "Khao niao mamuang is a beloved Thai street food and dessert eaten during mango season",
+    "culturalContext": {
+      "story": "Mango sticky rice is one of Thailand's most famous desserts, traditionally made during the Thai mango season from April to June. It is sold on every street corner in Bangkok during those months.",
+      "occasion": "Thai mango season, dessert, Asian celebrations",
+      "variations": "Use taro, durian, or black sticky rice for a different twist. Add pandan leaves to infuse the coconut milk."
+    },
+    "imageUrl": "https://images.unsplash.com/photo-1553279768-865429fa0078?w=600&q=80",
+    "videoUrl": "",
+    "authorId": 1773850195729,
+    "authorName": "itz.oxene",
+    "isPublic": true,
+    "createdAt": "2026-04-10T19:30:00.000Z"
+  },
+  {
+    "id": 1780000000019,
+    "title": "Classic Tiramisu",
+    "description": "The iconic Italian no-bake dessert of espresso-soaked ladyfingers layered with a rich mascarpone cream and dusted with cocoa.",
+    "ingredients": [
+      "300g mascarpone cheese",
+      "3 eggs, separated",
+      "80g caster sugar",
+      "200ml strong espresso, cooled",
+      "3 tbsp coffee liqueur (optional)",
+      "200g savoiardi ladyfinger biscuits",
+      "cocoa powder for dusting",
+      "dark chocolate for shaving"
+    ],
+    "steps": [
+      "Beat egg yolks with sugar until pale and creamy.",
+      "Add mascarpone and mix until smooth.",
+      "Whisk egg whites to stiff peaks and gently fold into the mascarpone mixture.",
+      "Mix espresso with the coffee liqueur if using.",
+      "Quickly dip each ladyfinger in the coffee mixture (do not soak) and arrange in a single layer in a dish.",
+      "Spread half the mascarpone cream over the biscuits.",
+      "Repeat with another layer of dipped biscuits and the remaining cream.",
+      "Refrigerate for at least 4 hours or overnight.",
+      "Dust generously with cocoa powder and shave dark chocolate over the top before serving."
+    ],
+    "cookingTime": 30,
+    "difficulty": "Medium",
+    "mealType": "Dessert",
+    "category": "dessert",
+    "dietaryTags": ["vegetarian"],
+    "origin": "Italy",
+    "tradition": "Said to originate from the Veneto region of Italy, at Le Beccherie restaurant in Treviso in the 1960s",
+    "culturalContext": {
+      "story": "Tiramisu means 'pick me up' in Italian, referencing the energising effects of espresso and sugar. It became one of the most beloved Italian desserts worldwide during the 1980s restaurant boom.",
+      "occasion": "Dinner parties, Italian feasts, special occasions",
+      "variations": "Replace coffee with matcha, add berries between layers, or make individual cups for easier serving."
+    },
+    "imageUrl": "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=600&q=80",
+    "videoUrl": "",
+    "authorId": 1750000000001,
+    "authorName": "admin",
+    "isPublic": true,
+    "createdAt": "2026-04-10T20:00:00.000Z"
+  },
+  {
+    "id": 1780000000020,
+    "title": "Banana Pancakes",
+    "description": "Fluffy, naturally sweet pancakes made with ripe bananas. Just three main ingredients — no added sugar needed.",
+    "ingredients": [
+      "2 ripe bananas",
+      "2 eggs",
+      "60g rolled oats or plain flour",
+      "1/2 tsp baking powder",
+      "1/2 tsp cinnamon",
+      "pinch of salt",
+      "butter for frying",
+      "maple syrup and sliced banana to serve"
+    ],
+    "steps": [
+      "Mash bananas thoroughly in a bowl until smooth.",
+      "Beat in the eggs until well combined.",
+      "Stir in oats or flour, baking powder, cinnamon, and salt.",
+      "Heat a little butter in a non-stick pan over medium heat.",
+      "Drop spoonfuls of batter into the pan to form small pancakes.",
+      "Cook for 2-3 minutes until bubbles form on the surface, then flip and cook for 1-2 minutes more.",
+      "Serve stacked with maple syrup and extra banana slices."
+    ],
+    "cookingTime": 15,
+    "difficulty": "Easy",
+    "mealType": "Breakfast",
+    "category": "breakfast",
+    "dietaryTags": ["vegetarian", "gluten-free option", "naturally sweet"],
+    "origin": "United States",
+    "tradition": "A popular healthy breakfast alternative that gained popularity with the clean eating movement",
+    "culturalContext": {
+      "story": "Banana pancakes became hugely popular in the 2010s as a gluten-free, naturally sweet alternative to traditional pancakes. The two-ingredient version became a viral recipe for its simplicity.",
+      "occasion": "Weekend breakfast, healthy brunch",
+      "variations": "Add chocolate chips, blueberries, or a spoonful of peanut butter to the batter."
+    },
+    "imageUrl": "https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=600&q=80",
+    "videoUrl": "",
+    "authorId": 1773850195729,
+    "authorName": "itz.oxene",
+    "isPublic": true,
+    "createdAt": "2026-04-11T08:00:00.000Z"
   }
 ]

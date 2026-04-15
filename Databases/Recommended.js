@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     return;
   }
 
-  var picks = shuffle(publicRecipes).slice(0, 9);
+  var picks = shuffle(publicRecipes).slice(0, 6);
 
   grid.innerHTML = picks.map(function (r) {
     var label = r.mealType || r.category || "";

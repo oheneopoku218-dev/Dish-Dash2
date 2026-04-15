@@ -1,5 +1,12 @@
 [
   {
+    "id": 1750000000001,
+    "username": "admin",
+    "email": "admin@dishdash.com",
+    "password": "Admin1234",
+    "profilePic": null
+  },
+  {
     "id": 1773850195729,
     "username": "itz.oxene",
     "email": "oheneopoku218@gmail.com",
