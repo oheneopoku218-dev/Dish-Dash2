@@ -65,10 +65,11 @@ async function loadDinner() {
   try {
     const res = await fetch(`${API_BASE}/api/recipes`, { headers });
     if (!res.ok) throw new Error("Failed to load");
-    _dnAllItems = await res.json();
-    localStorage.setItem("cachedAllRecipes", JSON.stringify(_dnAllItems));
+    const allRecipes = await res.json();
+    _dnAllItems = allRecipes.filter(item => (item.category || "").toLowerCase() === "dinner");
+    localStorage.setItem("cachedDinnerRecipes", JSON.stringify(_dnAllItems));
   } catch (err) {
-    const cached = localStorage.getItem("cachedAllRecipes");
+    const cached = localStorage.getItem("cachedDinnerRecipes");
     _dnAllItems = cached ? JSON.parse(cached) : [];
   }
 

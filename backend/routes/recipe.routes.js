@@ -122,6 +122,32 @@ import express from "express";
     }
   });
 
+  // UPDATE RECIPE
+  router.patch("/:id", authenticate, (req, res) => {
+    try {
+      const recipes = readJson(recipesFile);
+      const index = recipes.findIndex(r => String(r.id) === req.params.id);
+
+      if (index === -1) return res.status(404).json({ message: "Recipe not found." });
+      if (String(recipes[index].authorId) !== String(req.user.id))
+        return res.status(403).json({ message: "Not your recipe." });
+
+      const allowed = ["title", "description", "ingredients", "steps", "cookingTime", "difficulty",
+        "mealType", "category", "dietaryTags", "origin", "tradition", "isPublic", "imageUrl", "videoUrl", "culturalContext"];
+      allowed.forEach(key => {
+        if (req.body[key] !== undefined) recipes[index][key] = req.body[key];
+      });
+      if (req.body.category) recipes[index].category = req.body.category.toLowerCase();
+      recipes[index].updatedAt = new Date().toISOString();
+      writeJson(recipesFile, recipes);
+
+      res.json(recipes[index]);
+    } catch (error) {
+      console.error("UPDATE RECIPE ERROR:", error);
+      res.status(500).json({ message: "Server error." });
+    }
+  });
+
   // DELETE RECIPE
   router.delete("/:id", authenticate, (req, res) => {
     try {

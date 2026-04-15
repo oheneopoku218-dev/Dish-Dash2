@@ -65,10 +65,11 @@ async function loadDesert() {
   try {
     const res = await fetch(`${API_BASE}/api/recipes`, { headers });
     if (!res.ok) throw new Error("Failed to load");
-    _dsAllItems = await res.json();
-    localStorage.setItem("cachedAllRecipes", JSON.stringify(_dsAllItems));
+    const allRecipes = await res.json();
+    _dsAllItems = allRecipes.filter(item => ["dessert", "desert"].includes((item.category || "").toLowerCase()));
+    localStorage.setItem("cachedDessertRecipes", JSON.stringify(_dsAllItems));
   } catch (err) {
-    const cached = localStorage.getItem("cachedAllRecipes");
+    const cached = localStorage.getItem("cachedDessertRecipes");
     _dsAllItems = cached ? JSON.parse(cached) : [];
   }
 

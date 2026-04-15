@@ -65,4 +65,27 @@ router.post("/", (req, res) => {
   }
 });
 
+// DELETE REVIEW
+router.delete("/:id", (req, res) => {
+  try {
+    const { userId } = req.body;
+    if (!userId) return res.status(400).json({ message: "userId is required." });
+
+    const reviews = readJson(reviewsFile);
+    const review = reviews.find(r => String(r.id) === req.params.id);
+
+    if (!review) return res.status(404).json({ message: "Review not found." });
+    if (String(review.userId) !== String(userId))
+      return res.status(403).json({ message: "Not your review." });
+
+    const filtered = reviews.filter(r => String(r.id) !== req.params.id);
+    writeJson(reviewsFile, filtered);
+
+    res.json({ message: "Review deleted." });
+  } catch (error) {
+    console.error("DELETE REVIEW ERROR:", error);
+    res.status(500).json({ message: "Server error." });
+  }
+});
+
 export default router;

@@ -56,15 +56,18 @@ function renderGrid() {
       : "";
 
     return (
-      '<div class="rb-card" onclick=\'openRecipe(' + JSON.stringify(r).replace(/'/g, "&#39;") + ")\'>" +
-        imgHTML +
-        '<div class="rb-card-body">' +
-          '<p class="rb-card-name">' + escHtml(r.title || r.name || "Untitled") + "</p>" +
-          '<div class="rb-card-meta">' +
-            (label ? '<span class="tag-meal">' + escHtml(label) + "</span>" : "") +
-            timeHTML +
+      '<div class="rb-card">' +
+        '<div style="cursor:pointer;" onclick=\'openRecipe(' + JSON.stringify(r).replace(/'/g, "&#39;") + ")\'>" +
+          imgHTML +
+          '<div class="rb-card-body">' +
+            '<p class="rb-card-name">' + escHtml(r.title || r.name || "Untitled") + "</p>" +
+            '<div class="rb-card-meta">' +
+              (label ? '<span class="tag-meal">' + escHtml(label) + "</span>" : "") +
+              timeHTML +
+            "</div>" +
           "</div>" +
         "</div>" +
+        '<button onclick="removeFromBox(\'' + escHtml(String(r.id)) + '\')" style="display:block;width:100%;padding:6px;background:#cc3300;color:white;border:none;cursor:pointer;font-size:0.8rem;margin-top:4px;">Remove from Box</button>' +
       "</div>"
     );
   }).join("");
@@ -73,6 +76,27 @@ function renderGrid() {
 function openRecipe(recipe) {
   localStorage.setItem("selectedRecipe", JSON.stringify(recipe));
   window.location.href = "recipe-detail.html";
+}
+
+async function removeFromBox(recipeId) {
+  var userId = localStorage.getItem("userId");
+  if (!userId) { window.location.href = "Login.html"; return; }
+  if (!confirm("Remove this recipe from your box?")) return;
+  try {
+    var res = await fetch(API_BASE + "/api/favorites", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId: userId, recipeId: String(recipeId) })
+    });
+    if (res.ok) {
+      _rbRecipes = _rbRecipes.filter(function (r) { return String(r.id) !== String(recipeId); });
+      renderGrid();
+    } else {
+      alert("Failed to remove recipe.");
+    }
+  } catch {
+    alert("Error removing recipe.");
+  }
 }
 
 // ── Load on page ready ──────────────────────────────────────────────────
