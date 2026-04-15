@@ -32,7 +32,6 @@
     allowedHeaders: ["Content-Type", "x-user-id", "Authorization"]
   };
   app.use(cors(corsOptions));
-  app.options("*", cors(corsOptions));
 
   // -----------------------------------------------------
   // MIDDLEWARE
